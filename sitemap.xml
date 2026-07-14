@@ -5,31 +5,19 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/merge-pdf/</loc>
-    <priority>0.9</priority>
+    <loc>https://pixopdf.online/privacy/</loc>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/split-pdf/</loc>
-    <priority>0.9</priority>
+    <loc>https://pixopdf.online/about/</loc>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/rotate-pdf/</loc>
-    <priority>0.9</priority>
+    <loc>https://pixopdf.online/contact/</loc>
+    <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/remove-pdf-pages/</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://pixopdf.online/extract-pdf-pages/</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://pixopdf.online/organize-pdf/</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://pixopdf.online/compress-pdf/</loc>
+    <loc>https://pixopdf.online/sign-pdf/</loc>
     <priority>0.9</priority>
   </url>
   <url>
@@ -65,11 +53,47 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://pixopdf.online/redact-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/merge-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/split-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/rotate-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/remove-pdf-pages/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/extract-pdf-pages/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/organize-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/compress-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://pixopdf.online/crop-pdf/</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/sign-pdf/</loc>
+    <loc>https://pixopdf.online/pdf-metadata/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/remove-pdf-metadata/</loc>
     <priority>0.9</priority>
   </url>
   <url>
@@ -85,6 +109,26 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://pixopdf.online/image-to-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/word-to-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/excel-to-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/powerpoint-to-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://pixopdf.online/html-to-pdf/</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://pixopdf.online/pdf-to-jpg/</loc>
     <priority>0.9</priority>
   </url>
@@ -93,19 +137,19 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/redact-pdf/</loc>
+    <loc>https://pixopdf.online/pdf-to-images/</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/pdf-metadata/</loc>
+    <loc>https://pixopdf.online/pdf-to-word/</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/remove-pdf-metadata/</loc>
+    <loc>https://pixopdf.online/pdf-to-excel/</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://pixopdf.online/privacy/</loc>
-    <priority>0.5</priority>
+    <loc>https://pixopdf.online/pdf-to-powerpoint/</loc>
+    <priority>0.9</priority>
   </url>
 </urlset>
