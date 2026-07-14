@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Theme Initialization Script -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('pixopdf-theme');
+      const theme = savedTheme || 'light';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -111,7 +123,7 @@
           <div class="how-to-step">
             <span class="step-num">01</span>
             <h3 class="step-title">Upload PDFs</h3>
-            <p class="step-text">Select and upload your PDF documents securely into the drag & drop area.</p>
+            <p class="step-text">Select your PDF documents or drop them into the file area. Files are processed locally in your browser.</p>
           </div>
           <div class="how-to-step">
             <span class="step-num">02</span>
@@ -135,7 +147,7 @@
       <section class="mt-12 space-y-4">
         <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Secure and Private PDF Merger</h2>
         <p class="text-slate-600 dark:text-slate-350 leading-relaxed text-sm">
-          Unlike online tools that copy your PDF files onto cloud storage systems, PixoPDF handles all combining steps locally in your browser. Since none of your document metadata, structural elements, or signatures are sent over the network, your private documents remain completely protected.
+          Unlike online tools that copy your PDF files onto cloud storage systems, PixoPDF handles all combining steps locally in your browser. Since none of your document metadata, structural elements, or signatures are sent over the network, your documents are not uploaded to a PixoPDF processing server.
         </p>
       </section>
 

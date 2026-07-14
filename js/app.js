@@ -9,26 +9,18 @@ export const App = {
   },
 
   _initTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-
-    // Bind manually defined theme toggle switch if rendered
+    // Rely on head script state for initial load setup.
+    // Bind manually defined theme toggle switch if rendered.
     const toggleBtn = document.getElementById('theme-toggle');
     if (toggleBtn) {
       toggleBtn.addEventListener('click', () => {
         const isDark = document.documentElement.classList.contains('dark');
         if (isDark) {
           document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
+          localStorage.setItem('pixopdf-theme', 'light');
         } else {
           document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
+          localStorage.setItem('pixopdf-theme', 'dark');
         }
       });
     }

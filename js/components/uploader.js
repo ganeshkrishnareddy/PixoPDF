@@ -21,7 +21,7 @@ export const Uploader = {
     element.className = "border-2 border-dashed border-neutral-300 dark:border-neutral-700 rounded-xl p-8 text-center bg-white dark:bg-neutral-800 hover:border-indigo-500 transition-colors duration-200 cursor-pointer relative focus-within:ring-2 focus-within:ring-indigo-500 outline-none";
     element.setAttribute('tabindex', '0');
     element.setAttribute('role', 'button');
-    element.setAttribute('aria-label', 'Upload files. Click or drag files here.');
+    element.setAttribute('aria-label', 'Choose files. Click or drag files here.');
 
     element.innerHTML = `
       <input type="file" id="uploader-input" class="sr-only" multiple style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;" />

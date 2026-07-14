@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Theme Initialization Script -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('pixopdf-theme');
+      const theme = savedTheme || 'light';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -147,7 +159,7 @@
               No File Uploads
             </h3>
             <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
-              Zero storage, zero cloud latency. We never transmit your document content, ensuring strict offline confidentiality.
+              Your document is processed locally in your browser and is not uploaded to a PixoPDF processing server.
             </p>
           </div>
           <div class="space-y-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
