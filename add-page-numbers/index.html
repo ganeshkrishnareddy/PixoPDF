@@ -62,6 +62,8 @@
   <!-- Navigation Header -->
   
   <!-- Navigation Header -->
+  
+  <!-- Navigation Header -->
   <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-50 transition-colors duration-200">
     <div class="max-w-[1280px] mx-auto px-4 h-16 flex items-center justify-between relative">
       <a href="/" class="flex items-center space-x-2 text-xl font-bold tracking-tight" aria-label="PixoPDF Home">
@@ -382,10 +384,12 @@
         </div>
 
         <div class="p-4 border-b border-slate-150 dark:border-slate-855">
-          <div class="relative">
+          <div class="relative w-full">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-slate-400"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
             <input type="text" id="mobile-search-input" placeholder="Search tools (e.g. word, excel)..." 
-                   class="w-full pl-9 pr-4 py-2 border border-slate-250 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-450 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-sm" />
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-slate-400 absolute left-3 top-3"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                   class="w-full pl-10 pr-4 h-12 border border-slate-250 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-450 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-base" />
           </div>
         </div>
 
@@ -797,6 +801,7 @@
 
 
 
+
   <!-- Tool Processing Area -->
   <main class="flex-1 py-12">
     <div class="tool-page-container">
@@ -978,26 +983,31 @@
   <!-- Footer -->
   
   <!-- Footer -->
-  <footer class="border-t border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-550 dark:text-slate-400 py-12 text-sm transition-colors duration-200">
+  
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-550 dark:text-slate-400 pt-12 pb-8 text-sm transition-colors duration-200">
     <div class="max-w-[1280px] mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="space-y-3">
         <p class="text-lg font-bold text-slate-700 dark:text-slate-350 font-display">PixoPDF</p>
-        <p class="text-xs max-w-xs leading-relaxed">Free PDF tools made simple. Your files stay on your device.</p>
+        <p class="text-xs max-w-xs leading-relaxed">
+          Free PDF tools made simple.<br>
+          Your files stay on your device.
+        </p>
       </div>
       <div class="space-y-3">
         <p class="font-bold text-slate-700 dark:text-slate-300">Popular PDF Tools</p>
-        <div class="flex flex-col space-y-2 text-xs">
+        <div class="flex flex-col space-y-2 text-xs font-semibold">
+                    <a href="/pdf-to-word/" class="hover:text-indigo-600 dark:hover:text-indigo-400">PDF to Word</a>
+          <a href="/word-to-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Word to PDF</a>
           <a href="/merge-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Merge PDF</a>
           <a href="/compress-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Compress PDF</a>
           <a href="/sign-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Sign PDF</a>
           <a href="/edit-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Edit PDF</a>
-          <a href="/pdf-to-word/" class="hover:text-indigo-600 dark:hover:text-indigo-400">PDF to Word</a>
-          <a href="/word-to-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Word to PDF</a>
         </div>
       </div>
       <div class="space-y-3">
         <p class="font-bold text-slate-700 dark:text-slate-300">Company & Privacy</p>
-        <div class="flex flex-col space-y-2 text-xs">
+        <div class="flex flex-col space-y-2 text-xs font-semibold">
           <a href="/about/" class="hover:text-indigo-600 dark:hover:text-indigo-400">About PixoPDF</a>
           <a href="/privacy/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
           <a href="/contact/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Contact</a>
@@ -1005,13 +1015,14 @@
         </div>
       </div>
     </div>
-    <div class="max-w-[1280px] mx-auto px-4 border-t border-slate-200 dark:border-slate-800 mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+    <div class="max-w-[1280px] mx-auto px-4 border-t border-slate-200 dark:border-slate-800 mt-8 pt-6 pb-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-semibold">
       <p>&copy; 2026 PixoPDF. All rights reserved.</p>
-      <p class="text-slate-400 dark:text-slate-500">
-        Maintained and developed by <a href="https://progvision.online/?utm_source=chatgpt.com" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">ProgVision</a>
+      <p class="text-slate-450 dark:text-slate-500">
+        Maintained and developed by <a href="https://progvision.online/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline">ProgVision</a>
       </p>
     </div>
   </footer>
+
 
 
 
