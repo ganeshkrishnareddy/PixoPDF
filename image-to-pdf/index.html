@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="google-adsense-account" content="ca-pub-6359092700983860">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6359092700983860" crossorigin="anonymous"></script>
   <!-- Theme Initialization Script -->
   <script>
     (function() {
@@ -33,6 +35,8 @@
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
   
   <!-- Navigation Header Placeholder -->
+  
+  <!-- Navigation Header -->
   
   <!-- Navigation Header -->
   
@@ -345,34 +349,39 @@
         </div>
 
     </div>
+  </header>
 
-    <div id="mobile-nav-drawer" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 transition-opacity duration-200">
-      <div class="absolute right-0 top-0 bottom-0 w-full max-w-[360px] bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full transform translate-x-full transition-transform duration-200 overflow-hidden" id="mobile-drawer-body">
-        
-        <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-          <span class="font-bold text-slate-800 dark:text-white font-display">All PDF Tools</span>
-          <button id="btn-mobile-close" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none" aria-label="Close Mobile Menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-          </button>
+  <!-- Mobile Navigation Drawer Sibling outside header to bypass sticky backdrop containing blocks -->
+  <div id="mobile-nav-drawer" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 transition-opacity duration-200" aria-label="All PDF tools">
+    <div class="absolute right-0 top-0 bottom-0 w-full sm:max-w-[430px] bg-white dark:bg-slate-900 shadow-2xl flex flex-col h-full transform translate-x-full transition-transform duration-200 overflow-hidden" id="mobile-drawer-body">
+      
+      <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between flex-shrink-0 bg-white dark:bg-slate-900">
+        <span class="font-bold text-slate-800 dark:text-white font-display">All PDF Tools</span>
+        <button id="btn-mobile-close" class="w-11 h-11 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none" aria-label="Close PDF tools menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-6 h-6"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="p-4 border-b border-slate-150 dark:border-slate-855 flex-shrink-0 bg-white dark:bg-slate-900">
+        <div class="relative w-full">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-slate-400"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </span>
+          <input type="text" id="mobile-search-input" placeholder="Search tools (e.g. word, excel)..." 
+                 class="w-full pl-10 pr-4 h-12 border border-slate-250 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-450 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-base" />
         </div>
+      </div>
 
-        <div class="p-4 border-b border-slate-150 dark:border-slate-855">
-          <div class="relative w-full">
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-slate-400"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </span>
-            <input type="text" id="mobile-search-input" placeholder="Search tools (e.g. word, excel)..." 
-                   class="w-full pl-10 pr-4 h-12 border border-slate-250 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white placeholder-slate-450 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-lg text-base" />
-          </div>
-        </div>
-
-        <div class="flex-1 overflow-y-auto px-4" id="mobile-drawer-items-container">
-          <div id="mobile-drawer-accordions" class="divide-y divide-slate-100 dark:divide-slate-800">
-            
+      <div class="flex-1 overflow-y-auto px-4 min-h-0 py-2 bg-white dark:bg-slate-900" id="mobile-drawer-items-container">
+        <div id="mobile-drawer-accordions" class="divide-y divide-slate-100 dark:divide-slate-800">
+          
           <!-- Accordion Category: ORGANIZE PDF -->
           <div class="accordion-item border-b border-slate-200 dark:border-slate-800" data-category="organize-pdf">
             <button class="accordion-trigger w-full flex items-center justify-between py-4 text-left font-bold text-slate-800 dark:text-slate-100 focus:outline-none" aria-expanded="false">
-              <span class="text-sm uppercase tracking-wide">ORGANIZE PDF</span>
+              <div class="flex flex-col">
+                <span class="text-sm uppercase tracking-wide">ORGANIZE PDF</span>
+                <span class="text-xs text-slate-400 dark:text-slate-500 font-normal">6 tools</span>
+              </div>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4 text-slate-500 transform transition-transform duration-200"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="accordion-content hidden pb-4 space-y-1">
@@ -442,7 +451,10 @@
           <!-- Accordion Category: OPTIMIZE PDF -->
           <div class="accordion-item border-b border-slate-200 dark:border-slate-800" data-category="optimize-pdf">
             <button class="accordion-trigger w-full flex items-center justify-between py-4 text-left font-bold text-slate-800 dark:text-slate-100 focus:outline-none" aria-expanded="false">
-              <span class="text-sm uppercase tracking-wide">OPTIMIZE PDF</span>
+              <div class="flex flex-col">
+                <span class="text-sm uppercase tracking-wide">OPTIMIZE PDF</span>
+                <span class="text-xs text-slate-400 dark:text-slate-500 font-normal">4 tools</span>
+              </div>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4 text-slate-500 transform transition-transform duration-200"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="accordion-content hidden pb-4 space-y-1">
@@ -492,7 +504,10 @@
           <!-- Accordion Category: EDIT & SIGN PDF -->
           <div class="accordion-item border-b border-slate-200 dark:border-slate-800" data-category="edit-&-sign-pdf">
             <button class="accordion-trigger w-full flex items-center justify-between py-4 text-left font-bold text-slate-800 dark:text-slate-100 focus:outline-none" aria-expanded="false">
-              <span class="text-sm uppercase tracking-wide">EDIT & SIGN PDF</span>
+              <div class="flex flex-col">
+                <span class="text-sm uppercase tracking-wide">EDIT & SIGN PDF</span>
+                <span class="text-xs text-slate-400 dark:text-slate-500 font-normal">10 tools</span>
+              </div>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4 text-slate-500 transform transition-transform duration-200"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="accordion-content hidden pb-4 space-y-1">
@@ -602,7 +617,10 @@
           <!-- Accordion Category: CONVERT TO PDF -->
           <div class="accordion-item border-b border-slate-200 dark:border-slate-800" data-category="convert-to-pdf">
             <button class="accordion-trigger w-full flex items-center justify-between py-4 text-left font-bold text-slate-800 dark:text-slate-100 focus:outline-none" aria-expanded="false">
-              <span class="text-sm uppercase tracking-wide">CONVERT TO PDF</span>
+              <div class="flex flex-col">
+                <span class="text-sm uppercase tracking-wide">CONVERT TO PDF</span>
+                <span class="text-xs text-slate-400 dark:text-slate-500 font-normal">8 tools</span>
+              </div>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4 text-slate-500 transform transition-transform duration-200"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="accordion-content hidden pb-4 space-y-1">
@@ -692,7 +710,10 @@
           <!-- Accordion Category: CONVERT FROM PDF -->
           <div class="accordion-item border-b border-slate-200 dark:border-slate-800" data-category="convert-from-pdf">
             <button class="accordion-trigger w-full flex items-center justify-between py-4 text-left font-bold text-slate-800 dark:text-slate-100 focus:outline-none" aria-expanded="false">
-              <span class="text-sm uppercase tracking-wide">CONVERT FROM PDF</span>
+              <div class="flex flex-col">
+                <span class="text-sm uppercase tracking-wide">CONVERT FROM PDF</span>
+                <span class="text-xs text-slate-400 dark:text-slate-500 font-normal">6 tools</span>
+              </div>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-4 h-4 text-slate-500 transform transition-transform duration-200"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
             <div class="accordion-content hidden pb-4 space-y-1">
@@ -758,19 +779,19 @@
             </a>
             </div>
           </div>
-          </div>
-          <div id="mobile-drawer-search-results" class="hidden py-4 space-y-1"></div>
         </div>
+        <div id="mobile-drawer-search-results" class="hidden py-4 space-y-1"></div>
+      </div>
 
-        <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex flex-col space-y-2 text-xs font-semibold text-slate-500 dark:text-slate-450">
-          <a href="/" class="hover:text-indigo-600">Home Directory</a>
-          <a href="/privacy/" class="hover:text-indigo-600">Privacy Policy</a>
-          <a href="/about/" class="hover:text-indigo-600">About PixoPDF</a>
-          <a href="/contact/" class="hover:text-indigo-600">Contact Support</a>
-        </div>
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 flex flex-col space-y-2 text-xs font-semibold text-slate-500 dark:text-slate-450 flex-shrink-0">
+        <a href="/" class="hover:text-indigo-600">Home Directory</a>
+        <a href="/privacy/" class="hover:text-indigo-600">Privacy Policy</a>
+        <a href="/about/" class="hover:text-indigo-600">About PixoPDF</a>
+        <a href="/contact/" class="hover:text-indigo-600">Contact Support</a>
       </div>
     </div>
-  </header>
+  </div>
+
 
 
 
@@ -863,6 +884,8 @@
   <!-- Footer -->
   
   <!-- Footer -->
+  
+  <!-- Footer -->
   <footer class="border-t border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-550 dark:text-slate-400 pt-12 pb-8 text-sm transition-colors duration-200">
     <div class="max-w-[1280px] mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="space-y-3">
@@ -900,6 +923,7 @@
       </p>
     </div>
   </footer>
+
 
 
 
@@ -1016,6 +1040,7 @@
     }
   </script>
 
+  
   <!-- Navigation Menu Controller -->
   <script type="module">
     import { ToolRegistry } from '/js/tools.js';
@@ -1073,20 +1098,43 @@
       const drawerMobile = document.getElementById('mobile-nav-drawer');
       const drawerBody = document.getElementById('mobile-drawer-body');
       const btnMobileClose = document.getElementById('btn-mobile-close');
+      const mobileSearch = document.getElementById('mobile-search-input');
 
       if (btnMobileMenu && drawerMobile && drawerBody) {
+        let savedScrollY = 0;
+        
+        const lockScroll = () => {
+          savedScrollY = window.scrollY;
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${savedScrollY}px`;
+          document.body.style.width = '100%';
+          document.body.style.overflow = 'hidden';
+        };
+
+        const unlockScroll = () => {
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.width = '';
+          document.body.style.overflow = '';
+          window.scrollTo(0, savedScrollY);
+        };
+
         const toggleDrawer = (show) => {
           if (show) {
+            lockScroll();
             drawerMobile.classList.remove('hidden');
             btnMobileMenu.setAttribute('aria-expanded', 'true');
             setTimeout(() => {
               drawerBody.classList.remove('translate-x-full');
+              if (mobileSearch) mobileSearch.focus();
             }, 10);
           } else {
+            unlockScroll();
             drawerBody.classList.add('translate-x-full');
             btnMobileMenu.setAttribute('aria-expanded', 'false');
             setTimeout(() => {
               drawerMobile.classList.add('hidden');
+              btnMobileMenu.focus();
             }, 200);
           }
         };
@@ -1095,6 +1143,13 @@
         if (btnMobileClose) btnMobileClose.addEventListener('click', () => toggleDrawer(false));
         drawerMobile.addEventListener('click', (e) => {
           if (e.target === drawerMobile) toggleDrawer(false);
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !drawerMobile.classList.contains('hidden')) {
+            toggleDrawer(false);
+          }
         });
 
         // Mobile Category Accordions
@@ -1122,7 +1177,6 @@
         });
 
         // Mobile Drawer Search Matching
-        const mobileSearch = document.getElementById('mobile-search-input');
         const accordionsContainer = document.getElementById('mobile-drawer-accordions');
         const searchResultsContainer = document.getElementById('mobile-drawer-search-results');
 
@@ -1154,7 +1208,7 @@
             }
 
             searchResultsContainer.innerHTML = matches.map(t => `
-              <a href="${t.pageUrl}" class="flex items-center justify-between py-3 border-b border-slate-150 dark:border-slate-850 px-2 rounded-lg transition duration-150">
+              <a href="${t.pageUrl}" class="flex items-center justify-between py-3 border-b border-slate-150 dark:border-slate-855 px-2 rounded-lg transition duration-150">
                 <div class="flex items-center space-x-3">
                   <span class="w-8 h-8 flex items-center justify-center bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 rounded-lg">
                     ${t.icon.replace("w-6 h-6", "w-5 h-5")}
@@ -1168,6 +1222,7 @@
       }
     });
   </script>
+
 
 </body>
 </html>
