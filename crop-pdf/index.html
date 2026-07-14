@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Initialization Script -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('pixopdf-theme');
+      const theme = savedTheme || 'light';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Crop PDF Pages Online | PixoPDF</title>
+  <meta name="description" content="Crop PDF document pages online for free. Adjust margins and define precise crop boxes. Safe browser-side processing.">
+  <link rel="canonical" href="https://pixopdf.pages.dev/crop-pdf/">
+  
+  <!-- OG / Twitter Card Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Crop PDF Pages Online | PixoPDF">
+  <meta property="og:description" content="Crop PDF document pages online for free. Adjust margins and define precise crop boxes. Safe browser-side processing.">
+  <meta property="og:url" content="https://pixopdf.pages.dev/crop-pdf/">
+  <meta property="og:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta property="og:site_name" content="PixoPDF">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+  
+  <!-- Header Navigation -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center space-x-2 text-xl font-bold tracking-tight" aria-label="PixoPDF Home">
+        <span class="p-1 text-white rounded-lg w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 512 512" width="100%" height="100%"><rect width="512" height="512" rx="128" fill="#4f46e5" /><path d="M160 110 h140 l80 80 v212 c0 16-14 30-30 30 H160 c-16 0-30-14-30-30 V140 c0-16 14-30 30-30 z" fill="#ffffff" /><path d="M300 110 v80 h80 z" fill="#c7d2fe" /><path d="M180 180 h70 c25 0 45 20 45 45 s-20 45-45 45 h-70 z" fill="#4f46e5" /></svg>
+        </span>
+        <span class="font-display">PixoPDF</span>
+      </a>
+      <div class="flex items-center space-x-4">
+        <a href="/privacy/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Light/Dark Theme">
+          <!-- Moon icon (show in light mode, switch to dark) -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 block dark:hidden"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <!-- Sun icon (show in dark mode, switch to light) -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden dark:block"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tool Processing Area -->
+  <main class="flex-1 py-12">
+    <div class="tool-page-container">
+      
+      <!-- Breadcrumbs -->
+      <nav class="text-xs text-slate-500 dark:text-slate-400 mb-4 flex items-center space-x-2" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Home</a>
+        <span>&gt;</span>
+        <span class="font-medium text-slate-800 dark:text-slate-200">Crop PDF</span>
+      </nav>
+
+      <div class="tool-header">
+        <h1>Crop PDF Pages Online</h1>
+        <p>Visually define crop boxes and adjust document boundaries. Files are processed locally in your browser.</p>
+      </div>
+
+      <!-- Processing Card -->
+      <div class="card space-y-6" id="tool-workspace">
+        
+        <!-- Reusable Uploader element -->
+        <div id="uploader-container"></div>
+        
+        <!-- Work Area -->
+        <div id="crop-workspace-area" class="hidden space-y-6">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+            <div class="text-sm">
+              <span id="source-filename" class="font-semibold block truncate max-w-xs text-slate-900 dark:text-white">document.pdf</span>
+              <span id="source-page-count" class="text-slate-500 text-xs">Loading page details...</span>
+            </div>
+            <div>
+              <button id="btn-change-file" class="px-3 py-1.5 text-xs text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/20 font-semibold rounded transition">Change File</button>
+            </div>
+          </div>
+
+          <!-- Settings -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-100 dark:bg-slate-900/50 p-4 rounded-xl">
+            <div class="settings-group">
+              <label for="crop-scope" class="settings-label">Apply Crop To</label>
+              <select id="crop-scope" class="settings-select">
+                <option value="all">All Pages</option>
+                <option value="current">Current Page Only</option>
+              </select>
+            </div>
+            
+            <div class="settings-group">
+              <label for="crop-preview-page" class="settings-label">Preview Page</label>
+              <select id="crop-preview-page" class="settings-select">
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+          </div>
+
+          <!-- Cropper Canvas Container -->
+          <div class="flex flex-col items-center justify-center p-4 border border-slate-200 dark:border-slate-800 rounded-xl bg-slate-50 dark:bg-slate-950/50 relative overflow-hidden">
+            <div id="canvas-wrapper" class="relative max-w-full select-none" style="min-height: 250px;">
+              <canvas id="crop-canvas" class="max-w-full border border-slate-300 dark:border-slate-800 rounded shadow"></canvas>
+              <!-- Interactive Crop Overlay -->
+              <div id="crop-box" class="absolute border-2 border-dashed border-indigo-600 bg-indigo-500/10 cursor-move" style="top: 10%; left: 10%; width: 80%; height: 80%;">
+                <div class="handle absolute w-3 h-3 bg-indigo-600 border border-white -top-1.5 -left-1.5 cursor-nwse-resize" id="h-nw"></div>
+                <div class="handle absolute w-3 h-3 bg-indigo-600 border border-white -top-1.5 -right-1.5 cursor-nesw-resize" id="h-ne"></div>
+                <div class="handle absolute w-3 h-3 bg-indigo-600 border border-white -bottom-1.5 -left-1.5 cursor-nesw-resize" id="h-sw"></div>
+                <div class="handle absolute w-3 h-3 bg-indigo-600 border border-white -bottom-1.5 -right-1.5 cursor-nwse-resize" id="h-se"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controls -->
+          <div class="flex justify-center space-x-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+            <button id="btn-crop-pdf" class="btn-primary">Crop PDF</button>
+            <button id="btn-reset-tool" class="btn-secondary">Reset Crop</button>
+          </div>
+        </div>
+
+        <!-- Progress/Status Area -->
+        <div id="progress-container"></div>
+
+        <!-- Success Result -->
+        <div id="success-container" class="hidden text-center space-y-4">
+          <div class="text-emerald-500 font-semibold text-lg flex items-center justify-center space-x-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>PDF Cropped Successfully!</span>
+          </div>
+          <p class="text-sm text-slate-500 dark:text-slate-400" id="result-stats"></p>
+          <div class="flex justify-center space-x-4">
+            <button id="btn-download-pdf" class="btn-primary">Download Cropped PDF</button>
+            <button id="btn-reset-full" class="btn-secondary">Crop Another PDF</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SEO - How-To Section -->
+      <section class="how-to-section">
+        <h2 class="text-2xl font-bold text-center text-slate-900 dark:text-white">How to Crop PDF Pages Online</h2>
+        <div class="how-to-grid">
+          <div class="how-to-step">
+            <span class="step-num">01</span>
+            <h3 class="step-title">Choose Document</h3>
+            <p class="step-text">Choose the target PDF file from your device locally.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">02</span>
+            <h3 class="step-title">Adjust Crop Area</h3>
+            <p class="step-text">Drag or resize the dotted box outline over the page preview to define the crop area.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">03</span>
+            <h3 class="step-title">Crop PDF</h3>
+            <p class="step-text">Click Crop PDF. PixoPDF updates internal CropBox boundaries in browser memory.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">04</span>
+            <h3 class="step-title">Download</h3>
+            <p class="step-text">Save the cropped PDF document instantly with no server uploads.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO - General helpful content -->
+      <section class="mt-12 space-y-4">
+        <h2 class="text-2xl font-bold text-slate-900 dark:text-white">True Client-Side PDF Cropping</h2>
+        <p class="text-slate-655 dark:text-slate-350 leading-relaxed text-sm">
+          Unlike editors that upload files onto cloud storage platforms, PixoPDF updates the PDF's internal dimensions (using the page CropBox metadata standard) completely local inside browser memory. <strong>Your files never leave your device.</strong>
+        </p>
+      </section>
+
+      <!-- SEO - FAQ Section -->
+      <section class="faq-section">
+        <h2 class="text-2xl font-bold text-center text-slate-900 dark:text-white">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3 class="faq-q">Does cropping decrease text quality?</h3>
+            <p class="faq-a">No. Cropping only defines new view limits for the page structure. The vector text paths and image scales remain completely unaltered with zero pixelation degradation.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Can I crop a single page only?</h3>
+            <p class="faq-a">Yes. You can select "Current Page Only" in settings so that adjustments apply only to the selected preview page index.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Tools -->
+      <section class="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8">
+        <h2 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">Related PDF Tools</h2>
+        <div class="flex wrap gap-4 text-sm">
+          <a href="/add-page-numbers/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Add Page Numbers</a>
+          <span class="text-slate-300">|</span>
+          <a href="/add-watermark/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Add Watermark</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-855 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 py-8 text-sm">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="font-semibold text-slate-700 dark:text-slate-300 font-display">PixoPDF</p>
+        <p class="text-xs">PDF tools made simple.</p>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="/privacy/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Privacy & Files</a>
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Tools Directory</a>
+      </div>
+      <p class="text-xs text-slate-400">&copy; 2026 PixoPDF. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Breadcrumb structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://pixopdf.pages.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Crop PDF",
+        "item": "https://pixopdf.pages.dev/crop-pdf/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- UMD Local Vendor Scripts -->
+  <script src="/assets/vendor/pdf-lib/pdf-lib.min.js"></script>
+  <script src="/assets/vendor/pdfjs/pdf.min.js"></script>
+
+  <!-- Code bootstrap -->
+  <script type="module">
+    import { App } from '/js/app.js';
+    import { Uploader } from '/js/components/uploader.js';
+    import { Progress } from '/js/components/progress.js';
+    import { Toast } from '/js/components/toast.js';
+    import { CropPDF } from '/js/tools/crop-pdf.js';
+    import { DownloadManager } from '/js/core/download-manager.js';
+    import { Analytics } from '/js/analytics.js';
+
+    let targetFile = null;
+    let processedResult = null;
+    let totalPagesCount = 0;
+    let currentPageIndex = 0;
+    let pdfDocInstance = null; // PDF.js doc instance
+
+    const uploaderContainer = document.getElementById('uploader-container');
+    const cropWorkspaceArea = document.getElementById('crop-workspace-area');
+    const pageSelect = document.getElementById('crop-preview-page');
+    const canvas = document.getElementById('crop-canvas');
+    const cropBox = document.getElementById('crop-box');
+    const canvasWrapper = document.getElementById('canvas-wrapper');
+    const progressContainer = document.getElementById('progress-container');
+    const successContainer = document.getElementById('success-container');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      Analytics.trackEvent('tool_page_view', { tool: 'crop-pdf' });
+
+      Uploader.init(uploaderContainer, {
+        expectedType: 'pdf',
+        onFilesSelected: async (files) => {
+          targetFile = files[0];
+          uploaderContainer.classList.add('hidden');
+          cropWorkspaceArea.classList.remove('hidden');
+          document.getElementById('source-filename').innerText = targetFile.name;
+          document.getElementById('source-page-count').innerText = "Loading page details...";
+          
+          try {
+            const arrayBuf = await targetFile.arrayBuffer();
+            
+            // Set up local worker path
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/vendor/pdfjs/pdf.worker.min.js';
+            pdfDocInstance = await window.pdfjsLib.getDocument({ data: new Uint8Array(arrayBuf) }).promise;
+            totalPagesCount = pdfDocInstance.numPages;
+            document.getElementById('source-page-count').innerText = `${totalPagesCount} pages`;
+
+            // Populate selector option list
+            pageSelect.innerHTML = '';
+            for (let i = 0; i < totalPagesCount; i++) {
+              pageSelect.appendChild(new Option(`Page ${i + 1}`, i));
+            }
+
+            currentPageIndex = 0;
+            await renderPreviewPage(currentPageIndex);
+            initCropDragHandlers();
+
+          } catch (err) {
+            Toast.show("Failed to parse PDF document.", "error");
+            resetState();
+          }
+        },
+        onError: (err) => {
+          Toast.show(err, 'error');
+        }
+      });
+
+      pageSelect.addEventListener('change', () => {
+        currentPageIndex = parseInt(pageSelect.value, 10);
+        renderPreviewPage(currentPageIndex);
+      });
+
+      document.getElementById('btn-change-file').addEventListener('click', resetState);
+      document.getElementById('btn-reset-tool').addEventListener('click', () => {
+        cropBox.style.top = '10%';
+        cropBox.style.left = '10%';
+        cropBox.style.width = '80%';
+        cropBox.style.height = '80%';
+      });
+      document.getElementById('btn-reset-full').addEventListener('click', resetState);
+      document.getElementById('btn-crop-pdf').addEventListener('click', runCropping);
+
+      document.getElementById('btn-download-pdf').addEventListener('click', () => {
+        if (processedResult) {
+          DownloadManager.downloadBlob(processedResult, 'cropped-' + targetFile.name, 'crop-pdf');
+        }
+      });
+    });
+
+    async function renderPreviewPage(index) {
+      if (!pdfDocInstance) return;
+      try {
+        const page = await pdfDocInstance.getPage(index + 1);
+        const viewport = page.getViewport({ scale: 1.0 });
+        
+        // Target scale constraints for preview display
+        const displayWidth = 320;
+        const scale = displayWidth / viewport.width;
+        const scaledViewport = page.getViewport({ scale });
+
+        canvas.width = scaledViewport.width;
+        canvas.height = scaledViewport.height;
+        
+        // Set wrapper size to match canvas for absolute handles
+        canvasWrapper.style.width = `${scaledViewport.width}px`;
+        canvasWrapper.style.height = `${scaledViewport.height}px`;
+
+        const ctx = canvas.getContext('2d');
+        await page.render({
+          canvasContext: ctx,
+          viewport: scaledViewport
+        }).promise;
+      } catch (err) {
+        console.error("Preview rendering failed:", err);
+      }
+    }
+
+    function initCropDragHandlers() {
+      // Basic coordinates drag & resize handler for crop box overlay
+      let activeHandle = null;
+      let startX = 0, startY = 0;
+      let startTop = 0, startLeft = 0, startWidth = 0, startHeight = 0;
+
+      const handleMouseDown = (e) => {
+        e.preventDefault();
+        activeHandle = e.target.id === 'crop-box' ? 'drag' : e.target.id;
+        
+        const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+        
+        startX = clientX;
+        startY = clientY;
+
+        startTop = parseFloat(cropBox.style.top) || 0;
+        startLeft = parseFloat(cropBox.style.left) || 0;
+        startWidth = parseFloat(cropBox.style.width) || 0;
+        startHeight = parseFloat(cropBox.style.height) || 0;
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+        document.addEventListener('touchmove', handleMouseMove, { passive: false });
+        document.addEventListener('touchend', handleMouseUp);
+      };
+
+      const handleMouseMove = (e) => {
+        if (!activeHandle) return;
+        e.preventDefault();
+
+        const clientX = e.type.startsWith('touch') ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.startsWith('touch') ? e.touches[0].clientY : e.clientY;
+
+        const deltaX = clientX - startX;
+        const deltaY = clientY - startY;
+
+        const wrapperW = canvasWrapper.offsetWidth;
+        const wrapperH = canvasWrapper.offsetHeight;
+
+        const pctDeltaX = (deltaX / wrapperW) * 100;
+        const pctDeltaY = (deltaY / wrapperH) * 100;
+
+        if (activeHandle === 'drag') {
+          let newLeft = startLeft + pctDeltaX;
+          let newTop = startTop + pctDeltaY;
+
+          // Constraints
+          newLeft = Math.max(0, Math.min(newLeft, 100 - startWidth));
+          newTop = Math.max(0, Math.min(newTop, 100 - startHeight));
+
+          cropBox.style.left = `${newLeft}%`;
+          cropBox.style.top = `${newTop}%`;
+        } else if (activeHandle.startsWith('h-')) {
+          // Resizing bounds calculations
+          const dir = activeHandle.replace('h-', '');
+          
+          if (dir.includes('e')) {
+            const newWidth = Math.max(10, Math.min(startWidth + pctDeltaX, 100 - startLeft));
+            cropBox.style.width = `${newWidth}%`;
+          }
+          if (dir.includes('w')) {
+            const newLeft = Math.max(0, Math.min(startLeft + pctDeltaX, startLeft + startWidth - 10));
+            const newWidth = startWidth + (startLeft - newLeft);
+            cropBox.style.left = `${newLeft}%`;
+            cropBox.style.width = `${newWidth}%`;
+          }
+          if (dir.includes('s')) {
+            const newHeight = Math.max(10, Math.min(startHeight + pctDeltaY, 100 - startTop));
+            cropBox.style.height = `${newHeight}%`;
+          }
+          if (dir.includes('n')) {
+            const newTop = Math.max(0, Math.min(startTop + pctDeltaY, startTop + startHeight - 10));
+            const newHeight = startHeight + (startTop - newTop);
+            cropBox.style.top = `${newTop}%`;
+            cropBox.style.height = `${newHeight}%`;
+          }
+        }
+      };
+
+      const handleMouseUp = () => {
+        activeHandle = null;
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchmove', handleMouseMove);
+        document.removeEventListener('touchend', handleMouseUp);
+      };
+
+      cropBox.addEventListener('mousedown', handleMouseDown);
+      cropBox.addEventListener('touchstart', handleMouseDown, { passive: false });
+    }
+
+    async function runCropping() {
+      const scope = document.getElementById('crop-scope').value;
+      
+      // Calculate crop boxes percentage coordinates
+      const left = parseFloat(cropBox.style.left) / 100;
+      const top = parseFloat(cropBox.style.top) / 100;
+      const width = parseFloat(cropBox.style.width) / 100;
+      const height = parseFloat(cropBox.style.height) / 100;
+
+      // pdf-lib origin starts at bottom-left corner!
+      // Translate top/left box percentages to PDF coordinates correctly:
+      const pdfCrop = {
+        left: left,
+        right: left + width,
+        bottom: 1.0 - (top + height),
+        top: 1.0 - top
+      };
+
+      cropWorkspaceArea.classList.add('hidden');
+
+      try {
+        processedResult = await CropPDF.process(targetFile, {
+          crop: pdfCrop,
+          applyToAll: scope === 'all',
+          currentPageIndex: currentPageIndex
+        }, (msg, pct) => {
+          Progress.show(progressContainer, msg, pct);
+        });
+
+        Progress.hide(progressContainer);
+        successContainer.classList.remove('hidden');
+        document.getElementById('result-stats').innerText = `PDF cropped successfully. Output size: ${(processedResult.size / (1024 * 1024)).toFixed(2)} MB`;
+      } catch (err) {
+        Progress.hide(progressContainer);
+        cropWorkspaceArea.classList.remove('hidden');
+        Toast.show(err.message, 'error');
+      }
+    }
+
+    function resetState() {
+      targetFile = null;
+      processedResult = null;
+      totalPagesCount = 0;
+      currentPageIndex = 0;
+      if (pdfDocInstance) {
+        pdfDocInstance.destroy();
+        pdfDocInstance = null;
+      }
+      uploaderContainer.classList.remove('hidden');
+      cropWorkspaceArea.classList.add('hidden');
+      successContainer.classList.add('hidden');
+      Progress.hide(progressContainer);
+    }
+  </script>
+</body>
+</html>

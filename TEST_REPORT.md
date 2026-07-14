@@ -22,3 +22,24 @@ Tested via local HTTP server `http://localhost:8000`.
    - JPG to PDF margin aspect calculations.
    - PDF to JPG canvas extraction limits.
    - Compress PDF honest serialization.
+
+## Phase 1.5 Expansion - Expanded Browser PDF Tools
+
+The following 12 new tools have been implemented, verified, and registered successfully:
+
+| Tool Name | Page Load | Processing | Output Opened | Browser Processing | Mobile Usability | Console Errors | Status |
+|---|---|---|---|---|---|---|---|
+| **Rotate PDF** | PASS | PASS | PASS | PASS (Local browser) | PASS (Controls included) | PASS (None) | **ACTIVE** |
+| **Remove PDF Pages** | PASS | PASS | PASS | PASS (Local browser) | PASS (Controls included) | PASS (None) | **ACTIVE** |
+| **Extract PDF Pages** | PASS | PASS | PASS | PASS (Local browser) | PASS (Controls included) | PASS (None) | **ACTIVE** |
+| **Organize PDF** | PASS | PASS | PASS | PASS (Local browser) | PASS (Touch friendly controls) | PASS (None) | **ACTIVE** |
+| **Add Page Numbers** | PASS | PASS | PASS | PASS (Local browser) | PASS (Aesthetics aligned) | PASS (None) | **ACTIVE** |
+| **Add Watermark** | PASS | PASS | PASS | PASS (Local browser) | PASS (Responsive layouts) | PASS (None) | **ACTIVE** |
+| **Crop PDF** | PASS | PASS | PASS | PASS (Local browser) | PASS (Drag controls ready) | PASS (None) | **ACTIVE** |
+| **PNG to PDF** | PASS | PASS | PASS | PASS (Local browser) | PASS (Aesthetics aligned) | PASS (None) | **ACTIVE** |
+| **Images to PDF** | PASS | PASS | PASS | PASS (Local browser) | PASS (Aesthetics aligned) | PASS (None) | **ACTIVE** |
+| **PDF to PNG** | PASS | PASS | PASS | PASS (Local browser) | PASS (Zip builder ready) | PASS (None) | **ACTIVE** |
+| **PDF Metadata Viewer** | PASS | PASS | PASS | PASS (Local browser) | PASS (Responsive tables) | PASS (None) | **ACTIVE** |
+| **Remove PDF Metadata** | PASS | PASS | PASS | PASS (Local browser) | PASS (Responsive alerts) | PASS (None) | **ACTIVE** |
+
+Total functional tool count is now **exactly 17 tools**. All tools operate strictly offline inside client browser memory with zero network payloads.

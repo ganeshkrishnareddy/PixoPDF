@@ -59,7 +59,7 @@ export const ToolSearch = {
           <div class="mt-4 flex items-center justify-between">
             <span class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold flex items-center">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-3.5 h-3.5 mr-1"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-              In Browser
+              Processed in Browser
             </span>
             <div class="flex items-center text-xs font-bold text-indigo-600 dark:text-indigo-400 group-hover:translate-x-1 transition-transform duration-200">
               <span>Open Tool</span>

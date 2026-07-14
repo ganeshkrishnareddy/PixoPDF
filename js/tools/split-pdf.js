@@ -7,48 +7,9 @@ import { FileReaderUtil } from '../core/file-reader.js';
 import { MemoryManager } from '../core/memory-manager.js';
 import { ErrorHandler } from '../core/error-handler.js';
 import { Analytics } from '../analytics.js';
+import { PageRangeParser } from '../core/page-range-parser.js';
 
 export const SplitPDF = {
-  /**
-   * Helper range parser.
-   * Input examples: "1-3, 5", "1,3,5", "1-3, 7, 10-12"
-   * @param {string} rangeStr 
-   * @param {number} totalPages 
-   * @returns {number[]} Array of 0-indexed page numbers
-   */
-  parsePageRange(rangeStr, totalPages) {
-    const pages = new Set();
-    const parts = rangeStr.replace(/\s+/g, '').split(',');
-
-    for (const part of parts) {
-      if (!part) continue;
-      
-      if (part.includes('-')) {
-        const bounds = part.split('-');
-        if (bounds.length !== 2) throw new Error("Invalid range format.");
-        
-        const start = parseInt(bounds[0], 10);
-        const end = parseInt(bounds[1], 10);
-        
-        if (isNaN(start) || isNaN(end) || start <= 0 || end <= 0 || start > end || start > totalPages || end > totalPages) {
-          throw new Error("Page indices are out of bounds or invalid.");
-        }
-        
-        for (let i = start; i <= end; i++) {
-          pages.add(i - 1);
-        }
-      } else {
-        const pageNum = parseInt(part, 10);
-        if (isNaN(pageNum) || pageNum <= 0 || pageNum > totalPages) {
-          throw new Error("Page indices are out of bounds or invalid.");
-        }
-        pages.add(pageNum - 1);
-      }
-    }
-
-    return Array.from(pages).sort((a, b) => a - b);
-  },
-
   /**
    * Performs client-side PDF splitting.
    * @param {File} file Uploaded PDF file
@@ -73,7 +34,7 @@ export const SplitPDF = {
 
       if (options.mode === 'extract') {
         onProgress('Parsing target range...', 20);
-        const targetPages = this.parsePageRange(options.rangeStr, totalPages);
+        const targetPages = PageRangeParser.parse(options.rangeStr, totalPages);
         
         if (targetPages.length === 0) {
           throw new Error("No valid page range specified.");
