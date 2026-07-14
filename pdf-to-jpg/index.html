@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>PDF to JPG Converter Free – Convert PDF to Images | ZeroPDF</title>
+  <meta name="description" content="Convert PDF pages to JPG or PNG images online for free. Process documents privately in your browser with zero file uploads.">
+  <link rel="canonical" href="https://zeropdf.pages.dev/pdf-to-jpg/">
+  
+  <!-- OG / Twitter Card Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="PDF to JPG Converter Free – Convert PDF to Images | ZeroPDF">
+  <meta property="og:description" content="Convert PDF pages to JPG or PNG images online for free. Process documents privately in your browser with zero file uploads.">
+  <meta property="og:url" content="https://zeropdf.pages.dev/pdf-to-jpg/">
+  <meta property="og:image" content="https://zeropdf.pages.dev/assets/images/zeropdf-og.png">
+  <meta property="og:site_name" content="ZeroPDF">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+  
+  <!-- Header Navigation -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center space-x-2 text-xl font-bold tracking-tight">
+        <span class="p-1.5 bg-indigo-600 rounded-lg text-white">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-5 h-5"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><circle cx="12" cy="13" r="3"></circle></svg>
+        </span>
+        <span class="font-display">ZeroPDF</span>
+      </a>
+      <div class="flex items-center space-x-4">
+        <a href="/privacy/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Light/Dark Theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 block dark:hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden dark:block"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tool Processing Area -->
+  <main class="flex-1 py-12">
+    <div class="tool-page-container">
+      
+      <!-- Breadcrumbs -->
+      <nav class="text-xs text-slate-500 dark:text-slate-400 mb-4 flex items-center space-x-2" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Home</a>
+        <span>&gt;</span>
+        <span class="font-medium text-slate-800 dark:text-slate-200">PDF to JPG</span>
+      </nav>
+
+      <div class="tool-header">
+        <h1>Convert PDF to JPG Online</h1>
+        <p>Extract and render PDF pages into clean JPG or PNG images. Files are converted securely in your browser.</p>
+      </div>
+
+      <!-- Processing Card -->
+      <div class="card space-y-6" id="tool-workspace">
+        
+        <!-- Reusable Uploader element -->
+        <div id="uploader-container"></div>
+
+        <!-- Settings panel -->
+        <div id="to-jpg-workspace-area" class="hidden space-y-6">
+          <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <p class="font-medium text-slate-800 dark:text-slate-100" id="source-filename"></p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" id="source-page-count"></p>
+            </div>
+            <button id="btn-change-file" class="text-sm font-semibold text-rose-600 dark:text-rose-400 hover:underline">Change File</button>
+          </div>
+
+          <!-- Configuration parameters -->
+          <div class="settings-grid">
+            <div class="settings-group">
+              <label for="img-format" class="settings-label">Image Format</label>
+              <select id="img-format" class="settings-select">
+                <option value="jpg">JPG (Best compatibility)</option>
+                <option value="png">PNG (Lossless layout)</option>
+              </select>
+            </div>
+
+            <div class="settings-group">
+              <label for="img-quality" class="settings-label">Image Quality</label>
+              <select id="img-quality" class="settings-select">
+                <option value="recommended">Recommended (Balanced Quality/Size)</option>
+                <option value="high">High Quality (Pristine results)</option>
+                <option value="small">Small File Size</option>
+              </select>
+            </div>
+
+            <div class="settings-group">
+              <label for="img-resolution" class="settings-label">Resolution Scale</label>
+              <select id="img-resolution" class="settings-select">
+                <option value="standard">Standard (Good for reading)</option>
+                <option value="high">High (2x resolution, larger file size)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex justify-center space-x-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+            <button id="btn-convert-jpg" class="btn-primary">Convert PDF to JPG</button>
+            <button id="btn-reset-tool" class="btn-secondary">Reset</button>
+          </div>
+        </div>
+
+        <!-- Progress/Status Area -->
+        <div id="progress-container"></div>
+
+        <!-- Success Result -->
+        <div id="success-container" class="hidden text-center space-y-4">
+          <div class="text-emerald-500 font-semibold text-lg flex items-center justify-center space-x-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>PDF Converted Successfully!</span>
+          </div>
+          <p class="text-sm text-slate-505 dark:text-slate-400" id="result-stats"></p>
+          <div class="flex justify-center space-x-4">
+            <button id="btn-download-jpg" class="btn-primary">Download Images</button>
+            <button id="btn-reset-full" class="btn-secondary">Convert Another PDF</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SEO - How-To Section -->
+      <section class="how-to-section">
+        <h2 class="text-2xl font-bold text-center text-slate-900 dark:text-white">How to Convert PDF to JPG Online</h2>
+        <div class="how-to-grid">
+          <div class="how-to-step">
+            <span class="step-num">01</span>
+            <h3 class="step-title">Upload PDF</h3>
+            <p class="step-text">Choose the target PDF file from your device.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">02</span>
+            <h3 class="step-title">Set Output Settings</h3>
+            <p class="step-text">Specify format (JPG/PNG) and resolution scale density.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">03</span>
+            <h3 class="step-title">Extract Pages</h3>
+            <p class="step-text">Our local parser renders each page to off-screen canvases.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">04</span>
+            <h3 class="step-title">Save Images</h3>
+            <p class="step-text">Download a compiled ZIP containing all page images securely.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO - FAQ Section -->
+      <section class="faq-section">
+        <h2 class="text-2xl font-bold text-center text-slate-900 dark:text-white">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3 class="faq-q">Will my high quality layouts look pixelated?</h3>
+            <p class="faq-a">To prevent pixelation, choose the "High" resolution scale option which renders images at double density.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">Why does it download as a ZIP?</h3>
+            <p class="faq-a">If your PDF contains multiple pages, we package all rendered files into a single ZIP file locally so that you don't have to confirm multiple download dialogs.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Tools -->
+      <section class="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8">
+        <h2 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">Related PDF Tools</h2>
+        <div class="flex flex-wrap gap-4 text-sm">
+          <a href="/jpg-to-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline">JPG to PDF</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-855 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 py-8 text-sm">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="font-semibold text-slate-700 dark:text-slate-300 font-display">ZeroPDF</p>
+        <p class="text-xs">Zero Cost. Zero Signup. Zero File Storage.</p>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="/privacy/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Privacy & Files</a>
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Tools Directory</a>
+      </div>
+      <p class="text-xs text-slate-400">&copy; 2026 ZeroPDF. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Breadcrumb structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://zeropdf.pages.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "PDF to JPG",
+        "item": "https://zeropdf.pages.dev/pdf-to-jpg/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- UMD Local Vendor Scripts -->
+  <script src="/assets/vendor/pdfjs/pdf.min.js"></script>
+  <script src="/assets/vendor/jszip.min.js"></script>
+
+  <!-- Code bootstrap -->
+  <script type="module">
+    import { App } from '/js/app.js';
+    import { Uploader } from '/js/components/uploader.js';
+    import { Progress } from '/js/components/progress.js';
+    import { Toast } from '/js/components/toast.js';
+    import { PdfToJPG } from '/js/tools/pdf-to-jpg.js';
+    import { DownloadManager } from '/js/core/download-manager.js';
+    import { PdfLoader } from '/js/core/pdf-loader.js';
+    import { Analytics } from '/js/analytics.js';
+
+    let targetFile = null;
+    let totalPagesCount = 0;
+    let imagesListResult = [];
+
+    const uploaderContainer = document.getElementById('uploader-container');
+    const toJpgWorkspaceArea = document.getElementById('to-jpg-workspace-area');
+    const progressContainer = document.getElementById('progress-container');
+    const successContainer = document.getElementById('success-container');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      Analytics.trackEvent('tool_page_view', { tool: 'pdf-to-jpg' });
+      
+      Uploader.init(uploaderContainer, {
+        expectedType: 'pdf',
+        onFilesSelected: async (files) => {
+          targetFile = files[0];
+          uploaderContainer.classList.add('hidden');
+          toJpgWorkspaceArea.classList.remove('hidden');
+          
+          document.getElementById('source-filename').innerText = targetFile.name;
+          document.getElementById('source-page-count').innerText = "Loading page details...";
+          
+          try {
+            const pdf = await PdfLoader.loadPdf(targetFile);
+            totalPagesCount = pdf.numPages;
+            document.getElementById('source-page-count').innerText = `${totalPagesCount} pages`;
+          } catch (err) {
+            Toast.show("Failed to analyze PDF pages.", "error");
+            resetState();
+          }
+        },
+        onError: (err) => {
+          Toast.show(err, 'error');
+        }
+      });
+
+      document.getElementById('btn-change-file').addEventListener('click', resetState);
+      document.getElementById('btn-reset-tool').addEventListener('click', resetState);
+      document.getElementById('btn-reset-full').addEventListener('click', resetState);
+
+      document.getElementById('btn-convert-jpg').addEventListener('click', runConvert);
+      
+      document.getElementById('btn-download-jpg').addEventListener('click', () => {
+        if (imagesListResult.length === 0) return;
+        
+        if (imagesListResult.length === 1) {
+          // Download directly
+          DownloadManager.downloadBlob(imagesListResult[0].blob, imagesListResult[0].name, 'pdf-to-jpg');
+        } else {
+          // ZIP download
+          const zip = new JSZip();
+          imagesListResult.forEach(item => {
+            zip.file(item.name, item.blob);
+          });
+          zip.generateAsync({ type: 'blob' }).then(content => {
+            DownloadManager.downloadBlob(content, 'pdf-images.zip', 'pdf-to-jpg-zip');
+          });
+        }
+      });
+    });
+
+    async function runConvert() {
+      toJpgWorkspaceArea.classList.add('hidden');
+
+      try {
+        imagesListResult = await PdfToJPG.process(targetFile, {
+          format: document.getElementById('img-format').value,
+          quality: document.getElementById('img-quality').value,
+          resolution: document.getElementById('img-resolution').value
+        }, (msg, pct) => {
+          Progress.show(progressContainer, msg, pct);
+        });
+
+        Progress.hide(progressContainer);
+        successContainer.classList.remove('hidden');
+
+        document.getElementById('result-stats').innerText = `Successfully converted ${imagesListResult.length} pages.`;
+      } catch (err) {
+        Progress.hide(progressContainer);
+        toJpgWorkspaceArea.classList.remove('hidden');
+        Toast.show(err.message, 'error');
+      }
+    }
+
+    function resetState() {
+      targetFile = null;
+      totalPagesCount = 0;
+      imagesListResult = [];
+      uploaderContainer.classList.remove('hidden');
+      toJpgWorkspaceArea.classList.add('hidden');
+      successContainer.classList.add('hidden');
+      Progress.hide(progressContainer);
+    }
+  </script>
+</body>
+</html>

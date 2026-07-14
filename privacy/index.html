@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Privacy & Local PDF Processing | ZeroPDF</title>
+  <meta name="description" content="Learn about ZeroPDF's local browser-based PDF processing. No file uploads, no cookies, no tracking.">
+  <link rel="canonical" href="https://zeropdf.pages.dev/privacy/">
+  
+  <!-- OG / Twitter Card Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Privacy & Local PDF Processing | ZeroPDF">
+  <meta property="og:description" content="Learn about ZeroPDF's local browser-based PDF processing. No file uploads, no cookies, no tracking.">
+  <meta property="og:url" content="https://zeropdf.pages.dev/privacy/">
+  <meta property="og:image" content="https://zeropdf.pages.dev/assets/images/zeropdf-og.png">
+  <meta property="og:site_name" content="ZeroPDF">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/index.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+  
+  <!-- Navigation Header -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center space-x-2 text-xl font-bold tracking-tight">
+        <span class="p-1.5 bg-indigo-600 rounded-lg text-white">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-5 h-5"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><circle cx="12" cy="13" r="3"></circle></svg>
+        </span>
+        <span class="font-display">ZeroPDF</span>
+      </a>
+      <div class="flex items-center space-x-4">
+        <a href="/privacy/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Light/Dark Theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 block dark:hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden dark:block"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-1 py-12">
+    <div class="max-w-3xl mx-auto px-4">
+      <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-6 font-display text-slate-900 dark:text-white">
+        Privacy & File Processing Architecture
+      </h1>
+      <p class="text-lg text-slate-600 dark:text-slate-300 mb-8">
+        ZeroPDF is engineered from the ground up to respect user privacy. Unlike traditional PDF conversion utilities that require uploading files to remote servers, ZeroPDF runs entirely inside your web browser.
+      </p>
+
+      <div class="space-y-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
+        
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">1. Local Execution (No File Uploads)</h2>
+          <p class="text-slate-600 dark:text-slate-350 leading-relaxed text-sm">
+            All tools within our suite utilize browser-compatible Javascript engines (<code class="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-indigo-600 dark:text-indigo-400">pdf-lib</code>, <code class="bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-indigo-600 dark:text-indigo-400">pdf.js</code>, and Web Assembly). Files you drag and drop onto the application are read directly into browser sandbox memory as binary buffers. At no point are files sent over the internet.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">2. Memory Sanitation</h2>
+          <p class="text-slate-600 dark:text-slate-350 leading-relaxed text-sm">
+            When processing completes and you download the converted file, all references to binary buffers, canvas rendering surfaces, and temporary browser Object URLs are explicitly wiped and revoked to ensure garbage collection occurs immediately. No document data is cached or stored in cookies, LocalStorage, or IndexedDB.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="text-xl font-bold text-slate-900 dark:text-white">3. Zero Tracker Leaks</h2>
+          <p class="text-slate-600 dark:text-slate-350 leading-relaxed text-sm">
+            We do not use aggressive third-party trackers. Our anonymous product analytics record only generic tool activation events (e.g. tracking that "Merge PDF" was opened and run) and never collect filenames, metadata, signatures, or textual content.
+          </p>
+        </section>
+        
+      </div>
+      
+      <div class="mt-8 text-center">
+        <a href="/" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-sm transition-colors text-sm">Back to Tools Directory</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 py-8 mt-12 text-sm">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="font-semibold text-slate-700 dark:text-slate-300 font-display">ZeroPDF</p>
+        <p class="text-xs">Zero Cost. Zero Signup. Zero File Storage.</p>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="/privacy/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Privacy & Files</a>
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Tools Directory</a>
+      </div>
+      <p class="text-xs text-slate-400">&copy; 2026 ZeroPDF. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/privacy.js"></script>
+</body>
+</html>

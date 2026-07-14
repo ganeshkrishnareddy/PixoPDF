@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Split PDF Online Free – Extract PDF Pages | ZeroPDF</title>
+  <meta name="description" content="Split PDF files online for free. Extract selected pages or separate every PDF page securely in your browser with zero file uploads.">
+  <link rel="canonical" href="https://zeropdf.pages.dev/split-pdf/">
+  
+  <!-- OG / Twitter Card Social Metadata -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Split PDF Online Free – Extract PDF Pages | ZeroPDF">
+  <meta property="og:description" content="Split PDF files online for free. Extract selected pages or separate every PDF page securely in your browser with zero file uploads.">
+  <meta property="og:url" content="https://zeropdf.pages.dev/split-pdf/">
+  <meta property="og:image" content="https://zeropdf.pages.dev/assets/images/zeropdf-og.png">
+  <meta property="og:site_name" content="ZeroPDF">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="icon" href="/favicon-16x16.png" type="image/png" sizes="16x16">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+  
+  <!-- Header Navigation -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center space-x-2 text-xl font-bold tracking-tight">
+        <span class="p-1.5 bg-indigo-600 rounded-lg text-white">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="w-5 h-5"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><circle cx="12" cy="13" r="3"></circle></svg>
+        </span>
+        <span class="font-display">ZeroPDF</span>
+      </a>
+      <div class="flex items-center space-x-4">
+        <a href="/privacy/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Light/Dark Theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 block dark:hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden dark:block"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tool Processing Area -->
+  <main class="flex-1 py-12">
+    <div class="tool-page-container">
+      
+      <!-- Breadcrumbs -->
+      <nav class="text-xs text-slate-500 dark:text-slate-400 mb-4 flex items-center space-x-2" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Home</a>
+        <span>&gt;</span>
+        <span class="font-medium text-slate-800 dark:text-slate-200">Split PDF</span>
+      </nav>
+
+      <div class="tool-header">
+        <h1>Split PDF Files Online for Free</h1>
+        <p>Extract specific ranges or split every page into separate documents securely in your browser.</p>
+      </div>
+
+      <!-- Processing Card -->
+      <div class="card space-y-6" id="tool-workspace">
+        
+        <!-- Reusable Uploader element -->
+        <div id="uploader-container"></div>
+
+        <!-- Split settings and preview area -->
+        <div id="split-workspace-area" class="hidden space-y-6">
+          <div class="p-4 bg-slate-50 dark:bg-slate-800 rounded-lg flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <p class="font-medium text-slate-800 dark:text-slate-100" id="source-filename"></p>
+              <p class="text-xs text-slate-500 dark:text-slate-400" id="source-page-count"></p>
+            </div>
+            <button id="btn-change-file" class="text-sm font-semibold text-rose-600 dark:text-rose-400 hover:underline">Change File</button>
+          </div>
+
+          <!-- Configuration parameters -->
+          <div class="settings-grid">
+            <div class="settings-group">
+              <label for="split-mode" class="settings-label">Split Mode</label>
+              <select id="split-mode" class="settings-select">
+                <option value="extract">Extract Pages</option>
+                <option value="split-all">Split Every Page</option>
+              </select>
+            </div>
+
+            <div class="settings-group" id="range-input-group">
+              <label for="split-range" class="settings-label">Page Ranges (e.g. 1-3, 5)</label>
+              <input type="text" id="split-range" value="1" placeholder="e.g. 1-3, 5" 
+                     class="w-full px-4 py-2.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm text-sm" />
+            </div>
+          </div>
+
+          <div class="flex justify-center space-x-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+            <button id="btn-split-pdf" class="btn-primary">Split PDF</button>
+            <button id="btn-reset-tool" class="btn-secondary">Reset</button>
+          </div>
+        </div>
+
+        <!-- Progress/Status Area -->
+        <div id="progress-container"></div>
+
+        <!-- Success Result -->
+        <div id="success-container" class="hidden text-center space-y-4">
+          <div class="text-emerald-500 font-semibold text-lg flex items-center justify-center space-x-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            <span>Split Successful!</span>
+          </div>
+          <p class="text-sm text-slate-500 dark:text-slate-400" id="result-stats"></p>
+          <div class="flex justify-center space-x-4">
+            <button id="btn-download-split" class="btn-primary">Download File</button>
+            <button id="btn-reset-full" class="btn-secondary">Split Another PDF</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SEO - How-To Section -->
+      <section class="how-to-section">
+        <h2 class="text-2xl font-bold text-center text-slate-900 dark:text-white">How to Split PDF Files Online</h2>
+        <div class="how-to-grid">
+          <div class="how-to-step">
+            <span class="step-num">01</span>
+            <h3 class="step-title">Upload PDF</h3>
+            <p class="step-text">Choose the target PDF document you wish to extract or split.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">02</span>
+            <h3 class="step-title">Configure Mode</h3>
+            <p class="step-text">Choose between custom page range extraction or dividing every page independently.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">03</span>
+            <h3 class="step-title">Enter Ranges</h3>
+            <p class="step-text">Input desired ranges such as 1-5 or comma separated values like 1,3,5.</p>
+          </div>
+          <div class="how-to-step">
+            <span class="step-num">04</span>
+            <h3 class="step-title">Download</h3>
+            <p class="step-text">Download the resulting PDF or local ZIP containing all divided documents.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO - FAQ Section -->
+      <section class="faq-section">
+        <h2 class="text-2xl font-bold text-center text-slate-900 dark:text-white">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3 class="faq-q">What is Split Every Page mode?</h3>
+            <p class="faq-a">This automatically divides every page in the PDF into separate single-page documents and compiles them locally into a download-friendly ZIP archive.</p>
+          </div>
+          <div class="faq-item">
+            <h3 class="faq-q">How does the range syntax work?</h3>
+            <p class="faq-a">You can specify intervals using hyphens (e.g. 1-3) or discrete elements using commas (e.g. 1, 4, 7). You can combine them, like: 1-3, 5, 8-10.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Tools -->
+      <section class="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8">
+        <h2 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">Related PDF Tools</h2>
+        <div class="flex flex-wrap gap-4 text-sm">
+          <a href="/merge-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Merge PDF</a>
+          <span class="text-slate-300">|</span>
+          <a href="/compress-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Compress PDF</a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-855 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 py-8 text-sm">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="font-semibold text-slate-700 dark:text-slate-300 font-display">ZeroPDF</p>
+        <p class="text-xs">Zero Cost. Zero Signup. Zero File Storage.</p>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="/privacy/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Privacy & Files</a>
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Tools Directory</a>
+      </div>
+      <p class="text-xs text-slate-400">&copy; 2026 ZeroPDF. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Breadcrumb structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://zeropdf.pages.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Split PDF",
+        "item": "https://zeropdf.pages.dev/split-pdf/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- UMD Local Vendor Scripts -->
+  <script src="/assets/vendor/pdf-lib/pdf-lib.min.js"></script>
+  <script src="/assets/vendor/pdfjs/pdf.min.js"></script>
+  <script src="/assets/vendor/jszip.min.js"></script>
+
+  <!-- Code bootstrap -->
+  <script type="module">
+    import { App } from '/js/app.js';
+    import { Uploader } from '/js/components/uploader.js';
+    import { Progress } from '/js/components/progress.js';
+    import { Toast } from '/js/components/toast.js';
+    import { SplitPDF } from '/js/tools/split-pdf.js';
+    import { DownloadManager } from '/js/core/download-manager.js';
+    import { PdfLoader } from '/js/core/pdf-loader.js';
+    import { Analytics } from '/js/analytics.js';
+
+    let targetFile = null;
+    let totalPagesCount = 0;
+    let processedResult = null; // Blob (for single extract) or Array of {name, blob} (for split all)
+
+    const uploaderContainer = document.getElementById('uploader-container');
+    const splitWorkspaceArea = document.getElementById('split-workspace-area');
+    const rangeInputGroup = document.getElementById('range-input-group');
+    const progressContainer = document.getElementById('progress-container');
+    const successContainer = document.getElementById('success-container');
+    const splitModeSelect = document.getElementById('split-mode');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      Analytics.trackEvent('tool_page_view', { tool: 'split-pdf' });
+      
+      Uploader.init(uploaderContainer, {
+        expectedType: 'pdf',
+        onFilesSelected: async (files) => {
+          targetFile = files[0];
+          uploaderContainer.classList.add('hidden');
+          splitWorkspaceArea.classList.remove('hidden');
+          
+          document.getElementById('source-filename').innerText = targetFile.name;
+          document.getElementById('source-page-count').innerText = "Loading page details...";
+          
+          try {
+            const pdf = await PdfLoader.loadPdf(targetFile);
+            totalPagesCount = pdf.numPages;
+            document.getElementById('source-page-count').innerText = `${totalPagesCount} pages`;
+            document.getElementById('split-range').value = `1-${totalPagesCount}`;
+          } catch (err) {
+            Toast.show("Failed to analyze PDF pages.", "error");
+            resetState();
+          }
+        },
+        onError: (err) => {
+          Toast.show(err, 'error');
+        }
+      });
+
+      splitModeSelect.addEventListener('change', () => {
+        if (splitModeSelect.value === 'split-all') {
+          rangeInputGroup.classList.add('opacity-40', 'pointer-events-none');
+        } else {
+          rangeInputGroup.classList.remove('opacity-40', 'pointer-events-none');
+        }
+      });
+
+      document.getElementById('btn-change-file').addEventListener('click', resetState);
+      document.getElementById('btn-reset-tool').addEventListener('click', resetState);
+      document.getElementById('btn-reset-full').addEventListener('click', resetState);
+
+      document.getElementById('btn-split-pdf').addEventListener('click', runSplit);
+      
+      document.getElementById('btn-download-split').addEventListener('click', () => {
+        if (!processedResult) return;
+        
+        if (Array.isArray(processedResult)) {
+          // split-all: package in zip
+          const zip = new JSZip();
+          processedResult.forEach(item => {
+            zip.file(item.name, item.blob);
+          });
+          zip.generateAsync({ type: 'blob' }).then(content => {
+            DownloadManager.downloadBlob(content, 'split-pdf-pages.zip', 'split-pdf-zip');
+          });
+        } else {
+          // extract mode: download single PDF
+          DownloadManager.downloadBlob(processedResult, 'extracted-pages.pdf', 'split-pdf');
+        }
+      });
+    });
+
+    async function runSplit() {
+      const mode = splitModeSelect.value;
+      const rangeStr = document.getElementById('split-range').value.trim();
+
+      if (mode === 'extract' && !rangeStr) {
+        Toast.show("Please enter a page range to extract.", "warning");
+        return;
+      }
+
+      splitWorkspaceArea.classList.add('hidden');
+
+      try {
+        processedResult = await SplitPDF.process(targetFile, {
+          mode: mode,
+          rangeStr: rangeStr
+        }, (msg, pct) => {
+          Progress.show(progressContainer, msg, pct);
+        });
+
+        Progress.hide(progressContainer);
+        successContainer.classList.remove('hidden');
+        
+        if (Array.isArray(processedResult)) {
+          document.getElementById('result-stats').innerText = `Created ${processedResult.length} separate single-page PDF documents.`;
+        } else {
+          document.getElementById('result-stats').innerText = `Extracted pages PDF ready (${(processedResult.size / (1024 * 1024)).toFixed(2)} MB output size)`;
+        }
+      } catch (err) {
+        Progress.hide(progressContainer);
+        splitWorkspaceArea.classList.remove('hidden');
+        Toast.show(err.message, 'error');
+      }
+    }
+
+    function resetState() {
+      targetFile = null;
+      totalPagesCount = 0;
+      processedResult = null;
+      uploaderContainer.classList.remove('hidden');
+      splitWorkspaceArea.classList.add('hidden');
+      successContainer.classList.add('hidden');
+      Progress.hide(progressContainer);
+    }
+  </script>
+</body>
+</html>
