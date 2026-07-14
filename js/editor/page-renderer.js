@@ -161,12 +161,51 @@ export class PageRenderer {
 
       objEl.innerHTML = innerHtml;
 
-      // Click select
-      objEl.addEventListener('mousedown', (e) => {
+      // Pointer-based select & drag (supports Mouse and Touch drags)
+      objEl.addEventListener('pointerdown', (e) => {
         e.stopPropagation();
+        e.preventDefault();
+        
+        objEl.setPointerCapture(e.pointerId);
+        
         if (this.options.onObjectSelected) {
           this.options.onObjectSelected(obj.id);
         }
+
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const initialX = obj.x;
+        const initialY = obj.y;
+        const zoom = this.state.viewport.zoom;
+
+        const onPointerMove = (moveEvent) => {
+          const dx = (moveEvent.clientX - startX) / zoom;
+          const dy = (moveEvent.clientY - startY) / zoom;
+          
+          let newX = initialX + dx;
+          let newY = initialY + dy;
+
+          // Update editor state object coordinates
+          this.state.updateObject(obj.id, { x: newX, y: newY });
+
+          // Update DOM node position directly
+          objEl.style.left = `${newX * zoom}px`;
+          objEl.style.top = `${newY * zoom}px`;
+        };
+
+        const onPointerUp = (upEvent) => {
+          try {
+            objEl.releasePointerCapture(upEvent.pointerId);
+          } catch (err) {}
+          objEl.removeEventListener('pointermove', onPointerMove);
+          objEl.removeEventListener('pointerup', onPointerUp);
+          
+          // Redraw to ensure all views are aligned
+          this.drawPageObjects(pageIndex);
+        };
+
+        objEl.addEventListener('pointermove', onPointerMove);
+        objEl.addEventListener('pointerup', onPointerUp);
       });
 
       view.overlay.appendChild(objEl);
