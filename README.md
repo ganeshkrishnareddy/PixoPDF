@@ -1,6 +1,6 @@
-# ZeroPDF
+# PixoPDF
 
-ZeroPDF is a privacy-first, zero-signup, zero-watermark, free online PDF tools suite. 
+PixoPDF is a privacy-first, zero-signup, zero-watermark, free online PDF tools suite. 
 All document editing, merging, splitting, compression, and conversions are handled **entirely in the user's browser sandbox**. Documents never leave the device.
 
 ## Locally-Hosted Vendor Libraries
@@ -11,7 +11,7 @@ We host version-pinned PDF structures locally to remove CDN single-point failure
 
 ## Running Locally
 
-To preview ZeroPDF, start a local HTTP server inside the project root:
+To preview PixoPDF, start a local HTTP server inside the project root:
 
 ```bash
 # Using Python

@@ -1,6 +1,6 @@
 /**
- * ZeroPDF Registry
- * Definitive tools list metadata for ZeroPDF.
+ * PixoPDF Registry
+ * Definitive tools list metadata for PixoPDF.
  */
 
 export const ToolRegistry = [

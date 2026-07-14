@@ -1,5 +1,5 @@
 /**
- * ZeroPDF File Validator
+ * PixoPDF File Validator
  * Enforces security, file validation, and memory warnings.
  */
 

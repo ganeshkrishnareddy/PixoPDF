@@ -1,5 +1,5 @@
 /**
- * ZeroPDF File Reader Utility
+ * PixoPDF File Reader Utility
  * Reads files locally into ArrayBuffers or Object URLs safely.
  */
 

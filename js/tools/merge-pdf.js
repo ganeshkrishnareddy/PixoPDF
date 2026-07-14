@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Merge PDF Tool Implementation
+ * PixoPDF Merge PDF Tool Implementation
  * Combines multiple uploaded PDF files locally in browser using pdf-lib.
  */
 

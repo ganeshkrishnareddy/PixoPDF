@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Analytics Abstraction (Disabled for Privacy)
+ * PixoPDF Analytics Abstraction (Disabled for Privacy)
  * Prevents transmitting document content, names, or signature data.
  */
 
@@ -17,6 +17,6 @@ export const Analytics = {
     delete secureProps.text;
     delete secureProps.imageData;
 
-    console.debug(`[ZeroPDF Telemetry] Event: ${eventName}`, secureProps);
+    console.debug(`[PixoPDF Telemetry] Event: ${eventName}`, secureProps);
   }
 };

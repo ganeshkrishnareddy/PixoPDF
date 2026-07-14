@@ -1,5 +1,5 @@
 /**
- * ZeroPDF User-Friendly Error Handler
+ * PixoPDF User-Friendly Error Handler
  */
 
 export const ErrorHandler = {

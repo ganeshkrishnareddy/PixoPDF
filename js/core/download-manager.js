@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Download Manager
+ * PixoPDF Download Manager
  * Triggers client-side browser file downloads safely, tracking download events and cleanups.
  */
 

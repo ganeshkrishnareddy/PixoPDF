@@ -1,6 +1,6 @@
 {
-  "name": "ZeroPDF",
-  "short_name": "ZeroPDF",
+  "name": "PixoPDF",
+  "short_name": "PixoPDF",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8fafc",

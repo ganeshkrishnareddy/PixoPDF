@@ -1,5 +1,5 @@
 /**
- * ZeroPDF PDF to JPG Tool Implementation
+ * PixoPDF PDF to JPG Tool Implementation
  * Extracts and renders PDF pages locally to downloadable JPEG/PNG assets using PDF.js.
  */
 

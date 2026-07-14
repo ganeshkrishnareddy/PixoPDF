@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Main App Initializer
+ * PixoPDF Main App Initializer
  * Coordinates light/dark theme preference and layout setups.
  */
 

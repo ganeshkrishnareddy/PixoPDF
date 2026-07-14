@@ -1,5 +1,5 @@
 /**
- * ZeroPDF JPG to PDF Tool Implementation
+ * PixoPDF JPG to PDF Tool Implementation
  * Converts multiple JPG/PNG images into a single PDF document locally.
  */
 

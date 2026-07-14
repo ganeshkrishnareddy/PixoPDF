@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Uploader Component UI
+ * PixoPDF Uploader Component UI
  * Dynamically binds drop-zones, click handlers, and coordinates keyboard access.
  */
 

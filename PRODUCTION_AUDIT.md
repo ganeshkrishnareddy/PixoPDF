@@ -1,6 +1,6 @@
-# Production Audit - ZeroPDF
+# Production Audit - PixoPDF
 
-This document details findings from our manual files audit of ZeroPDF Phase 1, prioritizing issues for SEO hardening and deployment preparation.
+This document details findings from our manual files audit of PixoPDF Phase 1, prioritizing issues for SEO hardening and deployment preparation.
 
 ## 1. Audit Log & Checklist
 

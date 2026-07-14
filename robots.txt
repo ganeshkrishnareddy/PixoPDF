@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://zeropdf.pages.dev/sitemap.xml
+Sitemap: https://pixopdf.pages.dev/sitemap.xml

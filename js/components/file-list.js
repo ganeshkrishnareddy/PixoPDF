@@ -1,5 +1,5 @@
 /**
- * ZeroPDF File List Visual Component
+ * PixoPDF File List Visual Component
  * Renders a sortable or listable layout of selected files with reordering controls.
  */
 

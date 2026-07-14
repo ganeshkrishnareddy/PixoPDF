@@ -1,4 +1,4 @@
-# ZeroPDF Dependencies
+# PixoPDF Dependencies
 
 All third-party library files are downloaded and hosted locally in `/assets/vendor/` to prevent external CDN reliance, respect the privacy-first offline-capable model, and ensure high reliability.
 

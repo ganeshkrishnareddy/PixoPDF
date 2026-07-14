@@ -1,4 +1,4 @@
-# ZeroPDF Verification Report
+# PixoPDF Verification Report
 
 Tested via local HTTP server `http://localhost:8000`.
 

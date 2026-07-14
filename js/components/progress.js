@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Progress Component
+ * PixoPDF Progress Component
  * Displays loading rings or bar percentages safely.
  */
 

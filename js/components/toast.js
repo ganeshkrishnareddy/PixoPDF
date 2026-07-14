@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Toast Component
+ * PixoPDF Toast Component
  * Emits fleeting notifications or error alerts matching accessibility goals.
  */
 

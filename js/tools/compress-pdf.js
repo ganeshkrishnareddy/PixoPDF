@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Compress PDF Tool Implementation
+ * PixoPDF Compress PDF Tool Implementation
  * Optimizes PDF size in-browser by downscaling embedded images honestly.
  */
 

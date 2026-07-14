@@ -1,4 +1,4 @@
-# SEO Audit - ZeroPDF
+# SEO Audit - PixoPDF
 
 Verified indexing configurations for production deployment:
 
@@ -11,12 +11,12 @@ Verified indexing configurations for production deployment:
 
 | Path | H1 Tag | Title Tag | Meta Description | Canonical URL |
 | :--- | :--- | :--- | :--- | :--- |
-| `/` | Free Online PDF Tools | Free Online PDF Tools – Merge, Split & Convert | Free online PDF tools to merge, split, compress and convert files directly... | `https://zeropdf.pages.dev/` |
-| `/merge-pdf/` | Merge PDF Files Online for Free | Merge PDF Online Free – Combine PDF Files | Merge PDF files online for free. Combine multiple PDFs securely in your browser... | `https://zeropdf.pages.dev/merge-pdf/` |
-| `/split-pdf/` | Split PDF Files Online for Free | Split PDF Online Free – Extract PDF Pages | Split PDF files online for free. Extract selected pages or separate every PDF page... | `https://zeropdf.pages.dev/split-pdf/` |
-| `/compress-pdf/` | Compress PDF Online Free | Compress PDF Online Free – Reduce PDF Size | Compress PDF files online for free with browser-based PDF optimization... | `https://zeropdf.pages.dev/compress-pdf/` |
-| `/jpg-to-pdf/` | Convert JPG to PDF Online for Free | JPG to PDF Converter Free – Images to PDF | Convert JPG and PNG images to PDF online for free. Reorder images, choose page... | `https://zeropdf.pages.dev/jpg-to-pdf/` |
-| `/pdf-to-jpg/` | Convert PDF to JPG Online | PDF to JPG Converter Free – Convert PDF to Images | Convert PDF pages to JPG or PNG images online for free. Process documents privately... | `https://zeropdf.pages.dev/pdf-to-jpg/` |
-| `/privacy/` | Privacy & File Processing Architecture | Privacy & Local PDF Processing | Learn about ZeroPDF's local browser-based PDF processing. No file uploads... | `https://zeropdf.pages.dev/privacy/` |
+| `/` | Free Online PDF Tools | Free Online PDF Tools – Merge, Split & Convert | Free online PDF tools to merge, split, compress and convert files directly... | `https://pixopdf.pages.dev/` |
+| `/merge-pdf/` | Merge PDF Files Online for Free | Merge PDF Online Free – Combine PDF Files | Merge PDF files online for free. Combine multiple PDFs securely in your browser... | `https://pixopdf.pages.dev/merge-pdf/` |
+| `/split-pdf/` | Split PDF Files Online for Free | Split PDF Online Free – Extract PDF Pages | Split PDF files online for free. Extract selected pages or separate every PDF page... | `https://pixopdf.pages.dev/split-pdf/` |
+| `/compress-pdf/` | Compress PDF Online Free | Compress PDF Online Free – Reduce PDF Size | Compress PDF files online for free with browser-based PDF optimization... | `https://pixopdf.pages.dev/compress-pdf/` |
+| `/jpg-to-pdf/` | Convert JPG to PDF Online for Free | JPG to PDF Converter Free – Images to PDF | Convert JPG and PNG images to PDF online for free. Reorder images, choose page... | `https://pixopdf.pages.dev/jpg-to-pdf/` |
+| `/pdf-to-jpg/` | Convert PDF to JPG Online | PDF to JPG Converter Free – Convert PDF to Images | Convert PDF pages to JPG or PNG images online for free. Process documents privately... | `https://pixopdf.pages.dev/pdf-to-jpg/` |
+| `/privacy/` | Privacy & File Processing Architecture | Privacy & Local PDF Processing | Learn about PixoPDF's local browser-based PDF processing. No file uploads... | `https://pixopdf.pages.dev/privacy/` |
 
 All targets have exactly one H1 tag and self-referencing canonical definitions to resolve index deduplication issues.

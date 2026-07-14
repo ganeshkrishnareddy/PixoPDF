@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Privacy Page Helper
+ * PixoPDF Privacy Page Helper
  */
 
 import { Analytics } from './analytics.js';

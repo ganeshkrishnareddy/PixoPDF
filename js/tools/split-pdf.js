@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Split PDF Tool Implementation
+ * PixoPDF Split PDF Tool Implementation
  * Extracts selected page ranges or splits all pages into individual files.
  */
 

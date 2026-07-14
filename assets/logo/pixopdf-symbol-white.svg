@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- White version of symbol for dark backgrounds -->
+  <rect width="512" height="512" rx="128" fill="#ffffff" />
+  <path d="M160 110 h140 l80 80 v212 c0 16-14 30-30 30 H160 c-16 0-30-14-30-30 V140 c0-16 14-30 30-30 z" fill="#030712" />
+  <path d="M300 110 v80 h80 z" fill="#3b82f6" />
+  <path d="M180 180 h70 c25 0 45 20 45 45 s-20 45-45 45 h-70 z" fill="#ffffff" />
+</svg>

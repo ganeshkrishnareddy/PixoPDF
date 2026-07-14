@@ -1,6 +1,6 @@
-# Privacy Architecture Rule (ZeroPDF)
+# Privacy Architecture Rule (PixoPDF)
 
-ZeroPDF is built on the core promise of **Zero Cost. Zero Signup. Zero File Storage.**
+PixoPDF is built on the core promise of **PDF tools made simple.**
 To uphold this absolute privacy standard, this document outlines the mandatory rules governing all client-side operations.
 
 ## Core Privacy Directives

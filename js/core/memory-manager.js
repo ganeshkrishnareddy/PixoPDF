@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Memory Manager
+ * PixoPDF Memory Manager
  * Handles browser garbage collection flags, canvas cleanup, and large buffers.
  */
 

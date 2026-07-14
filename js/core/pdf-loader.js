@@ -1,5 +1,5 @@
 /**
- * ZeroPDF PDF Loader
+ * PixoPDF PDF Loader
  * Configures locally hosted PDFJS Worker path and returns helper for parsing PDFs.
  */
 

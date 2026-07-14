@@ -1,5 +1,5 @@
 /**
- * ZeroPDF Search & Quick Filters Component
+ * PixoPDF Search & Quick Filters Component
  */
 
 import { ToolRegistry } from '../tools.js';
