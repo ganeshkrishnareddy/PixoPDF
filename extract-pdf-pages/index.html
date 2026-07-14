@@ -4,6 +4,12 @@
   <!-- Theme Initialization Script -->
   <script>
     (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
       const savedTheme = localStorage.getItem('pixopdf-theme');
       const theme = savedTheme || 'light';
       if (theme === 'dark') {
@@ -18,14 +24,14 @@
   
   <title>Extract Pages from PDF Online | PixoPDF</title>
   <meta name="description" content="Extract specific pages from your PDF file online. Choose custom page ranges or select page thumbnails visually for browser-side extraction.">
-  <link rel="canonical" href="https://pixopdf.pages.dev/extract-pdf-pages/">
+  <link rel="canonical" href="https://pixopdf.online/extract-pdf-pages/">
   
   <!-- OG / Twitter Card Social Metadata -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Extract Pages from PDF Online | PixoPDF">
   <meta property="og:description" content="Extract specific pages from your PDF file online. Choose custom page ranges or select page thumbnails visually for browser-side extraction.">
-  <meta property="og:url" content="https://pixopdf.pages.dev/extract-pdf-pages/">
-  <meta property="og:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta property="og:url" content="https://pixopdf.online/extract-pdf-pages/">
+  <meta property="og:image" content="https://pixopdf.online/assets/images/pixopdf-og.png">
   <meta property="og:site_name" content="PixoPDF">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -229,13 +235,13 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://pixopdf.pages.dev/"
+        "item": "https://pixopdf.online/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Extract PDF Pages",
-        "item": "https://pixopdf.pages.dev/extract-pdf-pages/"
+        "item": "https://pixopdf.online/extract-pdf-pages/"
       }
     ]
   }

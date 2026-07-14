@@ -4,6 +4,12 @@
   <!-- Theme Initialization Script -->
   <script>
     (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
       const savedTheme = localStorage.getItem('pixopdf-theme');
       const theme = savedTheme || 'light';
       if (theme === 'dark') {
@@ -18,6 +24,7 @@
   
   <title>Page Not Found | PixoPDF</title>
   <meta name="description" content="The page you're looking for doesn't exist or may have moved.">
+  <link rel="canonical" href="https://pixopdf.online/404.html">
   
   <!-- CSS -->
   <link rel="stylesheet" href="/css/index.css">

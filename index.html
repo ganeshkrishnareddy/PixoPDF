@@ -4,6 +4,12 @@
   <!-- Theme Initialization Script -->
   <script>
     (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
       const savedTheme = localStorage.getItem('pixopdf-theme');
       const theme = savedTheme || 'light';
       if (theme === 'dark') {
@@ -18,19 +24,19 @@
   
   <title>Free Online PDF Tools – Merge, Split & Convert | PixoPDF</title>
   <meta name="description" content="Free online PDF tools to merge, split, compress and convert files directly in your browser. No signup, no watermark and zero file uploads.">
-  <link rel="canonical" href="https://pixopdf.pages.dev/">
+  <link rel="canonical" href="https://pixopdf.online/">
   
   <!-- OG / Twitter Card Social Metadata -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Free Online PDF Tools – Merge, Split & Convert | PixoPDF">
   <meta property="og:description" content="Free online PDF tools to merge, split, compress and convert files directly in your browser. No signup, no watermark and zero file uploads.">
-  <meta property="og:url" content="https://pixopdf.pages.dev/">
-  <meta property="og:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta property="og:url" content="https://pixopdf.online/">
+  <meta property="og:image" content="https://pixopdf.online/assets/images/pixopdf-og.png">
   <meta property="og:site_name" content="PixoPDF">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Free Online PDF Tools – Merge, Split & Convert | PixoPDF">
   <meta name="twitter:description" content="Free online PDF tools to merge, split, compress and convert files directly in your browser. No signup, no watermark and zero file uploads.">
-  <meta name="twitter:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta name="twitter:image" content="https://pixopdf.online/assets/images/pixopdf-og.png">
 
   <!-- Icons -->
   <link rel="icon" href="/favicon.ico" sizes="any">
@@ -91,11 +97,14 @@
           Your files never leave your device
         </span>
         <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display leading-tight">
-          17 Free PDF Tools.<br class="hidden sm:inline"> Made Simple.
+          25 Free PDF Tools.<br class="hidden sm:inline"> Made Simple.
         </h1>
         <p class="text-lg md:text-xl text-slate-600 dark:text-slate-350 max-w-2xl mx-auto leading-relaxed">
-          Merge, split, compress and convert PDF files directly in your browser. No signup, no watermark, and your files never leave your device.
+          Merge, split, compress, edit, sign and convert PDF files directly in your browser. Free to use, no signup, and no file uploads to a PixoPDF processing server.
         </p>
+        <div class="text-sm text-slate-500 dark:text-slate-400">
+          Popular: <a href="/sign-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Sign PDF</a>, <a href="/edit-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Edit PDF</a>, <a href="/add-text-to-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline font-semibold">Add Text</a>
+        </div>
         
         <div class="flex flex-wrap justify-center gap-4 pt-2">
           <a href="#tools-directory" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-sm transition-all duration-150 transform hover:-translate-y-0.5">Explore PDF Tools</a>
@@ -104,10 +113,10 @@
 
         <!-- Lightweight Inline Trust indicators -->
         <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 pt-6 text-xs text-slate-500 dark:text-slate-400 font-medium">
-          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> 100% Free</span>
-          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> No Signup Required</span>
-          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> No Watermarks</span>
-          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> Secure Browser Processing</span>
+          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> Free to Use</span>
+          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> No Signup</span>
+          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> No Watermark</span>
+          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> Processed in Browser</span>
         </div>
       </div>
 
@@ -256,7 +265,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "PixoPDF",
-    "url": "https://pixopdf.pages.dev/",
+    "url": "https://pixopdf.online/",
     "description": "Free online PDF tools to merge, split, compress and convert files directly in your browser. No signup, no watermark and zero file uploads."
   }
   </script>

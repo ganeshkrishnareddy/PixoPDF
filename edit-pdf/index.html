@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Initialization Script -->
+  <script>
+    (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
+      const savedTheme = localStorage.getItem('pixopdf-theme');
+      const theme = savedTheme || 'light';
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Edit PDF Online Free – Free PDF Editor | PixoPDF</title>
+  <meta name="description" content="Edit PDF documents online for free. Add text box comments, draw markups, insert visual text replacements, and place signatures. Processed locally in browser.">
+  <link rel="canonical" href="https://pixopdf.online/edit-pdf/">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/tool.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+  
+  <!-- Header Navigation -->
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center space-x-2 text-xl font-bold tracking-tight" aria-label="PixoPDF Home">
+        <span class="p-1 text-white rounded-lg w-8 h-8 flex items-center justify-center">
+          <svg viewBox="0 0 512 512" width="100%" height="100%"><rect width="512" height="512" rx="128" fill="#4f46e5" /><path d="M160 110 h140 l80 80 v212 c0 16-14 30-30 30 H160 c-16 0-30-14-30-30 V140 c0-16 14-30 30-30 z" fill="#ffffff" /><path d="M300 110 v80 h80 z" fill="#c7d2fe" /><path d="M180 180 h70 c25 0 45 20 45 45 s-20 45-45 45 h-70 z" fill="#4f46e5" /></svg>
+        </span>
+        <span class="font-display">PixoPDF</span>
+      </a>
+      <div class="flex items-center space-x-4">
+        <a href="/privacy/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Workspace Container -->
+  <main class="flex-1 py-6">
+    <div class="max-w-7xl mx-auto px-4 space-y-6">
+      
+      <!-- Breadcrumbs -->
+      <nav class="text-xs text-slate-500 dark:text-slate-400 flex items-center space-x-2" aria-label="Breadcrumb">
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Home</a>
+        <span>&gt;</span>
+        <span class="font-medium text-slate-800 dark:text-slate-200">Edit PDF</span>
+      </nav>
+
+      <div class="tool-header">
+        <h1>Edit PDF Online for Free</h1>
+        <p>A consolidated workspace to add text, visual replacements, and drawings. Processed strictly locally.</p>
+        
+        <div class="mt-4 p-4 border border-indigo-200/50 bg-indigo-50/10 rounded-lg text-xs space-y-1 text-slate-550 dark:text-slate-350 max-w-2xl">
+          <p class="font-semibold text-slate-800 dark:text-slate-200">Wording Disclosure Notice:</p>
+          <p>“Visual text replacement covers the selected area and adds replacement text. The original PDF text stream may remain in the document.”</p>
+        </div>
+      </div>
+
+      <!-- Editor Panel Card -->
+      <div class="card p-0 overflow-hidden relative border border-slate-200 dark:border-slate-800 rounded-xl" id="editor-card">
+        
+        <!-- File Uploader View -->
+        <div id="uploader-container" class="p-12"></div>
+
+        <!-- Editor Staged View -->
+        <div id="editor-workspace" class="hidden flex flex-col h-[75vh]">
+          
+          <!-- Editor Top Actions Bar -->
+          <div class="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 p-3.5 flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center space-x-2">
+              <button id="btn-add-txt" class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-100 text-xs font-semibold" aria-label="Add text input field">Text</button>
+              <button id="btn-replace-txt" class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-100 text-xs font-semibold" aria-label="Replace visual text overlay selection">Visual Replacement</button>
+              <button id="btn-add-rect" class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-100 text-xs font-semibold" aria-label="Add rectangle shape">Rectangle</button>
+              <button id="btn-add-check" class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-100 text-xs font-semibold" aria-label="Add checkmark symbol">✓ Checkmark</button>
+              
+              <span class="text-slate-300 dark:text-slate-700">|</span>
+              <button id="btn-del" class="p-2 text-rose-500 hover:underline text-xs font-semibold" aria-label="Delete selected object">Delete</button>
+              <button id="btn-undo" class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-100 text-xs font-semibold" aria-label="Undo action">Undo</button>
+              <button id="btn-redo" class="p-2 bg-white dark:bg-slate-800 rounded border border-slate-200 dark:border-slate-700 hover:bg-slate-100 text-xs font-semibold" aria-label="Redo action">Redo</button>
+            </div>
+            
+            <div class="flex items-center space-x-2">
+              <button id="btn-zoom-out" class="p-1.5 bg-slate-200 dark:bg-slate-800 rounded hover:bg-slate-300 font-bold" aria-label="Zoom out">-</button>
+              <span id="zoom-value" class="text-xs font-bold w-12 text-center">100%</span>
+              <button id="btn-zoom-in" class="p-1.5 bg-slate-200 dark:bg-slate-800 rounded hover:bg-slate-300 font-bold" aria-label="Zoom in">+</button>
+            </div>
+
+            <div>
+              <button id="btn-export-pdf" class="btn-primary py-2 px-5 text-sm">Download PDF</button>
+            </div>
+          </div>
+
+          <!-- Document Workspace Area -->
+          <div class="flex-1 flex overflow-hidden">
+            <div id="sidebar-thumbnails" class="w-44 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 overflow-y-auto p-4 space-y-4 hidden md:block">
+              <!-- Rendered dynamically -->
+            </div>
+            
+            <div id="viewport-workspace" class="flex-1 overflow-auto bg-slate-100 dark:bg-slate-950 p-6 flex flex-col items-center">
+              <!-- Content pages drawn dynamically by PageRenderer -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div id="progress-container"></div>
+      </div>
+
+      <!-- Text Editing Modal / Popup Panel -->
+      <div id="text-edit-popover" class="fixed z-50 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-4 rounded-xl shadow-lg hidden space-y-3">
+        <label for="popover-text-val" class="block text-[10px] font-bold text-slate-400 uppercase">Edit Content</label>
+        <textarea id="popover-text-val" rows="3" class="w-64 p-2 text-xs border rounded bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-indigo-500"></textarea>
+        <div class="flex justify-end space-x-2">
+          <button id="btn-close-popover" class="btn-secondary py-1 px-3 text-xs">Done</button>
+        </div>
+      </div>
+
+      <!-- Success Container -->
+      <div id="success-container" class="hidden text-center card space-y-4 max-w-md mx-auto p-8">
+        <div class="text-emerald-500 font-semibold text-lg flex items-center justify-center space-x-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-6 h-6"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>PDF Created Successfully!</span>
+        </div>
+        <p class="text-sm text-slate-500" id="result-stats"></p>
+        <div class="flex justify-center space-x-4">
+          <button id="btn-download-final" class="btn-primary">Download PDF</button>
+          <button id="btn-reset-full" class="btn-secondary">Edit Another PDF</button>
+        </div>
+      </div>
+
+    
+      <!-- Related Tools -->
+      <section class="mt-12 border-t border-slate-200 dark:border-slate-800 pt-8">
+        <h2 class="text-xl font-bold mb-4 text-slate-900 dark:text-white">Related PDF Tools</h2>
+        <div class="flex flex-wrap gap-4 text-sm">
+          <a href="/add-text-to-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Add Text to PDF</a>
+          <span class="text-slate-300">|</span>
+          <a href="/add-image-to-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Add Image to PDF</a>
+          <span class="text-slate-300">|</span>
+          <a href="/annotate-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Annotate PDF</a>
+          <span class="text-slate-300">|</span>
+          <a href="/sign-pdf/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Sign PDF</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-855 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 py-8 text-sm">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="font-semibold text-slate-700 dark:text-slate-300 font-display">PixoPDF</p>
+        <p class="text-xs">PDF tools made simple.</p>
+      </div>
+      <p class="text-xs text-slate-400">&copy; 2026 PixoPDF. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Vendor Scripts -->
+  <script src="/assets/vendor/pdf-lib/pdf-lib.min.js"></script>
+  <script src="/assets/vendor/pdfjs/pdf.min.js"></script>
+
+  <!-- Code bootstrap -->
+  <script type="module">
+    import { App } from '/js/app.js';
+    import { Uploader } from '/js/components/uploader.js';
+    import { Progress } from '/js/components/progress.js';
+    import { Toast } from '/js/components/toast.js';
+    import { DownloadManager } from '/js/core/download-manager.js';
+    import { EditorState } from '/js/editor/editor-state.js';
+    import { PageRenderer } from '/js/editor/page-renderer.js';
+    import { HistoryManager } from '/js/editor/history-manager.js';
+    import { ExportManager } from '/js/editor/export-manager.js';
+    import { Analytics } from '/js/analytics.js';
+
+    let targetFile = null;
+    let editorState = null;
+    let pageRenderer = null;
+    let historyManager = null;
+    let processedResult = null;
+    let activePdfjsDoc = null;
+
+    const uploaderContainer = document.getElementById('uploader-container');
+    const editorWorkspace = document.getElementById('editor-workspace');
+    const popover = document.getElementById('text-edit-popover');
+    const popoverTextVal = document.getElementById('popover-text-val');
+    const progressContainer = document.getElementById('progress-container');
+    const successContainer = document.getElementById('success-container');
+    const zoomValLabel = document.getElementById('zoom-value');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      Analytics.trackEvent('tool_page_view', { tool: 'edit-pdf' });
+      
+      editorState = new EditorState();
+
+      Uploader.init(uploaderContainer, {
+        expectedType: 'pdf',
+        onFilesSelected: async (files) => {
+          targetFile = files[0];
+          uploaderContainer.classList.add('hidden');
+          editorWorkspace.classList.remove('hidden');
+          
+          try {
+            window.pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/vendor/pdfjs/pdf.worker.min.js';
+            const arrayBuf = await targetFile.arrayBuffer();
+            activePdfjsDoc = await window.pdfjsLib.getDocument({ data: new Uint8Array(arrayBuf) }).promise;
+
+            pageRenderer = new PageRenderer(
+              document.getElementById('viewport-workspace'),
+              editorState,
+              {
+                onObjectSelected: (objId) => {
+                  editorState.selection.objectId = objId;
+                  showEditPopover(objId);
+                  pageRenderer.drawPageObjects(editorState.objects.find(o => o.id === objId).pageIndex);
+                }
+              }
+            );
+
+            historyManager = new HistoryManager(editorState, () => {
+              pageRenderer.refreshAll();
+            });
+
+            await pageRenderer.loadDocument(activePdfjsDoc);
+            await pageRenderer.refreshAll();
+          } catch (err) {
+            Toast.show("We couldn't open this PDF.", 'error');
+            resetState();
+          }
+        },
+        onError: (err) => {
+          Toast.show(err, 'error');
+        }
+      });
+
+      // Bind workspace selections
+      document.getElementById('btn-add-txt').addEventListener('click', () => insertEditObject('text', 'Type text...'));
+      document.getElementById('btn-replace-txt').addEventListener('click', insertVisualTextReplacement);
+      document.getElementById('btn-add-rect').addEventListener('click', () => insertEditObject('rectangle'));
+      document.getElementById('btn-add-check').addEventListener('click', () => insertEditObject('checkmark'));
+      
+      document.getElementById('btn-del').addEventListener('click', deleteSelected);
+
+      // Close popover
+      document.getElementById('btn-close-popover').addEventListener('click', () => {
+        popover.classList.add('hidden');
+        if (editorState.selection.objectId) {
+          historyManager.pushAction();
+          editorState.updateObject(editorState.selection.objectId, {
+            properties: {
+              text: popoverTextVal.value
+            }
+          });
+          pageRenderer.refreshAll();
+        }
+      });
+
+      // Zoom bindings
+      document.getElementById('btn-zoom-out').addEventListener('click', () => changeZoom(-0.25));
+      document.getElementById('btn-zoom-in').addEventListener('click', () => changeZoom(0.25));
+
+      // Undo / Redo
+      document.getElementById('btn-undo').addEventListener('click', () => historyManager.undo());
+      document.getElementById('btn-redo').addEventListener('click', () => historyManager.redo());
+
+      // Export
+      document.getElementById('btn-export-pdf').addEventListener('click', runExport);
+      document.getElementById('btn-download-final').addEventListener('click', () => {
+        if (processedResult) {
+          DownloadManager.downloadBlob(processedResult, 'edited-' + targetFile.name, 'edit-pdf');
+        }
+      });
+      document.getElementById('btn-reset-full').addEventListener('click', resetState);
+    });
+
+    function changeZoom(delta) {
+      let zoom = editorState.viewport.zoom + delta;
+      zoom = Math.max(0.5, Math.min(2.0, zoom));
+      editorState.viewport.zoom = zoom;
+      zoomValLabel.innerText = `${Math.round(zoom * 100)}%`;
+      pageRenderer.refreshAll();
+    }
+
+    function insertEditObject(type, textVal = '') {
+      historyManager.pushAction();
+      const newObj = editorState.addObject({
+        type: type,
+        pageIndex: editorState.document.currentPage - 1,
+        x: 100,
+        y: 100,
+        width: 140,
+        height: 35,
+        properties: {
+          text: textVal,
+          font: 'Helvetica',
+          fontSize: 14,
+          color: '#000000'
+        }
+      });
+
+      pageRenderer.refreshAll();
+      showEditPopover(newObj.id);
+    }
+
+    function insertVisualTextReplacement() {
+      historyManager.pushAction();
+      
+      // Visual text replacement draws a background cover box (rectangle) and text input overlay
+      // 1. Add white background cover
+      const coverObj = editorState.addObject({
+        type: 'rectangle',
+        pageIndex: editorState.document.currentPage - 1,
+        x: 100,
+        y: 100,
+        width: 140,
+        height: 25,
+        properties: {}
+      });
+
+      // 2. Add text overlay
+      const textObj = editorState.addObject({
+        type: 'text',
+        pageIndex: editorState.document.currentPage - 1,
+        x: 100,
+        y: 100,
+        width: 140,
+        height: 25,
+        properties: {
+          text: 'Replacement text',
+          font: 'Helvetica',
+          fontSize: 12,
+          color: '#000000'
+        }
+      });
+
+      pageRenderer.refreshAll();
+      showEditPopover(textObj.id);
+    }
+
+    function showEditPopover(objId) {
+      const obj = editorState.objects.find(o => o.id === objId);
+      if (!obj || obj.type !== 'text') return;
+
+      const cardEl = document.getElementById(`dom-obj-${objId}`);
+      if (cardEl) {
+        const bounds = cardEl.getBoundingClientRect();
+        popover.classList.remove('hidden');
+        popover.style.top = `${bounds.bottom + 8 + window.scrollY}px`;
+        popover.style.left = `${bounds.left + window.scrollX}px`;
+        popoverTextVal.value = obj.properties.text || '';
+      }
+    }
+
+    function deleteSelected() {
+      const objId = editorState.selection.objectId;
+      if (!objId) return;
+
+      historyManager.pushAction();
+      editorState.deleteObject(objId);
+      popover.classList.add('hidden');
+      pageRenderer.refreshAll();
+    }
+
+    async function runExport() {
+      if (editorState.objects.length === 0) {
+        Toast.show("Please make at least one edit first.", "warning");
+        return;
+      }
+
+      editorWorkspace.classList.add('hidden');
+      Progress.show(progressContainer, 'Rendering output document...', 30);
+
+      try {
+        processedResult = await ExportManager.export(targetFile, editorState, {}, (msg, pct) => {
+          Progress.show(progressContainer, msg, pct);
+        });
+
+        Progress.hide(progressContainer);
+        successContainer.classList.remove('hidden');
+        document.getElementById('result-stats').innerText = `Created updated PDF document (${(processedResult.size / (1024 * 1024)).toFixed(2)} MB output size)`;
+      } catch (err) {
+        Progress.hide(progressContainer);
+        editorWorkspace.classList.remove('hidden');
+        Toast.show(err.message, 'error');
+      }
+    }
+
+    function resetState() {
+      targetFile = null;
+      editorState.reset();
+      processedResult = null;
+      activePdfjsDoc = null;
+      
+      uploaderContainer.classList.remove('hidden');
+      editorWorkspace.classList.add('hidden');
+      successContainer.classList.add('hidden');
+      popover.classList.add('hidden');
+      Progress.hide(progressContainer);
+      document.getElementById('viewport-workspace').innerHTML = '';
+      document.getElementById('sidebar-thumbnails').innerHTML = '';
+    }
+  </script>
+</body>
+</html>

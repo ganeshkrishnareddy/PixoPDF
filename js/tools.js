@@ -4,6 +4,18 @@
  */
 
 export const ToolRegistry = [
+
+  {
+    slug: "sign-pdf",
+    name: "Sign PDF",
+    category: "Sign PDF",
+    description: "Sign PDF online for free. Draw touch signatures or type electronic names.",
+    primaryKeyword: "sign pdf online",
+    secondaryKeywords: ["add signature to pdf", "sign pdf visually", "place signature on pdf"],
+    pageUrl: "/sign-pdf/",
+    processingMode: "browser",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`
+  },
   // ORGANIZE PDF
   {
     slug: "merge-pdf",
@@ -87,6 +99,72 @@ export const ToolRegistry = [
 
   // EDIT PDF
   {
+    slug: "edit-pdf",
+    name: "Edit PDF",
+    category: "Edit PDF",
+    description: "Add texts, visual replacements, and drawings. Processed strictly locally.",
+    primaryKeyword: "edit pdf",
+    secondaryKeywords: ["edit pdf online", "free pdf editor", "change pdf text"],
+    pageUrl: "/edit-pdf/",
+    processingMode: "browser",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4z"></path></svg>`
+  },
+  {
+    slug: "add-text-to-pdf",
+    name: "Add Text to PDF",
+    category: "Edit PDF",
+    description: "Type text boxes onto PDF documents and customize font parameters.",
+    primaryKeyword: "add text to pdf",
+    secondaryKeywords: ["type on pdf", "write on pdf online", "insert text into pdf"],
+    pageUrl: "/add-text-to-pdf/",
+    processingMode: "browser",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><polyline points="4 7 4 4 20 4 20 7"></polyline><line x1="9" y1="20" x2="15" y2="20"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>`
+  },
+  {
+    slug: "add-image-to-pdf",
+    name: "Add Image to PDF",
+    category: "Edit PDF",
+    description: "Overlay transparent PNG, JPG, and JPEG images on PDF pages.",
+    primaryKeyword: "add image to pdf",
+    secondaryKeywords: ["insert photo into pdf", "overlay image on pdf", "put image on pdf"],
+    pageUrl: "/add-image-to-pdf/",
+    processingMode: "browser",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>`
+  },
+  {
+    slug: "annotate-pdf",
+    name: "Annotate PDF",
+    category: "Edit PDF",
+    description: "Draw highlight rectangles, underlines, or strike through sections online.",
+    primaryKeyword: "annotate pdf",
+    secondaryKeywords: ["pdf annotation tool", "highlight pdf online", "markup pdf pages"],
+    pageUrl: "/annotate-pdf/",
+    processingMode: "browser",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>`
+  },
+  {
+    slug: "fill-pdf",
+    name: "Fill PDF",
+    category: "Edit PDF",
+    description: "Visually add checkmarks, texts, dates, and initials on regular PDFs.",
+    primaryKeyword: "fill pdf",
+    secondaryKeywords: ["fill pdf online", "document filler", "type on pdf form"],
+    pageUrl: "/fill-pdf/",
+    processingMode: "browser",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path><path d="M10 9H8"></path></svg>`
+  },
+  {
+    slug: "pdf-form-filler",
+    name: "PDF Form Filler",
+    category: "Edit PDF",
+    description: "Fill interactive forms and save input text fields, dropdowns, and checkboxes.",
+    primaryKeyword: "pdf form filler",
+    secondaryKeywords: ["fill pdf forms online", "acroform filler", "complete pdf form"],
+    pageUrl: "/pdf-form-filler/",
+    processingMode: "browser",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M9 17h6"></path><path d="M9 12h6"></path><path d="M9 7h6"></path></svg>`
+  },
+  {
     slug: "add-page-numbers",
     name: "Add Page Numbers",
     category: "Edit PDF",
@@ -119,6 +197,8 @@ export const ToolRegistry = [
     processingMode: "browser",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M6.13 1L6 16a2 2 0 0 0 2 2h15"></path><path d="M1 6.13L16 6a2 2 0 0 1 2 2v15"></path></svg>`
   },
+
+  // SIGN PDF
 
   // CONVERT TO PDF
   {
@@ -180,6 +260,17 @@ export const ToolRegistry = [
   },
 
   // PDF PRIVACY
+  {
+    slug: "redact-pdf",
+    name: "Redact PDF",
+    category: "PDF Privacy",
+    description: "Rasterized redaction removes underlying page content from rebuilt redacted pages.",
+    primaryKeyword: "redact pdf online",
+    secondaryKeywords: ["black out text in pdf", "pdf content masking", "remove text in pdf"],
+    pageUrl: "/redact-pdf/",
+    processingMode: "browser",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`
+  },
   {
     slug: "pdf-metadata",
     name: "PDF Metadata Viewer",

@@ -4,6 +4,12 @@
   <!-- Theme Initialization Script -->
   <script>
     (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
       const savedTheme = localStorage.getItem('pixopdf-theme');
       const theme = savedTheme || 'light';
       if (theme === 'dark') {
@@ -18,14 +24,14 @@
   
   <title>Remove PDF Metadata Online Free – Clean PDF Properties | PixoPDF</title>
   <meta name="description" content="Remove PDF metadata online for free. Clear authors, creation dates, software creators, and producer properties locally in browser.">
-  <link rel="canonical" href="https://pixopdf.pages.dev/remove-pdf-metadata/">
+  <link rel="canonical" href="https://pixopdf.online/remove-pdf-metadata/">
   
   <!-- OG / Twitter Card Social Metadata -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Remove PDF Metadata Online Free – Clean PDF Properties | PixoPDF">
   <meta property="og:description" content="Remove PDF metadata online for free. Clear authors, creation dates, software creators, and producer properties locally in browser.">
-  <meta property="og:url" content="https://pixopdf.pages.dev/remove-pdf-metadata/">
-  <meta property="og:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta property="og:url" content="https://pixopdf.online/remove-pdf-metadata/">
+  <meta property="og:image" content="https://pixopdf.online/assets/images/pixopdf-og.png">
   <meta property="og:site_name" content="PixoPDF">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -225,13 +231,13 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://pixopdf.pages.dev/"
+        "item": "https://pixopdf.online/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Remove PDF Metadata",
-        "item": "https://pixopdf.pages.dev/remove-pdf-metadata/"
+        "item": "https://pixopdf.online/remove-pdf-metadata/"
       }
     ]
   }

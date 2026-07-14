@@ -4,6 +4,12 @@
   <!-- Theme Initialization Script -->
   <script>
     (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
       const savedTheme = localStorage.getItem('pixopdf-theme');
       const theme = savedTheme || 'light';
       if (theme === 'dark') {
@@ -18,14 +24,14 @@
   
   <title>Convert Images to PDF Online Free | PixoPDF</title>
   <meta name="description" content="Convert mixed JPG, PNG, and JPEG images to PDF online for free. Sort files visually and configure custom margins in browser.">
-  <link rel="canonical" href="https://pixopdf.pages.dev/images-to-pdf/">
+  <link rel="canonical" href="https://pixopdf.online/images-to-pdf/">
   
   <!-- OG / Twitter Card Social Metadata -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Convert Images to PDF Online Free | PixoPDF">
   <meta property="og:description" content="Convert mixed JPG, PNG, and JPEG images to PDF online for free. Sort files visually and configure custom margins in browser.">
-  <meta property="og:url" content="https://pixopdf.pages.dev/images-to-pdf/">
-  <meta property="og:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta property="og:url" content="https://pixopdf.online/images-to-pdf/">
+  <meta property="og:image" content="https://pixopdf.online/assets/images/pixopdf-og.png">
   <meta property="og:site_name" content="PixoPDF">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -248,13 +254,13 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://pixopdf.pages.dev/"
+        "item": "https://pixopdf.online/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Images to PDF",
-        "item": "https://pixopdf.pages.dev/images-to-pdf/"
+        "item": "https://pixopdf.online/images-to-pdf/"
       }
     ]
   }

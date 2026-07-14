@@ -4,6 +4,12 @@
   <!-- Theme Initialization Script -->
   <script>
     (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
       const savedTheme = localStorage.getItem('pixopdf-theme');
       const theme = savedTheme || 'light';
       if (theme === 'dark') {
@@ -18,14 +24,14 @@
   
   <title>Rotate PDF Online Free – Rotate PDF Pages | PixoPDF</title>
   <meta name="description" content="Rotate PDF pages online for free. Rotate individual pages or all pages clockwise or counter-clockwise securely in your browser.">
-  <link rel="canonical" href="https://pixopdf.pages.dev/rotate-pdf/">
+  <link rel="canonical" href="https://pixopdf.online/rotate-pdf/">
   
   <!-- OG / Twitter Card Social Metadata -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Rotate PDF Online Free – Rotate PDF Pages | PixoPDF">
   <meta property="og:description" content="Rotate PDF pages online for free. Rotate individual pages or all pages clockwise or counter-clockwise securely in your browser.">
-  <meta property="og:url" content="https://pixopdf.pages.dev/rotate-pdf/">
-  <meta property="og:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta property="og:url" content="https://pixopdf.online/rotate-pdf/">
+  <meta property="og:image" content="https://pixopdf.online/assets/images/pixopdf-og.png">
   <meta property="og:site_name" content="PixoPDF">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -223,13 +229,13 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://pixopdf.pages.dev/"
+        "item": "https://pixopdf.online/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Rotate PDF",
-        "item": "https://pixopdf.pages.dev/rotate-pdf/"
+        "item": "https://pixopdf.online/rotate-pdf/"
       }
     ]
   }

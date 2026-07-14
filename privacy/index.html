@@ -4,6 +4,12 @@
   <!-- Theme Initialization Script -->
   <script>
     (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
       const savedTheme = localStorage.getItem('pixopdf-theme');
       const theme = savedTheme || 'light';
       if (theme === 'dark') {
@@ -18,14 +24,14 @@
   
   <title>Privacy & Local PDF Processing | PixoPDF</title>
   <meta name="description" content="Learn about PixoPDF's local browser-based PDF processing. No file uploads, no cookies, no tracking.">
-  <link rel="canonical" href="https://pixopdf.pages.dev/privacy/">
+  <link rel="canonical" href="https://pixopdf.online/privacy/">
   
   <!-- OG / Twitter Card Social Metadata -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Privacy & Local PDF Processing | PixoPDF">
   <meta property="og:description" content="Learn about PixoPDF's local browser-based PDF processing. No file uploads, no cookies, no tracking.">
-  <meta property="og:url" content="https://pixopdf.pages.dev/privacy/">
-  <meta property="og:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta property="og:url" content="https://pixopdf.online/privacy/">
+  <meta property="og:image" content="https://pixopdf.online/assets/images/pixopdf-og.png">
   <meta property="og:site_name" content="PixoPDF">
   <meta name="twitter:card" content="summary_large_image">
 

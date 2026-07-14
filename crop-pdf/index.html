@@ -4,6 +4,12 @@
   <!-- Theme Initialization Script -->
   <script>
     (function() {
+      // Production Hostname Enforcer
+      if (window.location.hostname !== 'pixopdf.online' && 
+          window.location.hostname !== 'localhost' && 
+          window.location.hostname !== '127.0.0.1') {
+        window.location.replace('https://pixopdf.online' + window.location.pathname + window.location.search);
+      }
       const savedTheme = localStorage.getItem('pixopdf-theme');
       const theme = savedTheme || 'light';
       if (theme === 'dark') {
@@ -18,14 +24,14 @@
   
   <title>Crop PDF Pages Online | PixoPDF</title>
   <meta name="description" content="Crop PDF document pages online for free. Adjust margins and define precise crop boxes. Safe browser-side processing.">
-  <link rel="canonical" href="https://pixopdf.pages.dev/crop-pdf/">
+  <link rel="canonical" href="https://pixopdf.online/crop-pdf/">
   
   <!-- OG / Twitter Card Social Metadata -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Crop PDF Pages Online | PixoPDF">
   <meta property="og:description" content="Crop PDF document pages online for free. Adjust margins and define precise crop boxes. Safe browser-side processing.">
-  <meta property="og:url" content="https://pixopdf.pages.dev/crop-pdf/">
-  <meta property="og:image" content="https://pixopdf.pages.dev/assets/images/pixopdf-og.png">
+  <meta property="og:url" content="https://pixopdf.online/crop-pdf/">
+  <meta property="og:image" content="https://pixopdf.online/assets/images/pixopdf-og.png">
   <meta property="og:site_name" content="PixoPDF">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -248,13 +254,13 @@
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": "https://pixopdf.pages.dev/"
+        "item": "https://pixopdf.online/"
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Crop PDF",
-        "item": "https://pixopdf.pages.dev/crop-pdf/"
+        "item": "https://pixopdf.online/crop-pdf/"
       }
     ]
   }
