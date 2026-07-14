@@ -1,0 +1,223 @@
+# PixoPDF Full Specifications
+
+PixoPDF is a privacy-first, zero-signup static web application containing 34 active PDF management and format conversion tools.
+
+Public website:
+https://pixopdf.online/
+
+## Privacy Architecture
+PixoPDF processes all files locally inside your web browser tab. No file or document content is uploaded to any PixoPDF document-processing server.
+
+## Complete Tool Inventory
+
+### Sign PDF
+- Canonical URL: https://pixopdf.online/sign-pdf/
+- Description: Sign PDF online for free. Draw touch signatures or type electronic names.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Edit PDF
+- Canonical URL: https://pixopdf.online/edit-pdf/
+- Description: Add texts, visual replacements, and drawings. Processed strictly locally.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Add Text to PDF
+- Canonical URL: https://pixopdf.online/add-text-to-pdf/
+- Description: Type text boxes onto PDF documents and customize font parameters.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Add Image to PDF
+- Canonical URL: https://pixopdf.online/add-image-to-pdf/
+- Description: Overlay transparent PNG, JPG, and WebP images on PDF pages.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Annotate PDF
+- Canonical URL: https://pixopdf.online/annotate-pdf/
+- Description: Draw highlight rectangles, underlines, or strike through sections online.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Fill PDF
+- Canonical URL: https://pixopdf.online/fill-pdf/
+- Description: Visually add checkmarks, texts, dates, and initials on regular PDFs.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### PDF Form Filler
+- Canonical URL: https://pixopdf.online/pdf-form-filler/
+- Description: Fill interactive forms and save input text fields, dropdowns, and checkboxes.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Add Page Numbers
+- Canonical URL: https://pixopdf.online/add-page-numbers/
+- Description: Add formatted page numbers to your PDF document online for free.
+- Expected Input: Images/DOCX/XLSX/PPTX
+- Expected Output: PDF
+
+### Add Watermark
+- Canonical URL: https://pixopdf.online/add-watermark/
+- Description: Add text watermarks to your PDF pages with custom options.
+- Expected Input: Images/DOCX/XLSX/PPTX
+- Expected Output: PDF
+
+### Redact PDF
+- Canonical URL: https://pixopdf.online/redact-pdf/
+- Description: Rasterized redaction removes underlying page content from rebuilt redacted pages.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Merge PDF
+- Canonical URL: https://pixopdf.online/merge-pdf/
+- Description: Combine multiple PDF files into one document online for free.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Split PDF
+- Canonical URL: https://pixopdf.online/split-pdf/
+- Description: Extract specific page ranges or split every page into separate documents.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Rotate PDF
+- Canonical URL: https://pixopdf.online/rotate-pdf/
+- Description: Rotate individual pages or all pages clockwise or counter-clockwise visually.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Remove PDF Pages
+- Canonical URL: https://pixopdf.online/remove-pdf-pages/
+- Description: Delete unwanted pages from your PDF file online easily.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Extract PDF Pages
+- Canonical URL: https://pixopdf.online/extract-pdf-pages/
+- Description: Extract specific page ranges into a separate, standalone PDF document.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Organize PDF
+- Canonical URL: https://pixopdf.online/organize-pdf/
+- Description: Drag and drop to reorder, delete, or rotate pages in your PDF file.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Compress PDF
+- Canonical URL: https://pixopdf.online/compress-pdf/
+- Description: Optimize PDF document size by compressing embedded raster images.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Crop PDF
+- Canonical URL: https://pixopdf.online/crop-pdf/
+- Description: Crop PDF pages visually by adjusting bounding crop box parameters.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### PDF Metadata Viewer
+- Canonical URL: https://pixopdf.online/pdf-metadata/
+- Description: Read PDF file metadata headers locally to inspect document properties.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Remove PDF Metadata
+- Canonical URL: https://pixopdf.online/remove-pdf-metadata/
+- Description: Removes supported PDF metadata fields locally inside your browser.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### JPG to PDF
+- Canonical URL: https://pixopdf.online/jpg-to-pdf/
+- Description: Convert JPG, JPEG, and PNG images into a clean PDF document.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### PNG to PDF
+- Canonical URL: https://pixopdf.online/png-to-pdf/
+- Description: Convert PNG images to PDF online with layout and orientation options.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Images to PDF
+- Canonical URL: https://pixopdf.online/images-to-pdf/
+- Description: Convert multiple JPG, JPEG, and PNG images into a single PDF document online.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Image to PDF
+- Canonical URL: https://pixopdf.online/image-to-pdf/
+- Description: Convert JPG, PNG, and WebP files into PDF pages with visual margin configurations.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Word to PDF
+- Canonical URL: https://pixopdf.online/word-to-pdf/
+- Description: Convert Microsoft Word DOCX files into clean PDF documents locally in your browser.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### Excel to PDF
+- Canonical URL: https://pixopdf.online/excel-to-pdf/
+- Description: Convert Microsoft Excel XLSX worksheets into clean PDF page grids in your browser.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### PowerPoint to PDF
+- Canonical URL: https://pixopdf.online/powerpoint-to-pdf/
+- Description: Convert PPTX slide presentations into static PDF documents locally.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### HTML to PDF
+- Canonical URL: https://pixopdf.online/html-to-pdf/
+- Description: Paste raw HTML layouts to render and export them to PDF securely inside your browser.
+- Expected Input: PDF
+- Expected Output: PDF
+
+### PDF to JPG
+- Canonical URL: https://pixopdf.online/pdf-to-jpg/
+- Description: Convert pages of a PDF document into high-quality JPG images.
+- Expected Input: PDF
+- Expected Output: Images/DOCX/XLSX/PPTX/ZIP
+
+### PDF to PNG
+- Canonical URL: https://pixopdf.online/pdf-to-png/
+- Description: Convert PDF pages into transparent PNG images online locally.
+- Expected Input: PDF
+- Expected Output: Images/DOCX/XLSX/PPTX/ZIP
+
+### PDF to Images
+- Canonical URL: https://pixopdf.online/pdf-to-images/
+- Description: Extract PDF pages to JPG, PNG, and WebP formats packed into a ZIP download.
+- Expected Input: PDF
+- Expected Output: Images/DOCX/XLSX/PPTX/ZIP
+
+### PDF to Word
+- Canonical URL: https://pixopdf.online/pdf-to-word/
+- Description: Convert PDF documents into editable Word DOCX files reconstructing structural layers.
+- Expected Input: PDF
+- Expected Output: Images/DOCX/XLSX/PPTX/ZIP
+
+### PDF to Excel
+- Canonical URL: https://pixopdf.online/pdf-to-excel/
+- Description: Extract structured tables from PDF files into editable Excel XLSX spreadsheets.
+- Expected Input: PDF
+- Expected Output: Images/DOCX/XLSX/PPTX/ZIP
+
+### PDF to PowerPoint
+- Canonical URL: https://pixopdf.online/pdf-to-powerpoint/
+- Description: Convert PDF slides into Microsoft PowerPoint PPTX slide presentations locally.
+- Expected Input: PDF
+- Expected Output: Images/DOCX/XLSX/PPTX/ZIP
+
+## Frequently Asked Questions
+
+### Is PixoPDF secure?
+Yes. Files do not leave your device. All calculations occur locally in client memory.
+
+### Are there any subscription fees?
+No. All tools are 100% free with no signup requirements.

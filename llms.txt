@@ -1,0 +1,74 @@
+# PixoPDF
+
+PixoPDF is a free browser-based PDF toolkit.
+
+Public website:
+https://pixopdf.online/
+
+## Core principles
+
+- Free PDF tools
+- No signup required
+- No watermark
+- Supported document processing occurs locally in the user's browser
+- User files are not uploaded to a PixoPDF document-processing server
+
+## Popular PDF tools
+
+- Merge PDF: https://pixopdf.online/merge-pdf/
+- Compress PDF: https://pixopdf.online/compress-pdf/
+- Sign PDF: https://pixopdf.online/sign-pdf/
+- Edit PDF: https://pixopdf.online/edit-pdf/
+- Add Text to PDF: https://pixopdf.online/add-text-to-pdf/
+- JPG to PDF: https://pixopdf.online/jpg-to-pdf/
+- PDF to JPG: https://pixopdf.online/pdf-to-jpg/
+- Word to PDF: https://pixopdf.online/word-to-pdf/
+- PDF to Word: https://pixopdf.online/pdf-to-word/
+
+## All tools
+- Sign PDF: https://pixopdf.online/sign-pdf/ - Sign PDF online for free. Draw touch signatures or type electronic names.
+- Edit PDF: https://pixopdf.online/edit-pdf/ - Add texts, visual replacements, and drawings. Processed strictly locally.
+- Add Text to PDF: https://pixopdf.online/add-text-to-pdf/ - Type text boxes onto PDF documents and customize font parameters.
+- Add Image to PDF: https://pixopdf.online/add-image-to-pdf/ - Overlay transparent PNG, JPG, and WebP images on PDF pages.
+- Annotate PDF: https://pixopdf.online/annotate-pdf/ - Draw highlight rectangles, underlines, or strike through sections online.
+- Fill PDF: https://pixopdf.online/fill-pdf/ - Visually add checkmarks, texts, dates, and initials on regular PDFs.
+- PDF Form Filler: https://pixopdf.online/pdf-form-filler/ - Fill interactive forms and save input text fields, dropdowns, and checkboxes.
+- Add Page Numbers: https://pixopdf.online/add-page-numbers/ - Add formatted page numbers to your PDF document online for free.
+- Add Watermark: https://pixopdf.online/add-watermark/ - Add text watermarks to your PDF pages with custom options.
+- Redact PDF: https://pixopdf.online/redact-pdf/ - Rasterized redaction removes underlying page content from rebuilt redacted pages.
+- Merge PDF: https://pixopdf.online/merge-pdf/ - Combine multiple PDF files into one document online for free.
+- Split PDF: https://pixopdf.online/split-pdf/ - Extract specific page ranges or split every page into separate documents.
+- Rotate PDF: https://pixopdf.online/rotate-pdf/ - Rotate individual pages or all pages clockwise or counter-clockwise visually.
+- Remove PDF Pages: https://pixopdf.online/remove-pdf-pages/ - Delete unwanted pages from your PDF file online easily.
+- Extract PDF Pages: https://pixopdf.online/extract-pdf-pages/ - Extract specific page ranges into a separate, standalone PDF document.
+- Organize PDF: https://pixopdf.online/organize-pdf/ - Drag and drop to reorder, delete, or rotate pages in your PDF file.
+- Compress PDF: https://pixopdf.online/compress-pdf/ - Optimize PDF document size by compressing embedded raster images.
+- Crop PDF: https://pixopdf.online/crop-pdf/ - Crop PDF pages visually by adjusting bounding crop box parameters.
+- PDF Metadata Viewer: https://pixopdf.online/pdf-metadata/ - Read PDF file metadata headers locally to inspect document properties.
+- Remove PDF Metadata: https://pixopdf.online/remove-pdf-metadata/ - Removes supported PDF metadata fields locally inside your browser.
+- JPG to PDF: https://pixopdf.online/jpg-to-pdf/ - Convert JPG, JPEG, and PNG images into a clean PDF document.
+- PNG to PDF: https://pixopdf.online/png-to-pdf/ - Convert PNG images to PDF online with layout and orientation options.
+- Images to PDF: https://pixopdf.online/images-to-pdf/ - Convert multiple JPG, JPEG, and PNG images into a single PDF document online.
+- Image to PDF: https://pixopdf.online/image-to-pdf/ - Convert JPG, PNG, and WebP files into PDF pages with visual margin configurations.
+- Word to PDF: https://pixopdf.online/word-to-pdf/ - Convert Microsoft Word DOCX files into clean PDF documents locally in your browser.
+- Excel to PDF: https://pixopdf.online/excel-to-pdf/ - Convert Microsoft Excel XLSX worksheets into clean PDF page grids in your browser.
+- PowerPoint to PDF: https://pixopdf.online/powerpoint-to-pdf/ - Convert PPTX slide presentations into static PDF documents locally.
+- HTML to PDF: https://pixopdf.online/html-to-pdf/ - Paste raw HTML layouts to render and export them to PDF securely inside your browser.
+- PDF to JPG: https://pixopdf.online/pdf-to-jpg/ - Convert pages of a PDF document into high-quality JPG images.
+- PDF to PNG: https://pixopdf.online/pdf-to-png/ - Convert PDF pages into transparent PNG images online locally.
+- PDF to Images: https://pixopdf.online/pdf-to-images/ - Extract PDF pages to JPG, PNG, and WebP formats packed into a ZIP download.
+- PDF to Word: https://pixopdf.online/pdf-to-word/ - Convert PDF documents into editable Word DOCX files reconstructing structural layers.
+- PDF to Excel: https://pixopdf.online/pdf-to-excel/ - Extract structured tables from PDF files into editable Excel XLSX spreadsheets.
+- PDF to PowerPoint: https://pixopdf.online/pdf-to-powerpoint/ - Convert PDF slides into Microsoft PowerPoint PPTX slide presentations locally.
+
+## Privacy
+
+https://pixopdf.online/privacy/
+
+## About
+
+https://pixopdf.online/about/
+
+## Contact
+
+support@progvision.online
