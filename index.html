@@ -39,7 +39,7 @@
 <body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
   
   <!-- Navigation Header -->
-  <header class="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 sticky top-0 z-50">
+  <header class="border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-50 transition-colors duration-200">
     <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
       <a href="/" class="flex items-center space-x-2 text-xl font-bold tracking-tight">
         <span class="p-1.5 bg-indigo-600 rounded-lg text-white">
@@ -47,9 +47,18 @@
         </span>
         <span class="font-display">ZeroPDF</span>
       </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold text-slate-650 dark:text-slate-300">
+        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">All Tools</a>
+        <a href="/merge-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Merge PDF</a>
+        <a href="/compress-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Compress PDF</a>
+        <a href="/jpg-to-pdf/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Convert PDF</a>
+      </nav>
+
       <div class="flex items-center space-x-4">
-        <a href="/privacy/" class="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
-        <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Light/Dark Theme">
+        <a href="/privacy/" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
+        <button id="theme-toggle" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" aria-label="Toggle Theme">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 block dark:hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 hidden dark:block"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </button>
@@ -58,101 +67,139 @@
   </header>
 
   <!-- Main Content -->
-  <main class="flex-1 py-12">
-    <div class="max-w-6xl mx-auto px-4">
+  <main class="flex-1 py-16 relative overflow-hidden">
+    <!-- Subtle radial visual glow depth background -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-indigo-50/40 dark:from-indigo-950/20 to-transparent pointer-events-none -z-10 rounded-full blur-3xl"></div>
+
+    <div class="max-w-[1240px] mx-auto px-4">
       
       <!-- Hero Header -->
-      <div class="text-center max-w-2xl mx-auto mb-12">
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-slate-900 dark:text-white font-display">
-          All PDF Tools. Zero Cost.
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-6">
+        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-700 dark:text-emerald-450 border border-emerald-200 dark:border-emerald-900 tracking-wide uppercase">
+          Your files never leave your device
+        </span>
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white font-display leading-tight">
+          All PDF Tools.<br class="hidden sm:inline"> Zero Cost.
         </h1>
-        <p class="text-lg text-slate-600 dark:text-slate-300">
-          Merge, split, compress and convert PDF files directly in your browser. No signup. No watermark. Your files never leave your device.
+        <p class="text-lg md:text-xl text-slate-600 dark:text-slate-350 max-w-2xl mx-auto leading-relaxed">
+          Merge, split, compress and convert PDF files directly in your browser. No signup, no watermark, and your files never leave your device.
         </p>
         
-        <div class="mt-8 flex flex-wrap justify-center gap-4">
-          <a href="#tools-directory" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-sm transition-colors duration-150">Choose a PDF Tool</a>
-          <a href="/merge-pdf/" class="px-6 py-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 font-semibold rounded-lg shadow-sm transition-colors duration-150">Merge PDF</a>
+        <div class="flex flex-wrap justify-center gap-4 pt-2">
+          <a href="#tools-directory" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-sm transition-all duration-150 transform hover:-translate-y-0.5">Explore PDF Tools</a>
+          <a href="/merge-pdf/" class="px-6 py-3 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 font-bold rounded-lg shadow-sm transition-all duration-150 transform hover:-translate-y-0.5">Merge PDF</a>
         </div>
-      </div>
 
-      <!-- Trust Badges -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16 text-center">
-        <div class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-center space-x-2">
-          <span class="text-emerald-500 font-bold text-lg">✓</span>
-          <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">100% Free</span>
-        </div>
-        <div class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-center space-x-2">
-          <span class="text-emerald-500 font-bold text-lg">✓</span>
-          <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">No Signup</span>
-        </div>
-        <div class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-center space-x-2">
-          <span class="text-emerald-500 font-bold text-lg">✓</span>
-          <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">No Watermark</span>
-        </div>
-        <div class="p-4 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center justify-center space-x-2">
-          <span class="text-emerald-500 font-bold text-lg">✓</span>
-          <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">Files Stay on Device</span>
+        <!-- Lightweight Inline Trust indicators -->
+        <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 pt-6 text-xs text-slate-500 dark:text-slate-400 font-medium">
+          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> 100% Free</span>
+          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> No Signup Required</span>
+          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> No Watermarks</span>
+          <span class="flex items-center"><span class="text-emerald-500 mr-1.5">✓</span> Secure Browser Processing</span>
         </div>
       </div>
 
       <!-- Search Section -->
-      <div class="max-w-xl mx-auto mb-12" id="tools-directory">
-        <label for="search-input" class="sr-only">What do you want to do with your PDF?</label>
+      <div class="max-w-[720px] mx-auto mb-16" id="tools-directory">
+        <label for="search-input" class="sr-only">Search PDF tools — merge, split, compress...</label>
         <div class="relative">
-          <input type="text" id="search-input" placeholder="What do you want to do with your PDF? (e.g. merge, compress)" 
-                 class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm" />
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 text-slate-400 absolute left-4 top-3.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="search-input" placeholder="Search PDF tools — merge, split, compress..." aria-keyshortcuts="/"
+                 class="w-full pl-12 pr-28 py-4 rounded-xl border border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all shadow-sm text-base" />
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-5 h-5 text-slate-400 absolute left-4 top-4.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span class="hidden sm:inline-flex absolute right-4 top-3.5 items-center px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wide border border-slate-200 dark:border-slate-700">
+            Press / to search
+          </span>
         </div>
       </div>
 
       <!-- Tools Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16" id="tools-grid-container">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20" id="tools-grid-container">
         <!-- Rendered dynamically via js -->
       </div>
 
       <!-- Production Static SEO Content Section -->
-      <section class="max-w-4xl mx-auto border-t border-slate-200 dark:border-slate-800 pt-12 space-y-12">
+      <section class="border-t border-slate-200 dark:border-slate-800 pt-16 space-y-16">
         
-        <div class="space-y-4">
-          <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white font-display">Why Choose ZeroPDF?</h2>
-          <p class="text-slate-600 dark:text-slate-350 leading-relaxed text-sm">
+        <div class="max-w-[760px] mx-auto space-y-4 text-center md:text-left">
+          <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white font-display">PDF Tools Built for Privacy</h2>
+          <p class="text-slate-650 dark:text-slate-350 leading-relaxed text-sm md:text-base">
             ZeroPDF offers a privacy-first, zero-signup alternative to common PDF cloud editors. Traditional sites require document uploads onto their cloud platforms, creating security gaps. ZeroPDF eliminates this concern entirely by keeping calculations and data conversions completely local.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">Browser Processing</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-[960px] mx-auto">
+          <div class="space-y-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+              <span class="p-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded mr-2.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4.5 h-4.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              </span>
+              Browser Processing
+            </h3>
             <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               Every operation runs natively within your browser tab. High-performance JavaScript modules handle document manipulation locally without server calls.
             </p>
           </div>
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">No File Uploads</h3>
+          <div class="space-y-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+              <span class="p-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded mr-2.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4.5 h-4.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+              </span>
+              No File Uploads
+            </h3>
             <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               Zero storage, zero cloud latency. We never transmit your document content, ensuring strict offline confidentiality.
             </p>
           </div>
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">No Signup Walls</h3>
+          <div class="space-y-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+              <span class="p-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded mr-2.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4.5 h-4.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+              </span>
+              No Signup Walls
+            </h3>
             <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               Use all PDF tools immediately. No email registration, subscriptions, or credit card forms.
             </p>
           </div>
-          <div class="space-y-2">
-            <h3 class="text-xl font-bold text-slate-900 dark:text-white">No Watermarks</h3>
+          <div class="space-y-2 bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center">
+              <span class="p-1.5 bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 rounded mr-2.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4.5 h-4.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </span>
+              No Watermarks
+            </h3>
             <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
               Generate clean, professional documents without embedded watermarks or visual stamps.
             </p>
           </div>
         </div>
 
-        <div class="space-y-4 bg-slate-100 dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
-          <h3 class="text-xl font-bold text-slate-900 dark:text-white">How ZeroPDF Protects Your Files</h3>
-          <p class="text-slate-600 dark:text-slate-350 text-sm leading-relaxed">
-            Phase 1 tools (Merge, Split, Compress, JPG to PDF, and PDF to JPG) process files locally in browser memory. Using the exact privacy configuration standard, <strong>your files never leave your device</strong>. Learn more about our technical sandbox on our <a href="/privacy/" class="text-indigo-600 dark:text-indigo-400 hover:underline">Privacy Policy</a> page.
+        <!-- Privacy visual flow -->
+        <div class="max-w-[760px] mx-auto space-y-6 bg-slate-100 dark:bg-slate-900 p-8 rounded-2xl border border-slate-250 dark:border-slate-800 text-center">
+          <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white font-display">Your PDF Never Leaves Your Device</h3>
+          <p class="text-slate-600 dark:text-slate-350 text-sm md:text-base leading-relaxed">
+            ZeroPDF processes supported documents directly inside your browser. Unlike cloud-based PDF workflows, Phase 1 tools do not upload your document to a processing server.
           </p>
+          
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 py-6 text-sm font-semibold">
+            <div class="px-5 py-3 bg-white dark:bg-slate-800 border border-slate-250 dark:border-slate-700 rounded-lg shadow-sm w-44">
+              📂 Your Device
+            </div>
+            <span class="text-slate-400 hidden sm:inline">➔</span>
+            <span class="text-slate-400 sm:hidden">▼</span>
+            <div class="px-5 py-3 bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-900 text-indigo-600 dark:text-indigo-400 rounded-lg shadow-sm w-44">
+              ⚙️ Local Browser
+            </div>
+            <span class="text-slate-400 hidden sm:inline">➔</span>
+            <span class="text-slate-400 sm:hidden">▼</span>
+            <div class="px-5 py-3 bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-250 dark:border-emerald-900 text-emerald-700 dark:text-emerald-450 rounded-lg shadow-sm w-44">
+              📥 Done (Save File)
+            </div>
+          </div>
+          
+          <div class="pt-2">
+            <a href="/privacy/" class="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-sm text-sm">Learn How ZeroPDF Protects Your Files</a>
+          </div>
         </div>
 
       </section>
@@ -161,17 +208,33 @@
   </main>
 
   <!-- Footer -->
-  <footer class="border-t border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 py-8 text-sm">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
-      <div>
-        <p class="font-semibold text-slate-700 dark:text-slate-300 font-display">ZeroPDF</p>
-        <p class="text-xs">Zero Cost. Zero Signup. Zero File Storage.</p>
+  <footer class="border-t border-slate-200 dark:border-slate-850 bg-white dark:bg-slate-900 text-slate-500 dark:text-slate-400 py-12 text-sm">
+    <div class="max-w-[1240px] mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="space-y-3">
+        <p class="text-lg font-bold text-slate-700 dark:text-slate-300 font-display">ZeroPDF</p>
+        <p class="text-xs max-w-xs leading-relaxed">Zero Cost. Zero Signup. Zero File Storage. Files never leave your device.</p>
       </div>
-      <div class="flex items-center space-x-6">
-        <a href="/privacy/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Privacy & Files</a>
-        <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Tools Directory</a>
+      <div class="space-y-3">
+        <p class="font-bold text-slate-700 dark:text-slate-300">PDF Tools</p>
+        <div class="flex flex-col space-y-2 text-xs">
+          <a href="/merge-pdf/" class="hover:text-indigo-650 dark:hover:text-indigo-400">Merge PDF</a>
+          <a href="/split-pdf/" class="hover:text-indigo-650 dark:hover:text-indigo-400">Split PDF</a>
+          <a href="/compress-pdf/" class="hover:text-indigo-650 dark:hover:text-indigo-400">Compress PDF</a>
+          <a href="/jpg-to-pdf/" class="hover:text-indigo-650 dark:hover:text-indigo-400">JPG to PDF</a>
+          <a href="/pdf-to-jpg/" class="hover:text-indigo-650 dark:hover:text-indigo-400">PDF to JPG</a>
+        </div>
       </div>
-      <p class="text-xs text-slate-400">&copy; 2026 ZeroPDF. All rights reserved.</p>
+      <div class="space-y-3">
+        <p class="font-bold text-slate-700 dark:text-slate-300">Company & Privacy</p>
+        <div class="flex flex-col space-y-2 text-xs">
+          <a href="/privacy/" class="hover:text-indigo-650 dark:hover:text-indigo-400">Privacy Policy</a>
+          <a href="/" class="hover:text-indigo-600 dark:hover:text-indigo-400">Tools Directory</a>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-[1240px] mx-auto px-4 border-t border-slate-200 dark:border-slate-800 mt-8 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+      <p>&copy; 2026 ZeroPDF. All rights reserved.</p>
+      <p class="text-emerald-600 dark:text-emerald-400 font-semibold">Your files never leave your device.</p>
     </div>
   </footer>
 
@@ -196,6 +259,14 @@
         document.getElementById('search-input'),
         document.getElementById('tools-grid-container')
       );
+
+      // Keyboard shortcut focus bind
+      window.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          document.getElementById('search-input').focus();
+        }
+      });
     });
   </script>
 </body>
