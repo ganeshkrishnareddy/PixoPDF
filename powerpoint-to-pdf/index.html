@@ -1598,6 +1598,10 @@
           }
           
           document.body.appendChild(wrapper);
+          
+          // Wait for browser layout and rendering cycle
+          await new Promise(resolve => setTimeout(resolve, 150));
+          
           Progress.show(progressContainer, "Compiling slide presentation...", 70);
           
           const opt = {

@@ -1590,6 +1590,9 @@
           
           document.body.appendChild(wrapper);
           
+          // Wait for browser layout and rendering cycle
+          await new Promise(resolve => setTimeout(resolve, 150));
+          
           const orient = document.getElementById('xlsx-orientation').value;
           Progress.show(progressContainer, "Compiling sheet grids into PDF...", 70);
           

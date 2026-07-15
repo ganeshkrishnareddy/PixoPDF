@@ -1564,6 +1564,9 @@
           tempDiv.innerHTML = htmlContent;
           document.body.appendChild(tempDiv);
           
+          // Wait for browser layout and rendering cycle
+          await new Promise(resolve => setTimeout(resolve, 150));
+          
           Progress.show(progressContainer, "Compiling PDF format...", 75);
           
           const opt = {
