@@ -1472,6 +1472,7 @@
   <!-- Vendor libraries and custom scripts placeholders -->
   <script src="/assets/vendor/mammoth.browser.min.js"></script>
   <script src="/assets/vendor/html2pdf.bundle.min.js"></script>
+  <script src="/assets/vendor/pdf-lib/pdf-lib.min.js"></script>
   
   <script type="module">
     import { App } from '/js/app.js';
@@ -1498,6 +1499,7 @@
       const missingDeps = [];
       const assertions = [
         { name: 'Mammoth.js', check: () => typeof window.mammoth !== 'undefined' && typeof window.mammoth.convertToHtml === 'function' },
+        { name: 'PDF-Lib', check: () => typeof window.PDFLib !== 'undefined' },
         { name: 'html2pdf.js', check: () => typeof window.html2pdf !== 'undefined' }
       ];
       for (const dep of assertions) {
@@ -1548,7 +1550,13 @@
         Progress.show(progressContainer, "Processing conversion locally...", 30);
         
         try {
-          
+          if (!window.mammoth) {
+            throw new Error("Mammoth library failed to load.");
+          }
+          if (!window.PDFLib) {
+            throw new Error("PDFLib library failed to load.");
+          }
+
           const arrayBuffer = await selectedFile.arrayBuffer();
           const result = await window.mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
           const htmlContent = result.value;
@@ -1556,45 +1564,90 @@
             throw new Error("Mammoth conversion produced empty HTML context.");
           }
           
-          // Render HTML to hidden element
-          const outerContainer = document.createElement('div');
-          outerContainer.style.position = 'fixed';
-          outerContainer.style.top = '0';
-          outerContainer.style.left = '0';
-          outerContainer.style.width = '800px';
-          outerContainer.style.height = '100%';
-          outerContainer.style.zIndex = '-99999';
-          outerContainer.style.opacity = '0.01';
-          outerContainer.style.pointerEvents = 'none';
-          outerContainer.style.overflow = 'hidden';
-          document.body.appendChild(outerContainer);
-
-          const tempDiv = document.createElement('div');
-          tempDiv.style.width = '800px';
-          tempDiv.style.padding = '40px';
-          tempDiv.style.background = '#ffffff';
-          tempDiv.style.color = '#000000';
-          tempDiv.innerHTML = htmlContent;
-          outerContainer.appendChild(tempDiv);
+          console.log("Mammoth HTML length:", htmlContent.length);
+          console.log("Mammoth HTML snippet:", htmlContent.substring(0, 500));
           
-          // Wait for browser layout and rendering cycle
-          await new Promise(resolve => setTimeout(resolve, 150));
-          if (tempDiv.offsetHeight === 0) {
-            throw new Error("Conversion layout collapsed to a height of 0. Blank page prevented.");
+          Progress.show(progressContainer, "Compiling native PDF format...", 60);
+
+          // Parse HTML using DOMParser
+          const parser = new DOMParser();
+          const docHtml = parser.parseFromString(htmlContent, 'text/html');
+          
+          // Construct native vector PDF using pdf-lib
+          const pdfDoc = await window.PDFLib.PDFDocument.create();
+          const font = await pdfDoc.embedFont(window.PDFLib.StandardFonts.Helvetica);
+          const fontBold = await pdfDoc.embedFont(window.PDFLib.StandardFonts.HelveticaBold);
+          
+          let page = pdfDoc.addPage([595.28, 841.89]);
+          let y = 791.89; // Top margin start (841.89 - 50)
+          const margin = 50;
+          const widthLimit = 495.28; // Page width (595.28 - 100)
+          
+          // Simple word wrap helper
+          function getLines(text, fontSize) {
+            const words = text.split(/\s+/);
+            const lines = [];
+            let currentLine = "";
+            
+            for (const word of words) {
+              const testLine = currentLine ? currentLine + " " + word : word;
+              // 0.5 * fontSize is a reasonable average character width fallback
+              const testWidth = testLine.length * (fontSize * 0.5); 
+              if (testWidth > widthLimit) {
+                if (currentLine) lines.push(currentLine);
+                currentLine = word;
+              } else {
+                currentLine = testLine;
+              }
+            }
+            if (currentLine) {
+              lines.push(currentLine);
+            }
+            return lines;
           }
           
-          Progress.show(progressContainer, "Compiling PDF format...", 75);
+          // Process document nodes
+          const elements = docHtml.body.children;
+          for (let i = 0; i < elements.length; i++) {
+            const el = elements[i];
+            const tag = el.tagName.toLowerCase();
+            const text = el.textContent.trim();
+            if (!text) continue;
+            
+            let fontSize = 11;
+            let isBold = false;
+            let spacing = 15;
+            
+            if (tag === 'h1' || tag === 'h2' || tag === 'h3') {
+              fontSize = tag === 'h1' ? 18 : (tag === 'h2' ? 14 : 12);
+              isBold = true;
+              spacing = fontSize + 6;
+            }
+            
+            const lines = getLines(text, fontSize);
+            for (const line of lines) {
+              if (y - spacing < margin) {
+                page = pdfDoc.addPage([595.28, 841.89]);
+                y = 791.89;
+              }
+              y -= spacing;
+              page.drawText(line, {
+                x: margin,
+                y: y,
+                size: fontSize,
+                font: isBold ? fontBold : font,
+                color: window.PDFLib.rgb(0, 0, 0)
+              });
+            }
+            y -= 10; // Extra paragraph margin
+          }
           
-          const opt = {
-            margin:       10,
-            filename:     processedFileName,
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2, useCORS: true },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-          };
+          const pdfBytes = await pdfDoc.save();
+          processedBlob = new Blob([pdfBytes], { type: 'application/pdf' });
           
-          processedBlob = await html2pdf().set(opt).from(tempDiv).output('blob');
-          document.body.removeChild(outerContainer);
+          if (processedBlob.size < 500) {
+            throw new Error("Constructed PDF file is empty or invalid.");
+          }
           
           Progress.hide(progressContainer);
           workspace.classList.add('hidden');
