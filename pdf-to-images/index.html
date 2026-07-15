@@ -1490,6 +1490,28 @@
     const workspace = document.getElementById('tool-workspace');
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Dependency Assertion Guard
+      const missingDeps = [];
+      const assertions = [
+        { name: 'JSZip', check: () => typeof window.JSZip !== 'undefined' },
+        { name: 'pdf.js (pdfjsLib)', check: () => typeof window.pdfjsLib !== 'undefined' }
+      ];
+      for (const dep of assertions) {
+        if (!dep.check()) {
+          missingDeps.push(dep.name);
+          console.error(`PixoPDF Dependency Error: ${dep.name} is not loaded or missing required APIs.`);
+        }
+      }
+      if (missingDeps.length > 0) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 font-semibold";
+        errorDiv.innerHTML = `<span>Initialization Error!</span> The following required libraries failed to load: ${missingDeps.join(', ')}. Please check your internet connection and reload.`;
+        uploaderContainer.parentNode.insertBefore(errorDiv, uploaderContainer);
+        uploaderContainer.style.pointerEvents = 'none';
+        uploaderContainer.style.opacity = '0.5';
+        return;
+      }
+
       Analytics.trackEvent('tool_page_view', { tool: 'pdf-to-images' });
 
       Uploader.init(uploaderContainer, {
@@ -1504,8 +1526,8 @@
           // Render file preview info
           filesListContainer.innerHTML = `
             <div class="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg">
-              <span class="font-semibold text-sm text-slate-700 dark:text-slate-350 truncate max-w-xs">\${selectedFile.name}</span>
-              <span class="text-xs text-slate-400 font-bold">\${(selectedFile.size / 1024).toFixed(1)} KB</span>
+              <span class="font-semibold text-sm text-slate-700 dark:text-slate-350 truncate max-w-xs">${selectedFile.name}</span>
+              <span class="text-xs text-slate-400 font-bold">${(selectedFile.size / 1024).toFixed(1)} KB</span>
             </div>
           `;
         },
@@ -1532,7 +1554,7 @@
           const ext = format === 'image/jpeg' ? 'jpg' : 'png';
           
           for (let i = 1; i <= docObj.numPages; i++) {
-            Progress.show(progressContainer, `Converting page \${i} of \${docObj.numPages}...`, Math.round((i / docObj.numPages) * 70));
+            Progress.show(progressContainer, `Converting page ${i} of ${docObj.numPages}...`, Math.round((i / docObj.numPages) * 70));
             const page = await docObj.getPage(i);
             
             const viewport = page.getViewport({ scale: 2.0 });
@@ -1545,7 +1567,7 @@
             
             const imgDataUrl = canvas.toDataURL(format, 0.92);
             const base64Data = imgDataUrl.split(',')[1];
-            zip.file(`page-\${i}.\${ext}`, base64Data, { base64: true });
+            zip.file(`page-${i}.${ext}`, base64Data, { base64: true });
           }
           
           Progress.show(progressContainer, "Assembling ZIP file package...", 85);
@@ -1554,7 +1576,7 @@
           Progress.hide(progressContainer);
           workspace.classList.add('hidden');
           successContainer.classList.remove('hidden');
-          document.getElementById('result-stats').innerText = `ZIP archive compiled: \${(processedBlob.size / 1024).toFixed(1)} KB`;
+          document.getElementById('result-stats').innerText = `ZIP archive compiled: ${(processedBlob.size / 1024).toFixed(1)} KB`;
         
         } catch (err) {
           Progress.hide(progressContainer);

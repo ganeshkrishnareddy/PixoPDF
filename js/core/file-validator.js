@@ -44,6 +44,10 @@ export const FileValidator = {
         // PNG => 89 50 4e 47 0d 0a 1a 0a
         else if (header.startsWith('89504e470d0a1a0a')) {
           resolve('png');
+        }
+        // PK Zip => 50 4b 03 04
+        else if (header.startsWith('504b0304')) {
+          resolve('zip');
         } else {
           resolve('unknown');
         }
@@ -89,6 +93,7 @@ export const FileValidator = {
 
       // Magic byte check
       const detectedType = await this.detectTypeByHeader(file);
+      const ext = file.name.split('.').pop().toLowerCase();
       
       if (expectedType === 'pdf' && detectedType !== 'pdf') {
         errors.push(`"${file.name}" is not a valid PDF document.`);
@@ -96,6 +101,18 @@ export const FileValidator = {
       }
       if (expectedType === 'image' && detectedType !== 'jpeg' && detectedType !== 'png') {
         errors.push(`"${file.name}" is not a valid image. Only PNG and JPEG are supported.`);
+        continue;
+      }
+      if (expectedType === 'docx' && (detectedType !== 'zip' || ext !== 'docx')) {
+        errors.push(`"${file.name}" is not a valid Word document (.docx).`);
+        continue;
+      }
+      if (expectedType === 'xlsx' && (detectedType !== 'zip' || ext !== 'xlsx')) {
+        errors.push(`"${file.name}" is not a valid Excel workbook (.xlsx).`);
+        continue;
+      }
+      if (expectedType === 'pptx' && (detectedType !== 'zip' || ext !== 'pptx')) {
+        errors.push(`"${file.name}" is not a valid PowerPoint presentation (.pptx).`);
         continue;
       }
       if (expectedType === 'any' && detectedType === 'unknown') {

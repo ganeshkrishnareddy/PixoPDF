@@ -1500,8 +1500,8 @@
           // Render file preview info
           filesListContainer.innerHTML = `
             <div class="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg">
-              <span class="font-semibold text-sm text-slate-700 dark:text-slate-350 truncate max-w-xs">\${selectedFile.name}</span>
-              <span class="text-xs text-slate-400 font-bold">\${(selectedFile.size / 1024).toFixed(1)} KB</span>
+              <span class="font-semibold text-sm text-slate-700 dark:text-slate-350 truncate max-w-xs">${selectedFile.name}</span>
+              <span class="text-xs text-slate-400 font-bold">${(selectedFile.size / 1024).toFixed(1)} KB</span>
             </div>
           `;
         },
@@ -1546,7 +1546,7 @@
           Progress.hide(progressContainer);
           workspace.classList.add('hidden');
           successContainer.classList.remove('hidden');
-          document.getElementById('result-stats').innerText = `PDF file constructed: \${(processedBlob.size / 1024).toFixed(1)} KB`;
+          document.getElementById('result-stats').innerText = `PDF file constructed: ${(processedBlob.size / 1024).toFixed(1)} KB`;
         
         } catch (err) {
           Progress.hide(progressContainer);

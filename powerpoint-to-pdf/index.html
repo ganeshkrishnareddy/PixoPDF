@@ -1462,6 +1462,7 @@
 
   <!-- Vendor libraries and custom scripts placeholders -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="/assets/vendor/jszip.min.js"></script>
   
   <script type="module">
     import { App } from '/js/app.js';
@@ -1486,6 +1487,21 @@
     document.addEventListener('DOMContentLoaded', () => {
       Analytics.trackEvent('tool_page_view', { tool: 'powerpoint-to-pdf' });
 
+      // Dependency Assertion Guard
+      const missingDeps = [];
+      if (typeof window.html2pdf === 'undefined') missingDeps.push('html2pdf.js');
+      if (typeof window.JSZip === 'undefined') missingDeps.push('JSZip');
+      if (missingDeps.length > 0) {
+        console.error("PixoPDF Dependency Error: Missing libraries: " + missingDeps.join(', '));
+        const errorDiv = document.createElement('div');
+        errorDiv.className = "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 font-semibold";
+        errorDiv.innerHTML = `<span>Initialization Error!</span> The following required libraries failed to load: ${missingDeps.join(', ')}. Please check your internet connection and reload.`;
+        uploaderContainer.parentNode.insertBefore(errorDiv, uploaderContainer);
+        uploaderContainer.style.pointerEvents = 'none';
+        uploaderContainer.style.opacity = '0.5';
+        return;
+      }
+
       Uploader.init(uploaderContainer, {
         expectedType: 'pptx',
         onFilesSelected: async (files) => {
@@ -1498,8 +1514,8 @@
           // Render file preview info
           filesListContainer.innerHTML = `
             <div class="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg">
-              <span class="font-semibold text-sm text-slate-700 dark:text-slate-350 truncate max-w-xs">\${selectedFile.name}</span>
-              <span class="text-xs text-slate-400 font-bold">\${(selectedFile.size / 1024).toFixed(1)} KB</span>
+              <span class="font-semibold text-sm text-slate-700 dark:text-slate-350 truncate max-w-xs">${selectedFile.name}</span>
+              <span class="text-xs text-slate-400 font-bold">${(selectedFile.size / 1024).toFixed(1)} KB</span>
             </div>
           `;
         },
@@ -1516,20 +1532,70 @@
         Progress.show(progressContainer, "Processing conversion locally...", 30);
         
         try {
+          const arrayBuffer = await selectedFile.arrayBuffer();
+          const zip = await window.JSZip.loadAsync(arrayBuffer);
           
+          const slideFiles = Object.keys(zip.files).filter(name => name.startsWith("ppt/slides/slide") && name.endsWith(".xml"));
+          slideFiles.sort((a, b) => {
+            const numA = parseInt(a.replace("ppt/slides/slide", "").replace(".xml", ""));
+            const numB = parseInt(b.replace("ppt/slides/slide", "").replace(".xml", ""));
+            return numA - numB;
+          });
+
           const wrapper = document.createElement('div');
           wrapper.style.position = 'absolute';
           wrapper.style.left = '-9999px';
           wrapper.style.width = '800px';
-          wrapper.style.padding = '40px';
           wrapper.style.background = '#ffffff';
           wrapper.style.color = '#000000';
-          
-          const header = document.createElement('h2');
-          header.innerText = selectedFile.name.replace(".pptx", "");
-          header.style.textAlign = 'center';
-          header.style.marginTop = '100px';
-          wrapper.appendChild(header);
+          wrapper.style.padding = '0';
+
+          if (slideFiles.length === 0) {
+            const slide = document.createElement('div');
+            slide.style.width = '800px';
+            slide.style.height = '450px';
+            slide.style.padding = '40px';
+            slide.style.boxSizing = 'border-box';
+            slide.style.display = 'flex';
+            slide.style.alignItems = 'center';
+            slide.style.justifyContent = 'center';
+            slide.innerHTML = `<h2 style="font-family: Arial; font-size: 28px; margin: 0;">${selectedFile.name.replace(".pptx", "")}</h2>`;
+            wrapper.appendChild(slide);
+          } else {
+            for (let idx = 0; idx < slideFiles.length; idx++) {
+              const xmlText = await zip.files[slideFiles[idx]].async("text");
+              const parser = new DOMParser();
+              const xmlDoc = parser.parseFromString(xmlText, "text/xml");
+              const textElements = Array.from(xmlDoc.getElementsByTagName("a:t"));
+              const slideContent = textElements.map(el => el.textContent).join(" ");
+              
+              const slide = document.createElement('div');
+              slide.style.width = '800px';
+              slide.style.height = '450px';
+              slide.style.padding = '40px';
+              slide.style.boxSizing = 'border-box';
+              slide.style.position = 'relative';
+              slide.style.pageBreakAfter = 'always';
+              slide.style.background = '#ffffff';
+              slide.style.fontFamily = 'Arial, sans-serif';
+              
+              const header = document.createElement('div');
+              header.style.fontSize = '12px';
+              header.style.color = '#888888';
+              header.style.marginBottom = '20px';
+              header.innerText = `Slide ${idx + 1}`;
+              slide.appendChild(header);
+
+              const content = document.createElement('div');
+              content.style.fontSize = '16px';
+              content.style.lineHeight = '1.6';
+              content.style.color = '#333333';
+              content.innerText = slideContent.trim() || "(No text content on this slide)";
+              slide.appendChild(content);
+
+              wrapper.appendChild(slide);
+            }
+          }
           
           document.body.appendChild(wrapper);
           Progress.show(progressContainer, "Compiling slide presentation...", 70);
@@ -1548,7 +1614,7 @@
           Progress.hide(progressContainer);
           workspace.classList.add('hidden');
           successContainer.classList.remove('hidden');
-          document.getElementById('result-stats').innerText = `PDF presentation generated: \${(processedBlob.size / 1024).toFixed(1)} KB`;
+          document.getElementById('result-stats').innerText = `PDF presentation generated: ${(processedBlob.size / 1024).toFixed(1)} KB`;
         
         } catch (err) {
           Progress.hide(progressContainer);

@@ -31,5 +31,9 @@ export const DownloadManager = {
       tool: toolSlug,
       size: blob.size
     });
+  },
+
+  triggerDownload(blob, filename, toolSlug = 'unknown') {
+    this.downloadBlob(blob, filename, toolSlug);
   }
 };

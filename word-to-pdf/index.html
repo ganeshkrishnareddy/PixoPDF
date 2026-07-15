@@ -1354,7 +1354,7 @@
           <div class="how-to-step">
             <span class="step-num">01</span>
             <h3 class="step-title">Upload Word Doc</h3>
-            <p class="step-text">Select your Word document (.docx or .doc) from your local device.</p>
+            <p class="step-text">Select your Word document (.docx) from your local device.</p>
           </div>
 
           <div class="how-to-step">
@@ -1494,6 +1494,28 @@
     const workspace = document.getElementById('tool-workspace');
 
     document.addEventListener('DOMContentLoaded', () => {
+      // Dependency Assertion Guard
+      const missingDeps = [];
+      const assertions = [
+        { name: 'Mammoth.js', check: () => typeof window.mammoth !== 'undefined' && typeof window.mammoth.convertToHtml === 'function' },
+        { name: 'html2pdf.js', check: () => typeof window.html2pdf !== 'undefined' }
+      ];
+      for (const dep of assertions) {
+        if (!dep.check()) {
+          missingDeps.push(dep.name);
+          console.error(`PixoPDF Dependency Error: ${dep.name} is not loaded or missing required APIs.`);
+        }
+      }
+      if (missingDeps.length > 0) {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = "p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 font-semibold";
+        errorDiv.innerHTML = `<span>Initialization Error!</span> The following required libraries failed to load: ${missingDeps.join(', ')}. Please check your internet connection and reload.`;
+        uploaderContainer.parentNode.insertBefore(errorDiv, uploaderContainer);
+        uploaderContainer.style.pointerEvents = 'none';
+        uploaderContainer.style.opacity = '0.5';
+        return;
+      }
+
       Analytics.trackEvent('tool_page_view', { tool: 'word-to-pdf' });
 
       Uploader.init(uploaderContainer, {
@@ -1508,8 +1530,8 @@
           // Render file preview info
           filesListContainer.innerHTML = `
             <div class="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg">
-              <span class="font-semibold text-sm text-slate-700 dark:text-slate-350 truncate max-w-xs">\${selectedFile.name}</span>
-              <span class="text-xs text-slate-400 font-bold">\${(selectedFile.size / 1024).toFixed(1)} KB</span>
+              <span class="font-semibold text-sm text-slate-700 dark:text-slate-350 truncate max-w-xs">${selectedFile.name}</span>
+              <span class="text-xs text-slate-400 font-bold">${(selectedFile.size / 1024).toFixed(1)} KB</span>
             </div>
           `;
         },
@@ -1558,7 +1580,7 @@
           Progress.hide(progressContainer);
           workspace.classList.add('hidden');
           successContainer.classList.remove('hidden');
-          document.getElementById('result-stats').innerText = `Document converted: \${(processedBlob.size / 1024).toFixed(1)} KB`;
+          document.getElementById('result-stats').innerText = `Document converted: ${(processedBlob.size / 1024).toFixed(1)} KB`;
         
         } catch (err) {
           Progress.hide(progressContainer);

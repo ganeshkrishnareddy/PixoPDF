@@ -1503,7 +1503,7 @@
     const progressContainer = document.getElementById('progress-container');
     const successContainer = document.getElementById('success-container');
 
-    document.addEventListener('DOMContentLoaded', () => {
+    const initApp = () => {
       Analytics.trackEvent('tool_page_view', { tool: 'remove-pdf-metadata' });
 
       Uploader.init(uploaderContainer, {
@@ -1538,11 +1538,23 @@
       document.getElementById('btn-remove-metadata').addEventListener('click', runRemoval);
 
       document.getElementById('btn-download-pdf').addEventListener('click', () => {
-        if (processedResult) {
-          DownloadManager.downloadBlob(processedResult, 'clean-' + targetFile.name, 'remove-pdf-metadata');
+        try {
+          if (processedResult) {
+            DownloadManager.downloadBlob(processedResult, 'clean-' + targetFile.name, 'remove-pdf-metadata');
+          } else {
+            console.error("processedResult is empty");
+          }
+        } catch (e) {
+          console.error("Error during download:", e);
         }
       });
-    });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+      initApp();
+    }
 
     function renderPreviewFields(meta) {
       previewFieldsGrid.innerHTML = '';

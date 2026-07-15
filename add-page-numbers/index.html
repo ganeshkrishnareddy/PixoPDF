@@ -1548,7 +1548,7 @@
     const progressContainer = document.getElementById('progress-container');
     const successContainer = document.getElementById('success-container');
 
-    document.addEventListener('DOMContentLoaded', () => {
+    const initApp = () => {
       Analytics.trackEvent('tool_page_view', { tool: 'add-page-numbers' });
 
       Uploader.init(uploaderContainer, {
@@ -1597,11 +1597,24 @@
       document.getElementById('btn-add-numbers').addEventListener('click', runNumbering);
 
       document.getElementById('btn-download-pdf').addEventListener('click', () => {
-        if (processedResult) {
-          DownloadManager.downloadBlob(processedResult, 'numbered-' + targetFile.name, 'add-page-numbers');
+        console.log("Download button clicked!");
+        try {
+          if (processedResult) {
+            DownloadManager.downloadBlob(processedResult, 'numbered-' + targetFile.name, 'add-page-numbers');
+          } else {
+            console.error("processedResult is empty");
+          }
+        } catch (e) {
+          console.error("Error during download:", e);
         }
       });
-    });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initApp);
+    } else {
+      initApp();
+    }
 
     async function runNumbering() {
       const position = document.getElementById('num-position').value;

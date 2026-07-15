@@ -1633,7 +1633,8 @@
           try {
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/vendor/pdfjs/pdf.worker.min.js';
             const arrayBuf = await targetFile.arrayBuffer();
-            activePdfjsDoc = await window.pdfjsLib.getDocument({ data: new Uint8Array(arrayBuf) }).promise;
+            const arrayBufCopy = arrayBuf.slice(0);
+            activePdfjsDoc = await window.pdfjsLib.getDocument({ data: new Uint8Array(arrayBufCopy) }).promise;
             totalPagesCount = activePdfjsDoc.numPages;
             document.getElementById('source-page-count').innerText = `${totalPagesCount} pages`;
 

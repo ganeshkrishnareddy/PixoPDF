@@ -1435,7 +1435,7 @@
     const successContainer = document.getElementById('success-container');
     const zoomValLabel = document.getElementById('zoom-value');
 
-    document.addEventListener('DOMContentLoaded', () => {
+    /* Removed DOMContentLoaded */
       Analytics.trackEvent('tool_page_view', { tool: 'annotate-pdf' });
       
       editorState = new EditorState();
@@ -1573,7 +1573,7 @@
         }
       });
       document.getElementById('btn-reset-full').addEventListener('click', resetState);
-    });
+    /* Removed DOMContentLoaded closing */
 
     function changeZoom(delta) {
       let zoom = editorState.viewport.zoom + delta;

@@ -1581,12 +1581,11 @@
     const successContainer = document.getElementById('success-container');
     const zoomValLabel = document.getElementById('zoom-value');
 
-    document.addEventListener('DOMContentLoaded', () => {
-      Analytics.trackEvent('tool_page_view', { tool: 'sign-pdf' });
-      
-      editorState = new EditorState();
+    Analytics.trackEvent('tool_page_view', { tool: 'sign-pdf' });
+    
+    editorState = new EditorState();
 
-      Uploader.init(uploaderContainer, {
+    Uploader.init(uploaderContainer, {
         expectedType: 'pdf',
         onFilesSelected: async (files) => {
           targetFile = files[0];
@@ -1671,7 +1670,6 @@
           document.getElementById(tab.dataset.tab).classList.remove('hidden');
         });
       });
-    });
 
     function changeZoom(delta) {
       let zoom = editorState.viewport.zoom + delta;

@@ -1451,7 +1451,8 @@
           try {
             window.pdfjsLib.GlobalWorkerOptions.workerSrc = '/assets/vendor/pdfjs/pdf.worker.min.js';
             const arrayBuf = await targetFile.arrayBuffer();
-            activePdfjsDoc = await window.pdfjsLib.getDocument({ data: new Uint8Array(arrayBuf) }).promise;
+            const arrayBufCopy = arrayBuf.slice(0);
+            activePdfjsDoc = await window.pdfjsLib.getDocument({ data: new Uint8Array(arrayBufCopy) }).promise;
             
             // Render basic viewports
             pageRenderer = new PageRenderer(
@@ -1485,7 +1486,7 @@
               buildFormFieldsUI(form);
             }
           } catch (err) {
-            Toast.show("We couldn't parse this PDF form.", 'error');
+            console.error(err); Toast.show("We couldn't parse this PDF form.", 'error');
             resetState();
           }
         },
