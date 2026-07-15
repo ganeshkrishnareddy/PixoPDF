@@ -164,25 +164,28 @@ export class PageRenderer {
 
       // Pointer-based select & drag (supports Mouse and Touch drags)
       objEl.addEventListener('pointerdown', (e) => {
+        // Prevent event bubbling, but do NOT call preventDefault() so that edit popover text inputs can still focus
         e.stopPropagation();
-        e.preventDefault();
-        
-        objEl.setPointerCapture(e.pointerId);
         
         if (this.options.onObjectSelected) {
           this.options.onObjectSelected(obj.id);
         }
 
-        const startX = e.clientX;
-        const startY = e.clientY;
-        const initialX = obj.x;
-        const initialY = obj.y;
         const zoom = this.state.viewport.zoom;
+        const rectStart = this.pageViews[pageIndex].container.getBoundingClientRect();
+        
+        // Client coordinates of the object's current top-left corner
+        const objLeft = rectStart.left + (obj.x * zoom);
+        const objTop = rectStart.top + (obj.y * zoom);
+        
+        // Offset of the click pointer relative to the object's top-left corner
+        const offsetX = e.clientX - objLeft;
+        const offsetY = e.clientY - objTop;
 
         let currentPageIndex = pageIndex;
 
         const onPointerMove = (moveEvent) => {
-          const zoom = this.state.viewport.zoom;
+          const z = this.state.viewport.zoom;
           
           // Determine which page container is under the pointer
           let targetPageIndex = currentPageIndex;
@@ -205,17 +208,13 @@ export class PageRenderer {
             }
           }
 
-          // Calculate coordinates relative to the active target page top-left
-          const sourceRect = this.pageViews[pageIndex].container.getBoundingClientRect();
-          const dx = (moveEvent.clientX - startX) / zoom;
-          const dy = (moveEvent.clientY - startY) / zoom;
+          // Calculate client position of the object's top-left, maintaining the click offset
+          const targetObjLeft = moveEvent.clientX - offsetX;
+          const targetObjTop = moveEvent.clientY - offsetY;
           
-          // Absolute client coordinates mapped back to target page coordinates
-          const globalX = (startX + dx * zoom) - rect.left;
-          const globalY = (startY + dy * zoom) - rect.top;
-          
-          const localX = globalX / zoom;
-          const localY = globalY / zoom;
+          // Map to local page coordinates
+          const localX = (targetObjLeft - rect.left) / z;
+          const localY = (targetObjTop - rect.top) / z;
 
           if (targetPageIndex !== currentPageIndex) {
             // Migrate element in DOM to the new page overlay
@@ -233,14 +232,11 @@ export class PageRenderer {
             y: localY 
           });
 
-          objEl.style.left = `${localX * zoom}px`;
-          objEl.style.top = `${localY * zoom}px`;
+          objEl.style.left = `${localX * z}px`;
+          objEl.style.top = `${localY * z}px`;
         };
 
         const onPointerUp = (upEvent) => {
-          try {
-            objEl.releasePointerCapture(upEvent.pointerId);
-          } catch (err) {}
           document.removeEventListener('pointermove', onPointerMove);
           document.removeEventListener('pointerup', onPointerUp);
           
