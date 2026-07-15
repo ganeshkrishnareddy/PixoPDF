@@ -198,15 +198,15 @@ export class PageRenderer {
           try {
             objEl.releasePointerCapture(upEvent.pointerId);
           } catch (err) {}
-          objEl.removeEventListener('pointermove', onPointerMove);
-          objEl.removeEventListener('pointerup', onPointerUp);
+          document.removeEventListener('pointermove', onPointerMove);
+          document.removeEventListener('pointerup', onPointerUp);
           
           // Redraw to ensure all views are aligned
           this.drawPageObjects(pageIndex);
         };
 
-        objEl.addEventListener('pointermove', onPointerMove);
-        objEl.addEventListener('pointerup', onPointerUp);
+        document.addEventListener('pointermove', onPointerMove);
+        document.addEventListener('pointerup', onPointerUp);
       });
 
       view.overlay.appendChild(objEl);
