@@ -1542,13 +1542,19 @@
             return numA - numB;
           });
 
+          const outerContainer = document.createElement('div');
+          outerContainer.style.position = 'fixed';
+          outerContainer.style.top = '0';
+          outerContainer.style.left = '0';
+          outerContainer.style.width = '800px';
+          outerContainer.style.height = '100%';
+          outerContainer.style.zIndex = '-99999';
+          outerContainer.style.opacity = '0.01';
+          outerContainer.style.pointerEvents = 'none';
+          outerContainer.style.overflow = 'hidden';
+          document.body.appendChild(outerContainer);
+
           const wrapper = document.createElement('div');
-          wrapper.style.position = 'absolute';
-          wrapper.style.top = '0';
-          wrapper.style.left = '0';
-          wrapper.style.zIndex = '-9999';
-          wrapper.style.opacity = '0.01';
-          wrapper.style.pointerEvents = 'none';
           wrapper.style.width = '800px';
           wrapper.style.background = '#ffffff';
           wrapper.style.color = '#000000';
@@ -1601,10 +1607,13 @@
             }
           }
           
-          document.body.appendChild(wrapper);
+          outerContainer.appendChild(wrapper);
           
           // Wait for browser layout and rendering cycle
           await new Promise(resolve => setTimeout(resolve, 150));
+          if (wrapper.offsetHeight === 0) {
+            throw new Error("Conversion layout collapsed to a height of 0. Blank page prevented.");
+          }
           
           Progress.show(progressContainer, "Compiling slide presentation...", 70);
           
@@ -1617,7 +1626,7 @@
           };
           
           processedBlob = await html2pdf().set(opt).from(wrapper).output('blob');
-          document.body.removeChild(wrapper);
+          document.body.removeChild(outerContainer);
           
           Progress.hide(progressContainer);
           workspace.classList.add('hidden');

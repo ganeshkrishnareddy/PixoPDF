@@ -1552,13 +1552,19 @@
           const wb = XLSX.read(arrayBuffer, { type: 'array' });
           
           // Build HTML tables for all worksheets
+          const outerContainer = document.createElement('div');
+          outerContainer.style.position = 'fixed';
+          outerContainer.style.top = '0';
+          outerContainer.style.left = '0';
+          outerContainer.style.width = '1000px';
+          outerContainer.style.height = '100%';
+          outerContainer.style.zIndex = '-99999';
+          outerContainer.style.opacity = '0.01';
+          outerContainer.style.pointerEvents = 'none';
+          outerContainer.style.overflow = 'hidden';
+          document.body.appendChild(outerContainer);
+
           const wrapper = document.createElement('div');
-          wrapper.style.position = 'absolute';
-          wrapper.style.top = '0';
-          wrapper.style.left = '0';
-          wrapper.style.zIndex = '-9999';
-          wrapper.style.opacity = '0.01';
-          wrapper.style.pointerEvents = 'none';
           wrapper.style.width = '1000px';
           wrapper.style.background = '#ffffff';
           wrapper.style.color = '#000000';
@@ -1592,10 +1598,13 @@
             wrapper.appendChild(sheetDiv);
           });
           
-          document.body.appendChild(wrapper);
+          outerContainer.appendChild(wrapper);
           
           // Wait for browser layout and rendering cycle
           await new Promise(resolve => setTimeout(resolve, 150));
+          if (wrapper.offsetHeight === 0) {
+            throw new Error("Conversion layout collapsed to a height of 0. Blank page prevented.");
+          }
           
           const orient = document.getElementById('xlsx-orientation').value;
           Progress.show(progressContainer, "Compiling sheet grids into PDF...", 70);
@@ -1609,7 +1618,7 @@
           };
           
           processedBlob = await html2pdf().set(opt).from(wrapper).output('blob');
-          document.body.removeChild(wrapper);
+          document.body.removeChild(outerContainer);
           
           Progress.hide(progressContainer);
           workspace.classList.add('hidden');
