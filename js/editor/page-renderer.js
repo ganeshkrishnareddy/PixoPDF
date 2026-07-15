@@ -179,19 +179,62 @@ export class PageRenderer {
         const initialY = obj.y;
         const zoom = this.state.viewport.zoom;
 
+        let currentPageIndex = pageIndex;
+
         const onPointerMove = (moveEvent) => {
+          const zoom = this.state.viewport.zoom;
+          
+          // Determine which page container is under the pointer
+          let targetPageIndex = currentPageIndex;
+          let rect = this.pageViews[currentPageIndex].container.getBoundingClientRect();
+          
+          for (let i = 0; i < this.pageViews.length; i++) {
+            const pv = this.pageViews[i];
+            if (pv && pv.rendered) {
+              const r = pv.container.getBoundingClientRect();
+              if (
+                moveEvent.clientX >= r.left &&
+                moveEvent.clientX <= r.right &&
+                moveEvent.clientY >= r.top &&
+                moveEvent.clientY <= r.bottom
+              ) {
+                targetPageIndex = i;
+                rect = r;
+                break;
+              }
+            }
+          }
+
+          // Calculate coordinates relative to the active target page top-left
+          const sourceRect = this.pageViews[pageIndex].container.getBoundingClientRect();
           const dx = (moveEvent.clientX - startX) / zoom;
           const dy = (moveEvent.clientY - startY) / zoom;
           
-          let newX = initialX + dx;
-          let newY = initialY + dy;
+          // Absolute client coordinates mapped back to target page coordinates
+          const globalX = (startX + dx * zoom) - rect.left;
+          const globalY = (startY + dy * zoom) - rect.top;
+          
+          const localX = globalX / zoom;
+          const localY = globalY / zoom;
 
-          // Update editor state object coordinates
-          this.state.updateObject(obj.id, { x: newX, y: newY });
+          if (targetPageIndex !== currentPageIndex) {
+            // Migrate element in DOM to the new page overlay
+            const targetView = this.pageViews[targetPageIndex];
+            if (targetView && targetView.rendered) {
+              targetView.overlay.appendChild(objEl);
+              currentPageIndex = targetPageIndex;
+            }
+          }
 
-          // Update DOM node position directly
-          objEl.style.left = `${newX * zoom}px`;
-          objEl.style.top = `${newY * zoom}px`;
+          // Update state and styles
+          this.state.updateObject(obj.id, { 
+            pageIndex: currentPageIndex,
+            x: localX, 
+            y: localY 
+          });
+
+          objEl.style.left = `${localX * zoom}px`;
+          objEl.style.top = `${localY * zoom}px`;
         };
 
         const onPointerUp = (upEvent) => {
@@ -201,8 +244,11 @@ export class PageRenderer {
           document.removeEventListener('pointermove', onPointerMove);
           document.removeEventListener('pointerup', onPointerUp);
           
-          // Redraw to ensure all views are aligned
+          // Redraw original and final page objects to make sure they are perfectly synced
           this.drawPageObjects(pageIndex);
+          if (currentPageIndex !== pageIndex) {
+            this.drawPageObjects(currentPageIndex);
+          }
         };
 
         document.addEventListener('pointermove', onPointerMove);
