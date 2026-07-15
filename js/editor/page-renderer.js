@@ -144,7 +144,8 @@ export class PageRenderer {
       // Populate content wrapper depending on object types
       let innerHtml = '';
       if (obj.type === 'text') {
-        innerHtml = `<div class="w-full h-full overflow-hidden whitespace-pre-wrap outline-none p-1" style="font-family: ${obj.properties.font || 'Helvetica'}; font-size: ${(obj.properties.fontSize || 12) * this.state.viewport.zoom}px; color: ${obj.properties.color || '#000000'}">${obj.properties.text || 'Type text...'}</div>`;
+        const bgStyle = obj.properties.backgroundColor ? `background-color: ${obj.properties.backgroundColor};` : '';
+        innerHtml = `<div class="w-full h-full overflow-hidden whitespace-pre-wrap outline-none p-1" style="${bgStyle} font-family: ${obj.properties.font || 'Helvetica'}; font-size: ${(obj.properties.fontSize || 12) * this.state.viewport.zoom}px; color: ${obj.properties.color || '#000000'}">${obj.properties.text || 'Type text...'}</div>`;
       } else if (obj.type === 'signature' || obj.type === 'image') {
         innerHtml = `<img src="${obj.properties.dataUrl}" class="w-full h-full object-contain pointer-events-none" />`;
       } else if (obj.type === 'checkmark') {

@@ -1201,19 +1201,7 @@
     function insertVisualTextReplacement() {
       historyManager.pushAction();
       
-      // Visual text replacement draws a background cover box (rectangle) and text input overlay
-      // 1. Add white background cover
-      const coverObj = editorState.addObject({
-        type: 'rectangle',
-        pageIndex: editorState.document.currentPage - 1,
-        x: 100,
-        y: 100,
-        width: 140,
-        height: 25,
-        properties: {}
-      });
-
-      // 2. Add text overlay
+      // Visual text replacement draws a background cover box and text input overlay as a unified text element
       const textObj = editorState.addObject({
         type: 'text',
         pageIndex: editorState.document.currentPage - 1,
@@ -1225,7 +1213,8 @@
           text: 'Replacement text',
           font: 'Helvetica',
           fontSize: 12,
-          color: '#000000'
+          color: '#000000',
+          backgroundColor: '#ffffff'
         }
       });
 
