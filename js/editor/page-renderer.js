@@ -158,6 +158,12 @@ export class PageRenderer {
       if (obj.type === 'text') {
         const bgStyle = obj.properties.backgroundColor ? `background-color: ${obj.properties.backgroundColor};` : '';
         innerHtml = `<div class="w-full h-full overflow-hidden whitespace-pre-wrap outline-none p-1" style="${bgStyle} font-family: ${obj.properties.font || 'Helvetica'}; font-size: ${(obj.properties.fontSize || 12) * this.state.viewport.zoom}px; color: ${obj.properties.color || '#000000'}">${obj.properties.text || 'Type text...'}</div>`;
+      } else if (obj.type === 'watermark-text') {
+        const op = obj.properties.opacity !== undefined ? obj.properties.opacity : 0.3;
+        innerHtml = `<div class="w-full h-full flex items-center justify-center overflow-hidden whitespace-nowrap outline-none select-none text-center" style="font-family: Arial, Helvetica, sans-serif; font-weight: bold; font-size: ${(obj.properties.fontSize || 48) * this.state.viewport.zoom}px; color: ${obj.properties.color || '#6b7280'}; opacity: ${op}; line-height: 1;">${obj.properties.text || 'DRAFT'}</div>`;
+      } else if (obj.type === 'watermark-image') {
+        const op = obj.properties.opacity !== undefined ? obj.properties.opacity : 0.3;
+        innerHtml = `<img src="${obj.properties.dataUrl}" class="w-full h-full object-contain pointer-events-none select-none" style="opacity: ${op};" />`;
       } else if (obj.type === 'signature' || obj.type === 'image') {
         innerHtml = `<img src="${obj.properties.dataUrl}" class="w-full h-full object-contain pointer-events-none" />`;
       } else if (obj.type === 'checkmark') {

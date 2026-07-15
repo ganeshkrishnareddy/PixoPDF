@@ -1427,6 +1427,7 @@
     let historyManager = null;
     let processedResult = null;
     let activePdfjsDoc = null;
+    let activeTool = null;
 
     const uploaderContainer = document.getElementById('uploader-container');
     const editorWorkspace = document.getElementById('editor-workspace');
@@ -1479,12 +1480,82 @@
       });
 
       // Bind annotation action insertion
-      document.getElementById('btn-hl').addEventListener('click', () => insertAnnotation('highlight'));
-      document.getElementById('btn-ul').addEventListener('click', () => insertAnnotation('underline'));
-      document.getElementById('btn-so').addEventListener('click', () => insertAnnotation('strikeout'));
-      document.getElementById('btn-rect').addEventListener('click', () => insertAnnotation('rectangle'));
+      document.getElementById('btn-hl').addEventListener('click', () => setActiveTool('highlight'));
+      document.getElementById('btn-ul').addEventListener('click', () => setActiveTool('underline'));
+      document.getElementById('btn-so').addEventListener('click', () => setActiveTool('strikeout'));
+      document.getElementById('btn-rect').addEventListener('click', () => setActiveTool('rectangle'));
       
       document.getElementById('btn-del').addEventListener('click', deleteSelected);
+
+      // Workspace gesture delegation for drag-to-draw
+      const workspace = document.getElementById('viewport-workspace');
+      workspace.addEventListener('pointerdown', (e) => {
+        if (!activeTool) return;
+        
+        const overlay = e.target.closest('.page-overlay');
+        if (!overlay) return;
+        
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const rect = overlay.getBoundingClientRect();
+        const startX = (e.clientX - rect.left) / editorState.viewport.zoom;
+        const startY = (e.clientY - rect.top) / editorState.viewport.zoom;
+        
+        const preview = document.createElement('div');
+        // Drag highlight or shape preview
+        preview.className = 'absolute border border-dashed border-indigo-500 bg-yellow-300/35 pointer-events-none z-50';
+        overlay.appendChild(preview);
+        
+        const onPointerMove = (moveEvent) => {
+          const curX = (moveEvent.clientX - rect.left) / editorState.viewport.zoom;
+          const curY = (moveEvent.clientY - rect.top) / editorState.viewport.zoom;
+          
+          const x = Math.min(startX, curX);
+          const y = Math.min(startY, curY);
+          const w = Math.abs(curX - startX);
+          const h = Math.abs(curY - startY);
+          
+          preview.style.left = `${x * editorState.viewport.zoom}px`;
+          preview.style.top = `${y * editorState.viewport.zoom}px`;
+          preview.style.width = `${w * editorState.viewport.zoom}px`;
+          preview.style.height = `${h * editorState.viewport.zoom}px`;
+        };
+        
+        const onPointerUp = (upEvent) => {
+          document.removeEventListener('pointermove', onPointerMove);
+          document.removeEventListener('pointerup', onPointerUp);
+          
+          const curX = (upEvent.clientX - rect.left) / editorState.viewport.zoom;
+          const curY = (upEvent.clientY - rect.top) / editorState.viewport.zoom;
+          
+          const x = Math.min(startX, curX);
+          const y = Math.min(startY, curY);
+          const w = Math.abs(curX - startX);
+          const h = Math.abs(curY - startY);
+          
+          preview.remove();
+          
+          if (w > 2 && h > 2) {
+            historyManager.pushAction();
+            const pageIndex = parseInt(overlay.id.split('-').pop());
+            editorState.addObject({
+              type: activeTool,
+              pageIndex: pageIndex,
+              x: x,
+              y: y,
+              width: w,
+              height: h,
+              properties: {}
+            });
+            setActiveTool(null);
+            pageRenderer.refreshAll();
+          }
+        };
+        
+        document.addEventListener('pointermove', onPointerMove);
+        document.addEventListener('pointerup', onPointerUp);
+      });
 
       // Zoom bindings
       document.getElementById('btn-zoom-out').addEventListener('click', () => changeZoom(-0.25));
@@ -1512,18 +1583,36 @@
       pageRenderer.refreshAll();
     }
 
-    function insertAnnotation(type) {
-      historyManager.pushAction();
-      editorState.addObject({
-        type: type,
-        pageIndex: editorState.document.currentPage - 1,
-        x: 100,
-        y: 120,
-        width: 140,
-        height: 25,
-        properties: {}
+    function setActiveTool(tool) {
+      activeTool = tool;
+      
+      // Reset button styles
+      ['btn-hl', 'btn-ul', 'btn-so', 'btn-rect'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) {
+          btn.classList.remove('bg-indigo-650', 'text-white');
+          btn.classList.add('bg-white', 'dark:bg-slate-800');
+        }
       });
-      pageRenderer.refreshAll();
+      
+      if (tool) {
+        const activeBtnId = {
+          'highlight': 'btn-hl',
+          'underline': 'btn-ul',
+          'strikeout': 'btn-so',
+          'rectangle': 'btn-rect'
+        }[tool];
+        
+        const activeBtn = document.getElementById(activeBtnId);
+        if (activeBtn) {
+          activeBtn.classList.remove('bg-white', 'dark:bg-slate-800');
+          activeBtn.classList.add('bg-indigo-650', 'text-white');
+        }
+        
+        document.getElementById('viewport-workspace').style.cursor = 'crosshair';
+      } else {
+        document.getElementById('viewport-workspace').style.cursor = 'default';
+      }
     }
 
     function deleteSelected() {

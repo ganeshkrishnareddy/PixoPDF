@@ -101,6 +101,57 @@ export const ExportManager = {
         }
       }
       
+      else if (obj.type === 'watermark-text') {
+        const text = obj.properties.text || 'DRAFT';
+        const fontSize = obj.properties.fontSize || 48;
+        const colorHex = obj.properties.color || '#6b7280';
+        const op = obj.properties.opacity !== undefined ? obj.properties.opacity : 0.3;
+        
+        const helveticaBold = await doc.embedFont(window.PDFLib.StandardFonts.HelveticaBold);
+        
+        const r = parseInt(colorHex.substr(1, 2), 16) / 255;
+        const g = parseInt(colorHex.substr(3, 2), 16) / 255;
+        const b = parseInt(colorHex.substr(5, 2), 16) / 255;
+
+        page.drawText(text, {
+          x: pdfX,
+          y: pdfY,
+          size: fontSize,
+          font: helveticaBold,
+          color: window.PDFLib.rgb(r, g, b),
+          opacity: op,
+          rotate: window.PDFLib.degrees(obj.rotation || 0)
+        });
+      }
+      
+      else if (obj.type === 'watermark-image') {
+        const rawData = obj.properties.dataUrl;
+        const op = obj.properties.opacity !== undefined ? obj.properties.opacity : 0.3;
+        if (rawData) {
+          const binaryStr = atob(rawData.split(',')[1]);
+          const bytes = new Uint8Array(binaryStr.length);
+          for (let k = 0; k < binaryStr.length; k++) {
+            bytes[k] = binaryStr.charCodeAt(k);
+          }
+
+          let img;
+          if (rawData.includes('image/png')) {
+            img = await doc.embedPng(bytes);
+          } else {
+            img = await doc.embedJpg(bytes);
+          }
+
+          page.drawImage(img, {
+            x: pdfX,
+            y: pdfY,
+            width: obj.width,
+            height: obj.height,
+            opacity: op,
+            rotate: window.PDFLib.degrees(obj.rotation || 0)
+          });
+        }
+      }
+      
       else if (obj.type === 'checkmark') {
         // Draw vector character for checkmarks
         page.drawText('✓', {
