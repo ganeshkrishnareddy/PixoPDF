@@ -2,5 +2,188 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
-    <body>Verification: d748b330b22212d3</body>
+    <body>Verification: d748b330b22212d3
+  <!-- Navigation Menu Controller -->
+  <script type="module">
+    import { ToolRegistry } from '/js/tools.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Theme toggle binding (re-bound sitewide)
+      const themeBtn = document.getElementById('theme-toggle');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+          const isDark = document.documentElement.classList.contains('dark');
+          if (isDark) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('pixopdf-theme', 'light');
+          } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('pixopdf-theme', 'dark');
+          }
+        });
+      }
+
+      // 2. Desktop Mega Menu triggers
+      const btnMega = document.getElementById('btn-mega-menu');
+      const panelMega = document.getElementById('mega-menu-panel');
+
+      if (btnMega && panelMega) {
+        const toggleMega = (forceState) => {
+          const show = forceState !== undefined ? forceState : panelMega.classList.contains('hidden');
+          if (show) {
+            panelMega.classList.remove('hidden');
+            btnMega.setAttribute('aria-expanded', 'true');
+          } else {
+            panelMega.classList.add('hidden');
+            btnMega.setAttribute('aria-expanded', 'false');
+          }
+        };
+
+        btnMega.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleMega();
+        });
+
+        // Close on escape or outside clicks
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') toggleMega(false);
+        });
+        document.addEventListener('click', (e) => {
+          if (!panelMega.contains(e.target) && e.target !== btnMega) {
+            toggleMega(false);
+          }
+        });
+      }
+
+      // 3. Mobile Navigation Drawer
+      const btnMobileMenu = document.getElementById('btn-mobile-menu');
+      const drawerMobile = document.getElementById('mobile-nav-drawer');
+      const drawerBody = document.getElementById('mobile-drawer-body');
+      const btnMobileClose = document.getElementById('btn-mobile-close');
+      const mobileSearch = document.getElementById('mobile-search-input');
+
+      if (btnMobileMenu && drawerMobile && drawerBody) {
+        let savedScrollY = 0;
+        
+        const lockScroll = () => {
+          savedScrollY = window.scrollY;
+          document.body.style.position = 'fixed';
+          document.body.style.top = `-${savedScrollY}px`;
+          document.body.style.width = '100%';
+          document.body.style.overflow = 'hidden';
+        };
+
+        const unlockScroll = () => {
+          document.body.style.position = '';
+          document.body.style.top = '';
+          document.body.style.width = '';
+          document.body.style.overflow = '';
+          window.scrollTo(0, savedScrollY);
+        };
+
+        const toggleDrawer = (show) => {
+          if (show) {
+            lockScroll();
+            drawerMobile.classList.remove('hidden');
+            btnMobileMenu.setAttribute('aria-expanded', 'true');
+            setTimeout(() => {
+              drawerBody.classList.remove('translate-x-full');
+              if (mobileSearch) mobileSearch.focus();
+            }, 10);
+          } else {
+            unlockScroll();
+            drawerBody.classList.add('translate-x-full');
+            btnMobileMenu.setAttribute('aria-expanded', 'false');
+            setTimeout(() => {
+              drawerMobile.classList.add('hidden');
+              btnMobileMenu.focus();
+            }, 200);
+          }
+        };
+
+        btnMobileMenu.addEventListener('click', () => toggleDrawer(true));
+        if (btnMobileClose) btnMobileClose.addEventListener('click', () => toggleDrawer(false));
+        drawerMobile.addEventListener('click', (e) => {
+          if (e.target === drawerMobile) toggleDrawer(false);
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && !drawerMobile.classList.contains('hidden')) {
+            toggleDrawer(false);
+          }
+        });
+
+        // Mobile Category Accordions
+        const accordionTriggers = drawerMobile.querySelectorAll('.accordion-trigger');
+        accordionTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            const parent = trigger.parentElement;
+            const content = parent.querySelector('.accordion-content');
+            const isOpen = !content.classList.contains('hidden');
+            
+            // Close all first
+            drawerMobile.querySelectorAll('.accordion-content').forEach(c => c.classList.add('hidden'));
+            drawerMobile.querySelectorAll('.accordion-trigger').forEach(t => {
+              t.setAttribute('aria-expanded', 'false');
+              t.querySelector('svg').classList.remove('rotate-180');
+            });
+
+            // Open selected if it was closed
+            if (!isOpen) {
+              content.classList.remove('hidden');
+              trigger.setAttribute('aria-expanded', 'true');
+              trigger.querySelector('svg').classList.add('rotate-180');
+            }
+          });
+        });
+
+        // Mobile Drawer Search Matching
+        const accordionsContainer = document.getElementById('mobile-drawer-accordions');
+        const searchResultsContainer = document.getElementById('mobile-drawer-search-results');
+
+        if (mobileSearch && accordionsContainer && searchResultsContainer) {
+          mobileSearch.addEventListener('input', () => {
+            const q = mobileSearch.value.trim().toLowerCase();
+            if (q.length === 0) {
+              accordionsContainer.classList.remove('hidden');
+              searchResultsContainer.classList.add('hidden');
+              return;
+            }
+
+            accordionsContainer.classList.add('hidden');
+            searchResultsContainer.classList.remove('hidden');
+
+            const matches = ToolRegistry.filter(tool => {
+              return (
+                tool.name.toLowerCase().includes(q) ||
+                tool.description.toLowerCase().includes(q) ||
+                tool.category.toLowerCase().includes(q) ||
+                tool.primaryKeyword.toLowerCase().includes(q) ||
+                tool.secondaryKeywords.some(kw => kw.toLowerCase().includes(q))
+              );
+            });
+
+            if (matches.length === 0) {
+              searchResultsContainer.innerHTML = `<div class="p-4 text-center text-xs text-slate-550">No matching tools found.</div>`;
+              return;
+            }
+
+            searchResultsContainer.innerHTML = matches.map(t => `
+              <a href="${t.pageUrl}" class="flex items-center justify-between py-3 border-b border-slate-150 dark:border-slate-855 px-2 rounded-lg transition duration-150">
+                <div class="flex items-center space-x-3">
+                  <span class="w-8 h-8 flex items-center justify-center bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 rounded-lg">
+                    ${t.icon.replace("w-6 h-6", "w-5 h-5")}
+                  </span>
+                  <span class="text-sm font-semibold text-slate-700 dark:text-slate-200">${t.name}</span>
+                </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4 text-slate-400"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>`).join('');
+          });
+        }
+      }
+    });
+  </script>
+
+</body>
 </html>
