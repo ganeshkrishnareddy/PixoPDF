@@ -1556,7 +1556,11 @@
           // Render HTML to hidden element
           const tempDiv = document.createElement('div');
           tempDiv.style.position = 'absolute';
-          tempDiv.style.left = '-9999px';
+          tempDiv.style.top = '0';
+          tempDiv.style.left = '0';
+          tempDiv.style.zIndex = '-9999';
+          tempDiv.style.opacity = '0.01';
+          tempDiv.style.pointerEvents = 'none';
           tempDiv.style.width = '800px';
           tempDiv.style.padding = '40px';
           tempDiv.style.background = '#ffffff';

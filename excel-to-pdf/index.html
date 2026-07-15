@@ -1554,7 +1554,11 @@
           // Build HTML tables for all worksheets
           const wrapper = document.createElement('div');
           wrapper.style.position = 'absolute';
-          wrapper.style.left = '-9999px';
+          wrapper.style.top = '0';
+          wrapper.style.left = '0';
+          wrapper.style.zIndex = '-9999';
+          wrapper.style.opacity = '0.01';
+          wrapper.style.pointerEvents = 'none';
           wrapper.style.width = '1000px';
           wrapper.style.background = '#ffffff';
           wrapper.style.color = '#000000';
