@@ -1151,6 +1151,20 @@
         }
       });
 
+      // Real-time text input binding
+      popoverTextVal.addEventListener('input', () => {
+        const objId = editorState.selection.objectId;
+        if (objId) {
+          editorState.updateObject(objId, {
+            properties: {
+              text: popoverTextVal.value
+            }
+          });
+          const pageIdx = editorState.objects.find(o => o.id === objId).pageIndex;
+          pageRenderer.drawPageObjects(pageIdx);
+        }
+      });
+
       // Zoom bindings
       document.getElementById('btn-zoom-out').addEventListener('click', () => changeZoom(-0.25));
       document.getElementById('btn-zoom-in').addEventListener('click', () => changeZoom(0.25));
