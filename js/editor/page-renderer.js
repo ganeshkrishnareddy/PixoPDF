@@ -3,6 +3,8 @@
  * Manages PDF.js page rendering and syncs absolute HTML overlays.
  */
 
+import { InteractiveObjectController } from './interactive-object-controller.js';
+
 export class PageRenderer {
   /**
    * @param {HTMLElement} workspaceContainer Target DOM element where pages are drawn
@@ -16,6 +18,9 @@ export class PageRenderer {
     this.options = options || {};
     this.pdfDoc = null;
     this.pageViews = {}; // pageIndex -> { canvas, overlay, viewport, page }
+    
+    // Shared Interactive Controller
+    this.controller = new InteractiveObjectController(this.state, this, this.options);
   }
 
   /**
@@ -47,6 +52,13 @@ export class PageRenderer {
       pageWrapper.appendChild(canvas);
       pageWrapper.appendChild(overlay);
       this.container.appendChild(pageWrapper);
+
+      // Deselect when clicking empty page overlay canvas
+      overlay.addEventListener('pointerdown', (e) => {
+        if (e.target === overlay) {
+          this.controller.deselect();
+        }
+      });
 
       this.pageViews[i] = {
         wrapper: pageWrapper,
@@ -126,7 +138,7 @@ export class PageRenderer {
 
     pageObjects.forEach(obj => {
       const objEl = document.createElement('div');
-      objEl.className = `editor-object absolute border border-dashed border-indigo-400 bg-indigo-50/10 cursor-move group select-none ${this.state.selection.objectId === obj.id ? 'border-indigo-600 ring-2 ring-indigo-500/20' : ''}`;
+      objEl.className = `editor-object absolute border border-dashed border-indigo-300 bg-indigo-50/5 cursor-move group select-none transition-shadow duration-150`;
       
       // Transform coordinates relative to zoom & rotation viewport
       const x = obj.x * this.state.viewport.zoom;
@@ -162,94 +174,8 @@ export class PageRenderer {
 
       objEl.innerHTML = innerHtml;
 
-      // Pointer-based select & drag (supports Mouse and Touch drags)
-      objEl.addEventListener('pointerdown', (e) => {
-        // Prevent event bubbling, but do NOT call preventDefault() so that edit popover text inputs can still focus
-        e.stopPropagation();
-        
-        if (this.options.onObjectSelected) {
-          this.options.onObjectSelected(obj.id);
-        }
-
-        const zoom = this.state.viewport.zoom;
-        const rectStart = this.pageViews[pageIndex].container.getBoundingClientRect();
-        
-        // Client coordinates of the object's current top-left corner
-        const objLeft = rectStart.left + (obj.x * zoom);
-        const objTop = rectStart.top + (obj.y * zoom);
-        
-        // Offset of the click pointer relative to the object's top-left corner
-        const offsetX = e.clientX - objLeft;
-        const offsetY = e.clientY - objTop;
-
-        let currentPageIndex = pageIndex;
-
-        const onPointerMove = (moveEvent) => {
-          const z = this.state.viewport.zoom;
-          
-          // Determine which page container is under the pointer
-          let targetPageIndex = currentPageIndex;
-          let rect = this.pageViews[currentPageIndex].container.getBoundingClientRect();
-          
-          for (let i = 0; i < this.pageViews.length; i++) {
-            const pv = this.pageViews[i];
-            if (pv && pv.rendered) {
-              const r = pv.container.getBoundingClientRect();
-              if (
-                moveEvent.clientX >= r.left &&
-                moveEvent.clientX <= r.right &&
-                moveEvent.clientY >= r.top &&
-                moveEvent.clientY <= r.bottom
-              ) {
-                targetPageIndex = i;
-                rect = r;
-                break;
-              }
-            }
-          }
-
-          // Calculate client position of the object's top-left, maintaining the click offset
-          const targetObjLeft = moveEvent.clientX - offsetX;
-          const targetObjTop = moveEvent.clientY - offsetY;
-          
-          // Map to local page coordinates
-          const localX = (targetObjLeft - rect.left) / z;
-          const localY = (targetObjTop - rect.top) / z;
-
-          if (targetPageIndex !== currentPageIndex) {
-            // Migrate element in DOM to the new page overlay
-            const targetView = this.pageViews[targetPageIndex];
-            if (targetView && targetView.rendered) {
-              targetView.overlay.appendChild(objEl);
-              currentPageIndex = targetPageIndex;
-            }
-          }
-
-          // Update state and styles
-          this.state.updateObject(obj.id, { 
-            pageIndex: currentPageIndex,
-            x: localX, 
-            y: localY 
-          });
-
-          objEl.style.left = `${localX * z}px`;
-          objEl.style.top = `${localY * z}px`;
-        };
-
-        const onPointerUp = (upEvent) => {
-          document.removeEventListener('pointermove', onPointerMove);
-          document.removeEventListener('pointerup', onPointerUp);
-          
-          // Redraw original and final page objects to make sure they are perfectly synced
-          this.drawPageObjects(pageIndex);
-          if (currentPageIndex !== pageIndex) {
-            this.drawPageObjects(currentPageIndex);
-          }
-        };
-
-        document.addEventListener('pointermove', onPointerMove);
-        document.addEventListener('pointerup', onPointerUp);
-      });
+      // Bind the shared InteractiveObjectController actions
+      this.controller.bindEvents(obj, objEl, pageIndex);
 
       view.overlay.appendChild(objEl);
     });
